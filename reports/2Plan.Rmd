@@ -7,4 +7,11 @@ output: html_document
 source(here::here("scripts/setup.R"))
 ```
 
+We would start from scratch, from an empty page, to create a shiny application using some necessary packages:
+such as “shiny”, “shinydashboard” for the construction of the application and some other packages to create 
+a dataset visual (such as “DT”), moreover we implement some fancy “ggplot” graphs to facilitate visualizations, 
+applying some filters on the data and useful tools to let operators take records in an efficient ways of the quantities.
+We have about 1 year data with thousands of observations and some variables about the operator, 
+the request numbers, the date, the target weights, and the confidence intervals.
+The main source of ispiration of the project is the meeting with Joao Ramalho that explained us his project idea.
 
