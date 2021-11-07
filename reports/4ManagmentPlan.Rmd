@@ -15,7 +15,6 @@ We plan to make weekly zoom or meet in the campus every Friday afternoon to disc
 ```{r}
 
 data <- data.frame("Sophie" = "Data Cleaning/Wrangling",
-                   "Team Member" =
                    "Louis" = "Data Cleaning/Wrangling",
                    "Francesco" = "Shiny App Integration",
                    "Daniel" = "Data Cleaning/Wrangling",
