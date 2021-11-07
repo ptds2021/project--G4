@@ -8,3 +8,4 @@ source(here::here("scripts/setup.R"))
 ```
 
 
+In the scope of this class, we will be working with Nestle through Joao Ramalho.
