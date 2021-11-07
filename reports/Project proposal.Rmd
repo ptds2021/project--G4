@@ -12,5 +12,5 @@ output:
     number_sections: true
 ---
 
-```{r child = c('1Goals_impacts.Rmd', '2Plan.Rmd', '3Timeline.Rmd', '4ManagementPlan.Rmd')}
+```{r child = c('1Goals_impact.Rmd', '2Plan.Rmd', '3Timeline.Rmd', '4ManagmentPlan.Rmd')}
 ```

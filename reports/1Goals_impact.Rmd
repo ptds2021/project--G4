@@ -1,7 +1,4 @@
----
-title: "1Goals_impact"
-output: html_document
----
+# Goal Impact
 
 ```{r, echo = FALSE, message = FALSE}
 source(here::here("scripts/setup.R"))

@@ -8,8 +8,7 @@ packages <- c(
   "tidyverse", "lubridate", # for wrangling
   "knitr", "kableExtra", "bookdown", "rmarkdown", "DT", # for the report
   "summarytools","caret","ggplot2",
-  "dplyr","readr",
-  "titanic")
+  "dplyr","readr")
 
 purrr::walk(packages, library, character.only = TRUE)
 
