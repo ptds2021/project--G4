@@ -1,0 +1,16 @@
+---
+title: "Project proposal"
+author: "Sophie La Gennusa, Özgür Aydemir, Francesco Darino, Louis del Perugia, Daniel Szenes"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+
+output: 
+  html_document:
+    theme: cerulean
+    highlight: tango 
+    toc: true
+    toc_float: true 
+    number_sections: true
+---
+
+```{r child = c('1Goals_impacts.Rmd', '2Plan.Rmd', '3Timeline.Rmd', '4ManagementPlan.Rmd')}
+```
