@@ -9,7 +9,7 @@ purrr::walk(packages, library, character.only = TRUE)
 
 #Joaos' Theme
 theme_qcc <- function(base_size = 12, base_family = "") {
-  
+
   ggplot2::theme_grey(base_size = base_size, base_family = base_family) %+replace%
     
     ggplot2::theme(
