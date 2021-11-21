@@ -66,11 +66,15 @@ a <- poids %>%
     values_drop_na = TRUE
 ) #tidy data set
 
-b <- a[!is.na(a$Prelevement),] %>% 
+a <- a[!is.na(a$Prelevement),]
+a <- a[!is.na(a$Cible),]
+
+b <- a %>% 
   group_by(Request, Prelevement, Cible) %>%
-  summarise(median = mean(weight),
-            sd = sd(weight),
-            range = max(weight) - min(weight)) %>%
+  summarise(real_weight = weight-Tare,
+    median = mean(real_weight),
+            sd = sd(real_weight),
+            range = max(real_weight) - min(real_weight)) %>%
   filter(Request == 929) #data test
 
 
@@ -106,10 +110,12 @@ b %>%
     ggplot2::geom_histogram(
       ggplot2::aes(x = b$median),
       fill = "grey80",
-      color = "grey20") +
+      color = "grey20") + 
+  ggplot2::geom_vline(ggplot2::aes(xintercept = mean(b$median)), color = "blue", linetype = 3) +
     ggplot2::geom_vline(ggplot2::aes(xintercept = UCL), color = "blue", linetype = 3) +
     ggplot2::geom_vline(ggplot2::aes(xintercept = LCL), color = "blue", linetype = 3) +
     ggplot2::geom_vline(ggplot2::aes(xintercept = b$Cible), color = "red", linetype = 2) +
   stat_function(fun = dnorm, n = 101, args = list(mean = mean(b$median), sd = median(b$sd))) +
   ylab("") +
-  scale_y_continuous(breaks = NULL) + theme_qcc()
+  scale_y_continuous(breaks = NULL) +
+  theme_qcc()
