@@ -90,7 +90,7 @@ theme_qcc <- function(base_size = 12, base_family = "") {
     )
 }
 
-poids <- readxl::read_xlsx("/Users/ROUGE/Desktop/VenusLab - QMS poids.xlsx")
+poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
 
 poids$Poids1 <- as.double(poids$Poids1)
 poids$Poids2 <- as.double(poids$Poids2)
@@ -113,3 +113,17 @@ b <- a %>%
             median = mean(real_weight),
             sd = sd(real_weight),
             range = max(real_weight) - min(real_weight))
+
+
+
+
+
+o2 <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS O2.xlsx")
+c <- o2 %>%
+  pivot_longer(
+    cols = starts_with("Valeur"),
+    names_to = "Valeur",
+    names_prefix = "Valeur",
+    values_to = "valeur",
+    values_drop_na = TRUE
+  )
