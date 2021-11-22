@@ -152,6 +152,14 @@ in the R&D branch of the company."),
           numericInput("poids3", "Poids 3", ""),
           hr(),
         )),
+        
+        column(5, wellPanel(
+          plotOutput("plot_sample"),
+          hr()
+        ), offset = 6)
+      ),
+
+      fluidRow(
         column(2, wellPanel(
           numericInput("poids4", "Poids 4", ""),
           hr(),
@@ -160,30 +168,25 @@ in the R&D branch of the company."),
           numericInput("poids5", "Poids 5", ""),
           hr(),
         )),
-          column(2, wellPanel(
-            numericInput("poids6", "Poids 6", ""),
-            hr(),
-          )),
+        column(2, wellPanel(
+          numericInput("poids6", "Poids 6", ""),
+          hr(),
+        ))
       ),
       
       br(),
+      
       
       fluidRow(
         column(4, wellPanel(
           actionButton("submit", "Submit", align="center"),
           hr()
         ))
-        
       ),
-      
       br()
     )
   ),
-  
-  
-  
-  
-  
+
   tabPanel(title = "Graph",
            fluidPage(
              selectInput("request", "Request", unique(b$Request)),
