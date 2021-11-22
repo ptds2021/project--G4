@@ -1,4 +1,18 @@
-weights <- c("date", "heure", "prelevement", "request", "cible", "sample")
+weights <-
+  c("date",
+    "heure",
+    "prelevement",
+    "operator",
+    "request",
+    "batch_pod_scel",
+    "cible",
+    "batch_pod_bottom",
+    "poids1",
+    "poids2",
+    "poids3",
+    "poids4",
+    "poids5",
+    "poids6")
 
 outputDirWeight <- "responses"
 
@@ -20,19 +34,9 @@ loadData <- function() {
   data <- lapply(files, read.csv, stringsAsFactors = FALSE) 
   # Concatenate all data together into one data.frame
   data <- do.call(rbind, data)
+  data <- as.matrix(data)
   data
 }
-
-MergeData = function() {
-  files = list.files(path = outputDirWeight, full.names = TRUE)
-  data = lapply(filenames, function(x) {
-    read.csv(file = x, header = T)
-  })
-  Reduce(function(x, y) {
-    merge(x, y)
-  }, data)
-}
-
 
 packages <- c(
   "here", "readxl", # for the project's organization

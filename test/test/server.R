@@ -16,6 +16,8 @@ shinyServer(function(input, output, session) {
     # (update with current response when Submit is clicked)
     output$responses <- DT::renderDataTable({
         input$submit
-        loadData()
+        DT::datatable(loadData(),
+                      options = list(pageLength = 5, scrollX = TRUE),
+                      class = 'cell-border stripe', rownames = FALSE, width =500)
     })
 })
