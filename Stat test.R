@@ -115,7 +115,36 @@ b %>%
     ggplot2::geom_vline(ggplot2::aes(xintercept = UCL), color = "blue", linetype = 3) +
     ggplot2::geom_vline(ggplot2::aes(xintercept = LCL), color = "blue", linetype = 3) +
     ggplot2::geom_vline(ggplot2::aes(xintercept = b$Cible), color = "red", linetype = 2) +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = USL), color = "red", linetype = 2) +
+  ggplot2::geom_vline(ggplot2::aes(xintercept = LSL), color = "red", linetype = 2) +
   stat_function(fun = dnorm, n = 101, args = list(mean = mean(b$median), sd = median(b$sd))) +
   ylab("") +
   scale_y_continuous(breaks = NULL) +
   theme_qcc()
+
+USL = b$Cible[1] + 0.05
+LSL = b$Cible[1] - 0.05
+
+Cpu <- (USL - b$Cible[1])/3*Rbar
+Cpl <- (b$Cible[1] - LSL)/3*Rbar
+
+b %>%
+    ggplot2::ggplot() +
+    ggplot2::geom_histogram(
+      ggplot2::aes(x = b$median),
+      fill = "grey80",
+      color = "grey20") +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = USL), color = "red", linetype = 3) +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = LSL), color = "red", linetype = 3) +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = b$Cible[1]), color = "red", linetype = 2) +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = mean(b$median)), color = "blue", linetype = 3) +
+    ggplot2::theme_light() +
+    ggplot2::labs(
+      title = "Tablet weight process control",
+      subtitle = "Process Capability chart",
+      x = "Part Weight [g]",
+      y = "Count",
+      caption = "data source: Line1"
+    ) +
+theme_qcc()
+

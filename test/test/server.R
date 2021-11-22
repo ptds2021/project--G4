@@ -18,5 +18,5 @@ shinyServer(function(input, output, session) {
     output$responses <- DT::renderDataTable({
         input$submit
         loadData()
-    })     
+    })
 })

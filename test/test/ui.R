@@ -46,6 +46,9 @@ The project manager, to check the big picture of the project in the R&D branch o
                     )),
            
            tabPanel(title = "Graph",
-                    "content 3"),
-           inverse = T
+                    fluidPage(
+                      selectInput("request", "Request", unique(b$Request)),
+                      mainPanel(
+                        plotOutput("plot", height = "400px"))
+                    ))
 )
