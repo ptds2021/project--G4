@@ -12,7 +12,6 @@ shinyServer(function(input, output, session) {
     observeEvent(input$submit, {
         saveData(formData())
     })
-    
     # Show the previous responses
     # (update with current response when Submit is clicked)
     output$responses <- DT::renderDataTable({

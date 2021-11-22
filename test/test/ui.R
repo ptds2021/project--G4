@@ -36,15 +36,14 @@ The project manager, to check the big picture of the project in the R&D branch o
                             tags$hr(),
                             textInput("date", "Date", ""),
                             textInput("heure", "Heure", ""),
-                            textInput("prelevement", "Prelevement", ""),
+                            selectInput("operator", "Operator", unique(a$Operator)),
+                            numericInput("prelevement", "Prelevement", ""),
                             textInput("request", "Request", ""),
+                            selectInput("operator", "Operator", unique(a$Operator)),
                             textInput("cible", "Cible", ""),
-                            sliderInput("sample", "Sample Size",
-                                        0, 25, 6, ticks = FALSE),
                             actionButton("submit", "Submit")
                         )
                     )),
-           
            tabPanel(title = "Graph",
                     fluidPage(
                       selectInput("request", "Request", unique(b$Request)),

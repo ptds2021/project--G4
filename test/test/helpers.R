@@ -23,8 +23,15 @@ loadData <- function() {
   data
 }
 
-
-
+MergeData = function() {
+  files = list.files(path = outputDirWeight, full.names = TRUE)
+  data = lapply(filenames, function(x) {
+    read.csv(file = x, header = T)
+  })
+  Reduce(function(x, y) {
+    merge(x, y)
+  }, data)
+}
 
 
 packages <- c(
@@ -102,5 +109,3 @@ b <- a %>%
             median = mean(real_weight),
             sd = sd(real_weight),
             range = max(real_weight) - min(real_weight))
-
-
