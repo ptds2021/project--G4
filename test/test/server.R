@@ -37,7 +37,10 @@ shinyServer(function(input, output, session) {
             ggplot2::geom_hline(yintercept = (input$cible),
                                 linetype = "dashed",
                                 color = "red") +
-            theme_qcc()
+            theme_qcc() +
+            labs(x = "Poids", y = "Weight (Gr)",
+                 title = paste("Request",input$request),
+                 subtitle = paste("Prélèvement",input$prelevement))
     })
     
     
