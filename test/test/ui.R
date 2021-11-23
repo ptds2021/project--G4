@@ -104,7 +104,7 @@ in the R&D branch of the company."),
         )),
         
         column(4, wellPanel(
-          selectInput("operator", "Operator", unique(a$Operator)),
+          selectInput("operator", "Operator", unique(df$Operator)),
           hr(),
           
         )),
@@ -119,18 +119,18 @@ in the R&D branch of the company."),
       
       fluidRow(
         column(4, wellPanel(
-          selectInput("batch_pod_scel", "Batch_pod_scellé", unique(a$Batch_pod_scellé)),
+          selectInput("batch_pod_scel", "Batch_pod_scellé", unique(df$Batch_pod_scellé)),
           hr(),
           
         )),
       
         column(4, wellPanel(
-          textInput("cible", "Cible", ""),
+          numericInput("cible", "Cible", ""),
           hr(),
         )),
         
         column(4, wellPanel(
-          selectInput("batch_pod_bottom", "Batch_pod_bottom", unique(a$Batch_pod_bottom)),
+          selectInput("batch_pod_bottom", "Batch_pod_bottom", unique(df$Batch_pod_bottom)),
           hr(),
         )),
         
@@ -189,7 +189,7 @@ in the R&D branch of the company."),
 
   tabPanel(title = "Graph",
            fluidPage(
-             selectInput("request", "Request", unique(a$Request)),
+             selectInput("request", "Request", unique(df$Request)),
              mainPanel(plotOutput("plot_hist", height = "400px"))
            ))
 )

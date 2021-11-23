@@ -95,7 +95,7 @@ poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poid
 poids$Poids1 <- as.double(poids$Poids1)
 poids$Poids2 <- as.double(poids$Poids2)
 
-a <- poids %>%
+df <- poids %>%
   pivot_longer(
     cols = starts_with("Poids"),
     names_to = "Poids",
@@ -104,26 +104,5 @@ a <- poids %>%
     values_drop_na = TRUE
   ) #tidy data set
 
-a <- a[!is.na(a$Prelevement),]
-a <- a[!is.na(a$Cible),]
-
-tabSPC_request <- function(request) {
-  a %>% 
-    group_by(Request, Prelevement, Cible) %>%
-    summarise(real_weight = weight-Tare,
-              median = mean(real_weight),
-              sd = sd(real_weight),
-              range = max(real_weight) - min(real_weight))%>%
-    filter(Request == request)
-}
-
-
-o2 <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS O2.xlsx")
-c <- o2 %>%
-  pivot_longer(
-    cols = starts_with("Valeur"),
-    names_to = "Valeur",
-    names_prefix = "Valeur",
-    values_to = "valeur",
-    values_drop_na = TRUE
-  )
+df <- df[!is.na(df$Prelevement),]
+df <- df[!is.na(df$Cible),]
