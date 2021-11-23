@@ -28,5 +28,4 @@ shinyServer(function(input, output, session) {
     
 #####Graph output
     
-    
 })

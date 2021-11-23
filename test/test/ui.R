@@ -179,7 +179,7 @@ in the R&D branch of the company."),
       
       fluidRow(
         column(4, wellPanel(
-          actionButton("submit", "Submit", align="center"),
+          actionButton("submit", "Submit", align = "center"),
           hr()
         ))
       ),
@@ -189,8 +189,8 @@ in the R&D branch of the company."),
 
   tabPanel(title = "Graph",
            fluidPage(
-             selectInput("request", "Request", unique(b$Request)),
-             mainPanel(plotOutput("plot", height = "400px"))
+             selectInput("request", "Request", unique(a$Request)),
+             mainPanel(plotOutput("plot_hist", height = "400px"))
            ))
 )
 

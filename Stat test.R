@@ -77,12 +77,29 @@ b <- a %>%
             range = max(real_weight) - min(real_weight)) %>%
   filter(Request == 929) #data test
 
+tabSPC_request <- function(request) {
+  a %>% 
+    group_by(Request, Prelevement, Cible) %>%
+    summarise(real_weight = weight-Tare,
+              median = mean(real_weight),
+              sd = sd(real_weight),
+              range = max(real_weight) - min(real_weight))%>%
+    filter(Request == request)
+}
 
+
+
+Rbar = mean(tabSPC_request()[7])
+A2 = 0.483 #because each sample is composed of 6 observations
+UCL = mean(tabSPC_request()[5]) + A2*Rbar
+LCL = mean(tabSPC_request()[5]) - A2*Rbar 
 
 Rbar = mean(b$range)
 A2 = 0.483 #because each sample is composed of 6 observations
 UCL = mean(b$median) + A2*Rbar
 LCL = mean(b$median) - A2*Rbar 
+
+
 
 ####### X_bar chart : n = 6
 b %>%

@@ -107,15 +107,15 @@ a <- poids %>%
 a <- a[!is.na(a$Prelevement),]
 a <- a[!is.na(a$Cible),]
 
-b <- a %>% 
-  group_by(Request, Prelevement, Cible) %>%
-  summarise(real_weight = weight-Tare,
-            median = mean(real_weight),
-            sd = sd(real_weight),
-            range = max(real_weight) - min(real_weight))
-
-
-
+tabSPC_request <- function(request) {
+  a %>% 
+    group_by(Request, Prelevement, Cible) %>%
+    summarise(real_weight = weight-Tare,
+              median = mean(real_weight),
+              sd = sd(real_weight),
+              range = max(real_weight) - min(real_weight))%>%
+    filter(Request == request)
+}
 
 
 o2 <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS O2.xlsx")
