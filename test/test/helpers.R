@@ -90,7 +90,9 @@ theme_qcc <- function(base_size = 12, base_family = "") {
     )
 }
 
-poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
+#poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
+
+poids <- readxl::read_xlsx("C:/Users/sophi//NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
 
 poids$Poids1 <- as.double(poids$Poids1)
 poids$Poids2 <- as.double(poids$Poids2)
