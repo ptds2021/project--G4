@@ -119,7 +119,7 @@ in the R&D branch of the company."),
       
       fluidRow(
         column(4, wellPanel(
-          selectInput("Batch_pod_scel", "Batch_pod_scellé", unique(df$Batch_pod_scellé)),
+          selectInput("Batch_pod_scellé", "Batch_pod_scellé", unique(df$Batch_pod_scellé)),
           hr(),
           
         )),

@@ -108,8 +108,8 @@ poids$Poids2 <- as.double(poids$Poids2)
 #merge the data base
 poids<-poids%>% mutate(Date= as.numeric(Date))
 data_all<- rbind(poids, data)
- 
-# df <- data_all %>%
+# data_all<-poids
+# df <- poids %>%
 #   pivot_longer(
 #     cols = starts_with("Poids"),
 #     names_to = "Poids",
@@ -117,6 +117,6 @@ data_all<- rbind(poids, data)
 #     values_to = "weight",
 #     values_drop_na = TRUE
 #   ) #tidy data set
-# 
+
 # df <- df[!is.na(df$Prelevement),]
 # df <- df[!is.na(df$Cible),]
