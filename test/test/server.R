@@ -21,26 +21,26 @@ shinyServer(function(input, output, session) {
     
     output$plot_sample <- renderPlot({
         ggplot2::ggplot() +
-            ggplot2::geom_point(ggplot2::aes(y = input$poids1, x = 1)) +
-            ggplot2::geom_point(ggplot2::aes(y = input$poids2, x = 2)) +
-            ggplot2::geom_point(ggplot2::aes(y = input$poids3, x = 3)) +
-            ggplot2::geom_point(ggplot2::aes(y = input$poids4, x = 4)) +
-            ggplot2::geom_point(ggplot2::aes(y = input$poids5, x = 5)) +
-            ggplot2::geom_point(ggplot2::aes(y = input$poids6, x = 6)) +
+            ggplot2::geom_point(ggplot2::aes(y = input$Poids1, x = 1)) +
+            ggplot2::geom_point(ggplot2::aes(y = input$Poids2, x = 2)) +
+            ggplot2::geom_point(ggplot2::aes(y = input$Poids3, x = 3)) +
+            ggplot2::geom_point(ggplot2::aes(y = input$Poids4, x = 4)) +
+            ggplot2::geom_point(ggplot2::aes(y = input$Poids5, x = 5)) +
+            ggplot2::geom_point(ggplot2::aes(y = input$Poids6, x = 6)) +
             ggplot2::geom_hline(ggplot2::aes(
                 yintercept = (
-                    input$poids1 + input$poids2 + input$poids3 + input$poids4 + input$poids5 + input$poids6
+                    input$Poids1 + input$Poids2 + input$Poids3 + input$Poids4 + input$Poids5 + input$Poids6
                 )/6
             ),
             color = "blue",
             linetype = 3) +
-            ggplot2::geom_hline(yintercept = (input$cible),
+            ggplot2::geom_hline(yintercept = (input$Cible),
                                 linetype = "dashed",
                                 color = "red") +
             theme_qcc() +
             labs(x = "Poids", y = "Weight (Gr)",
-                 title = paste("Request",input$request),
-                 subtitle = paste("Prélèvement",input$prelevement))
+                 title = paste("Request",input$Request),
+                 subtitle = paste("Prélèvement",input$Prelevement))
     })
     
     

@@ -140,16 +140,29 @@ in the R&D branch of the company."),
       
       fluidRow(
         column(2, wellPanel(
-          numericInput("poids1", "Poids 1", ""),
+          numericInput("Poids1", "Poids 1", ""),
           hr(),
         )),
         
         column(2, wellPanel(
-          numericInput("poids2", "Poids 2", ""),
+          numericInput("Poids2", "Poids 2", ""),
           hr(),
         )),
         column(2, wellPanel(
-          numericInput("poids3", "Poids 3", ""),
+          numericInput("Poids3", "Poids 3", ""),
+          hr(),
+        )),
+        
+        column(2, wellPanel(
+          numericInput("Poids4", "Poids 4", ""),
+          hr(),
+        )),
+        column(2, wellPanel(
+          numericInput("Poids5", "Poids 5", ""),
+          hr(),
+        )),
+        column(2, wellPanel(
+          numericInput("Poids6", "Poids 6", ""),
           hr(),
         )),
         
@@ -158,23 +171,6 @@ in the R&D branch of the company."),
           hr()
         ), offset = 6)
       ),
-
-      fluidRow(
-        column(2, wellPanel(
-          numericInput("poids4", "Poids 4", ""),
-          hr(),
-        )),
-        column(2, wellPanel(
-          numericInput("poids5", "Poids 5", ""),
-          hr(),
-        )),
-        column(2, wellPanel(
-          numericInput("poids6", "Poids 6", ""),
-          hr(),
-        ))
-      ),
-      
-      br(),
       
       
       fluidRow(

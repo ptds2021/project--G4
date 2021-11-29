@@ -1,18 +1,19 @@
 weights <-
-  c("date",
-    "heure",
-    "prelevement",
-    "operator",
-    "request",
-    "batch_pod_scel",
-    "cible",
-    "batch_pod_bottom",
-    "poids1",
-    "poids2",
-    "poids3",
-    "poids4",
-    "poids5",
-    "poids6")
+  c("Date",
+    "Heure",
+    "Prelevement",
+    "Operator",
+    "Request",
+    "Batch_pod_scellé",
+    "Batch_pod_bottom",
+    "Poids1",
+    "Poids2",
+    "Poids3",
+    "Poids4",
+    "Poids5",
+    "Poids6",
+    "Cible",
+    "Tare")
 
 outputDirWeight <- "responses"
 
