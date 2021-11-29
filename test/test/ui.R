@@ -133,8 +133,13 @@ in the R&D branch of the company."),
           selectInput("batch_pod_bottom", "Batch_pod_bottom", unique(df$Batch_pod_bottom)),
           hr(),
         )),
+        column(4, wellPanel(
+          numericInput("Tare", "Tare", ""),
+          hr(),
+        )),
         
       ),
+      
       
       br(),
       
