@@ -84,12 +84,12 @@ in the R&D branch of the company."),
       
       fluidRow(column(4,
                       wellPanel(
-                        dateInput("date", "Date", "", value = Sys.Date()),
+                        dateInput("Date", "Date", "", value = Sys.Date()),
                         hr(),
                       )),
                column(4,
                       wellPanel(
-                        selectInput("heure", "Heure:",
+                        selectInput("Heure", "Heure:",
                                     c("8:00", "9:00", "10:00", "11:00", "12:00",
                                       "13:00","14:00","15:00","16:00", "17:00","18:00")),
                         hr(),
@@ -99,17 +99,17 @@ in the R&D branch of the company."),
       
       fluidRow(
         column(4, wellPanel(
-          numericInput("prelevement", "Prelevement", ""),
+          numericInput("Prelevement", "Prelevement", ""),
           hr(),
         )),
         
         column(4, wellPanel(
-          selectInput("operator", "Operator", unique(df$Operator)),
+          selectInput("Operator", "Operator", unique(df$Operator)),
           hr(),
           
         )),
         column(4, wellPanel(
-          textInput("request", "Request", ""),
+          textInput("Request", "Request", ""),
           hr(),
         ))
       ),
@@ -119,18 +119,18 @@ in the R&D branch of the company."),
       
       fluidRow(
         column(4, wellPanel(
-          selectInput("batch_pod_scel", "Batch_pod_scellé", unique(df$Batch_pod_scellé)),
+          selectInput("Batch_pod_scel", "Batch_pod_scellé", unique(df$Batch_pod_scellé)),
           hr(),
           
         )),
       
         column(4, wellPanel(
-          numericInput("cible", "Cible", ""),
+          numericInput("Cible", "Cible", ""),
           hr(),
         )),
         
         column(4, wellPanel(
-          selectInput("batch_pod_bottom", "Batch_pod_bottom", unique(df$Batch_pod_bottom)),
+          selectInput("Batch_pod_bottom", "Batch_pod_bottom", unique(df$Batch_pod_bottom)),
           hr(),
         )),
         column(4, wellPanel(
@@ -190,7 +190,7 @@ in the R&D branch of the company."),
 
   tabPanel(title = "Graph",
            fluidPage(
-             selectInput("request", "Request", unique(data_all$Request)),
+             selectInput("Request", "Request", unique(data_all$Request)),
              mainPanel(plotOutput("plot_hist", height = "400px"))
            ))
 )
