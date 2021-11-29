@@ -190,7 +190,7 @@ in the R&D branch of the company."),
 
   tabPanel(title = "Graph",
            fluidPage(
-             selectInput("request", "Request", unique(df$Request)),
+             selectInput("request", "Request", unique(data_all$Request)),
              mainPanel(plotOutput("plot_hist", height = "400px"))
            ))
 )

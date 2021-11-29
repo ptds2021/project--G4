@@ -91,27 +91,32 @@ theme_qcc <- function(base_size = 12, base_family = "") {
     )
 }
 
-#poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
-
-poids <- readxl::read_xlsx("C:/Users/sophi//NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
+#poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx") %>% select(-"...16")
+ 
+poids <- readxl::read_xlsx("C:/Users/sophi//NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx") %>% select(-"...16")
 
 #store the data into one tibble
-data <- list.files(path = "responses/", pattern="*.csv",  full.names = TRUE) %>%
+data <- list.files(path = "test/responses/", pattern="*.csv",  full.names = TRUE) %>%
   lapply(read_csv) %>%                                            # Store all files in list
   bind_rows                                                       # Combine data sets into one data set
 data
 
+
 poids$Poids1 <- as.double(poids$Poids1)
 poids$Poids2 <- as.double(poids$Poids2)
 
-df <- poids %>%
-  pivot_longer(
-    cols = starts_with("Poids"),
-    names_to = "Poids",
-    names_prefix = "Poids",
-    values_to = "weight",
-    values_drop_na = TRUE
-  ) #tidy data set
-
-df <- df[!is.na(df$Prelevement),]
-df <- df[!is.na(df$Cible),]
+#merge the data base
+poids<-poids%>% mutate(Date= as.numeric(Date))
+data_all<- rbind(poids, data)
+ 
+# df <- data_all %>%
+#   pivot_longer(
+#     cols = starts_with("Poids"),
+#     names_to = "Poids",
+#     names_prefix = "Poids",
+#     values_to = "weight",
+#     values_drop_na = TRUE
+#   ) #tidy data set
+# 
+# df <- df[!is.na(df$Prelevement),]
+# df <- df[!is.na(df$Cible),]
