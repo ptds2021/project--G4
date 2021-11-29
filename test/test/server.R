@@ -21,15 +21,15 @@ shinyServer(function(input, output, session) {
     
     output$plot_sample <- renderPlot({
         ggplot2::ggplot() +
-            ggplot2::geom_point(ggplot2::aes(y = input$Poids1, x = 1)) +
-            ggplot2::geom_point(ggplot2::aes(y = input$Poids2, x = 2)) +
-            ggplot2::geom_point(ggplot2::aes(y = input$Poids3, x = 3)) +
-            ggplot2::geom_point(ggplot2::aes(y = input$Poids4, x = 4)) +
-            ggplot2::geom_point(ggplot2::aes(y = input$Poids5, x = 5)) +
-            ggplot2::geom_point(ggplot2::aes(y = input$Poids6, x = 6)) +
+            ggplot2::geom_point(ggplot2::aes(y = (input$Poids1-input$Tare), x = 1)) +
+            ggplot2::geom_point(ggplot2::aes(y = (input$Poids2-input$Tare), x = 2)) +
+            ggplot2::geom_point(ggplot2::aes(y = (input$Poids3-input$Tare), x = 3)) +
+            ggplot2::geom_point(ggplot2::aes(y = (input$Poids4-input$Tare), x = 4)) +
+            ggplot2::geom_point(ggplot2::aes(y = (input$Poids5-input$Tare), x = 5)) +
+            ggplot2::geom_point(ggplot2::aes(y = (input$Poids6-input$Tare), x = 6)) +
             ggplot2::geom_hline(ggplot2::aes(
                 yintercept = (
-                    input$Poids1 + input$Poids2 + input$Poids3 + input$Poids4 + input$Poids5 + input$Poids6
+                    (input$Poids1-input$Tare + input$Poids2-input$Tare + input$Poids3-input$Tare + input$Poids4-input$Tare + input$Poids5-input$Tare + input$Poids6-input$Tare)
                 )/6
             ),
             color = "blue",
