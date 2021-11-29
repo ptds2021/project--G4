@@ -82,95 +82,112 @@ in the R&D branch of the company."),
       )),
       br(),
       
-      fluidRow(column(4,
+      fluidRow(column(1,
                       wellPanel(
                         dateInput("Date", "Date", "", value = Sys.Date()),
                         hr(),
                       )),
-               column(4,
+               column(2 ,
                       wellPanel(
                         selectInput("Heure", "Heure:",
                                     c("8:00", "9:00", "10:00", "11:00", "12:00",
                                       "13:00","14:00","15:00","16:00", "17:00","18:00")),
                         hr(),
-                      )), ), 
+                      )), 
+               column(width = 1, offset = 1, 
+                      wellPanel(
+                 numericInput("Poids1", "Poids 1", ""),
+                 hr(),
+                      )),
+               column(width = 1, 
+                      wellPanel(
+                        numericInput("Poids2", "Poids 2", ""),
+                        hr(),
+                      )),
+               column(width = 1, 
+                      wellPanel(
+                        numericInput("Poids3", "Poids 3", ""),
+                        hr(),
+                      )),
+               column(width = 1, 
+                      wellPanel(
+                        numericInput("Poids4", "Poids 4", ""),
+                        hr(),
+                      )),
+               column(width = 1, 
+                      wellPanel(
+                        numericInput("Poids5", "Poids 5", ""),
+                        hr(),
+                      )),
+               column(width = 1, 
+                      wellPanel(
+                        numericInput("Poids6", "Poids 6", ""),
+                        hr(),
+                      )),
+               column(width = 1,
+                      wellPanel(
+                        
+                        
+                      ))
+               
+                 
+               
+               
+               ), 
       
       br(),
       
       fluidRow(
-        column(4, wellPanel(
+        column(1, wellPanel(
           numericInput("Prelevement", "Prelevement", ""),
           hr(),
         )),
         
-        column(4, wellPanel(
+        column(2, wellPanel(
           selectInput("Operator", "Operator", unique(df$Operator)),
           hr(),
           
         )),
-        column(4, wellPanel(
-          textInput("Request", "Request", ""),
-          hr(),
-        ))
-      ),
-      
-      
-      br(),
-      
-      fluidRow(
-        column(4, wellPanel(
+        
+        
+    
+        column(2, offset = 1, wellPanel(
           selectInput("Batch_pod_scellé", "Batch_pod_scellé", unique(df$Batch_pod_scellé)),
           hr(),
+        )),
+        
+          column(2, wellPanel(
+            selectInput("Batch_pod_bottom", "Batch_pod_bottom", unique(df$Batch_pod_bottom)),
+            hr(),
+            
+          
           
         )),
       
-        column(4, wellPanel(
+        column(1, wellPanel(
           numericInput("Cible", "Cible", ""),
           hr(),
         )),
         
-        column(4, wellPanel(
-          selectInput("Batch_pod_bottom", "Batch_pod_bottom", unique(df$Batch_pod_bottom)),
-          hr(),
-        )),
-        column(4, wellPanel(
+        
+        
+        column(1, wellPanel(
           numericInput("Tare", "Tare", ""),
           hr(),
         )),
         
+        column(1, offset=1, wellPanel(
+          textInput("Request", "Request", ""),
+          hr(),
+        )),
       ),
-      
       
       br(),
       
+    
+        
+        
       fluidRow(
-        column(2, wellPanel(
-          numericInput("Poids1", "Poids 1", ""),
-          hr(),
-        )),
-        
-        column(2, wellPanel(
-          numericInput("Poids2", "Poids 2", ""),
-          hr(),
-        )),
-        column(2, wellPanel(
-          numericInput("Poids3", "Poids 3", ""),
-          hr(),
-        )),
-        
-        column(2, wellPanel(
-          numericInput("Poids4", "Poids 4", ""),
-          hr(),
-        )),
-        column(2, wellPanel(
-          numericInput("Poids5", "Poids 5", ""),
-          hr(),
-        )),
-        column(2, wellPanel(
-          numericInput("Poids6", "Poids 6", ""),
-          hr(),
-        )),
-        
         column(5, wellPanel(
           plotOutput("plot_sample"),
           hr()
@@ -179,7 +196,7 @@ in the R&D branch of the company."),
       
       
       fluidRow(
-        column(4, wellPanel(
+        column(2, wellPanel(
           actionButton("submit", "Submit", align = "center"),
           hr()
         ))
