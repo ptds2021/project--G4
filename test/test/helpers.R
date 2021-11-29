@@ -95,6 +95,12 @@ theme_qcc <- function(base_size = 12, base_family = "") {
 
 poids <- readxl::read_xlsx("C:/Users/sophi//NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
 
+#store the data into one tibble
+data <- list.files(path = "responses/", pattern="*.csv",  full.names = TRUE) %>%
+  lapply(read_csv) %>%                                            # Store all files in list
+  bind_rows                                                       # Combine data sets into one data set
+data
+
 poids$Poids1 <- as.double(poids$Poids1)
 poids$Poids2 <- as.double(poids$Poids2)
 
