@@ -124,11 +124,7 @@ in the R&D branch of the company."),
                         numericInput("Poids6", "Poids 6", ""),
                         hr(),
                       )),
-               column(width = 1,
-                      wellPanel(
-                        
-                        
-                      ))
+               
                
                  
                
@@ -183,10 +179,15 @@ in the R&D branch of the company."),
       ),
       
       br(),
+      fluidRow(
+        column(2, wellPanel(
+          actionButton("submit", "Submit", align = "center"),
+          hr()
+        ))
+      ),
+      br()
+    ),
       
-    
-        
-        
       fluidRow(
         column(5, wellPanel(
           plotOutput("plot_sample"),
@@ -199,18 +200,11 @@ in the R&D branch of the company."),
           renderTable("summary_table"),
           hr()
         ), offset = 6)
-      ),
+      )
+ ),
       
       
-      fluidRow(
-        column(2, wellPanel(
-          actionButton("submit", "Submit", align = "center"),
-          hr()
-        ))
-      ),
-      br()
-    )
-  ),
+      
 
   tabPanel(title = "Graph",
            fluidPage(
