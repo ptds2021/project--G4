@@ -33,24 +33,25 @@ request_CL <- function(request, A2 = 0.483) {
   Cpu <- (USL - request_SPC$Cible[1])/3*Rbar
   Cpl <- (request_SPC$Cible[1] - LSL)/3*Rbar
   
+  CPK <- matrix(c(Rbar, UCL, LCL, USL, LSL, Cpu, Cpl))
+  
   request_SPC %>%
     ggplot2::ggplot() +
     ggplot2::geom_histogram(
       ggplot2::aes(x = request_SPC$median),
       fill = "grey80",
-      color = "grey20") + 
+      color = "grey20", bins = 70) + 
     ggplot2::geom_vline(ggplot2::aes(xintercept = mean(request_SPC$median)), color = "blue", linetype = 3) +
     ggplot2::geom_vline(ggplot2::aes(xintercept = UCL), color = "blue", linetype = 3) +
     ggplot2::geom_vline(ggplot2::aes(xintercept = LCL), color = "blue", linetype = 3) +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = request_SPC$Cible), color = "red", linetype = 2) +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = USL), color = "red", linetype = 2) +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = LSL), color = "red", linetype = 2) +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = request_SPC$Cible), color = "red") +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = USL), color = "red") +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = LSL), color = "red") +
     stat_function(fun = dnorm, n = 101, args = list(mean = mean(request_SPC$median), sd = median(request_SPC$sd))) +
-    ylab("") +
-    scale_y_continuous(breaks = NULL)
+    ylab("")
+
 }
 
 #Add some basic stats, legend, and a text that analyze automatically
 
-request_CL(1015)
 
