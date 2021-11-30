@@ -53,7 +53,7 @@ request_CL <- function(request, A2 = 0.483, d2 = 5.534) {
     stat_function(fun = dnorm, n = 101,
                   args = list(mean = mean(request_SPC$median),
                                                     sd = median(request_SPC$sd))) +
-    ylab("")
+    ylab("") + xlab("")
 
 if (Ppk < 1) {
   caption1 <- "Process variation is not equal to the specs"
