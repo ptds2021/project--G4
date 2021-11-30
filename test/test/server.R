@@ -42,6 +42,11 @@ shinyServer(function(input, output, session) {
                  title = paste("Request",input$Request),
                  subtitle = paste("Prélèvement",input$Prelevement))
     })
+    
+    output$table_summary <- DT::renderDataTable({
+        summary_table(input$Poids1,input$Poids2,input$Tare
+            
+        )})
 })
     
     

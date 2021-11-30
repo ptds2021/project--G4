@@ -120,3 +120,19 @@ data_all<- rbind(poids, data)
 
  df <- df[!is.na(df$Prelevement),]
  df <- df[!is.na(df$Cible),]
+ 
+ 
+ 
+#function
+
+summary_table <- function(x1,x2, t){
+  x<- c(x1,x2)
+  x<- x-t
+  mean<- (x1+x2)/2
+  sd <- sd(x1,x2)
+  quan1 <- quantile(x, probs = seq(0.25))
+  quan3 <- quantile(x, probs = seq(0.75))
+  t <- tibble(mean,sd, quan1,quan3)
+  t 
+}
+ 
