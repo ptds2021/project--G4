@@ -12,7 +12,6 @@ poids <- poids %>%
     values_to = "weight",
     values_drop_na = TRUE
   )
-poids %>% filter(Request == "1008.1")
 
 poids_SPC <- poids %>% 
   group_by(Request, Prelevement, Cible) %>%
@@ -22,7 +21,8 @@ poids_SPC <- poids %>%
             range = max(real_weight) - min(real_weight))
 
 request_CL <- function(request, A2 = 0.483, d2 = 5.534) {
-  request_SPC <- poids_SPC %>% filter(Request == request)
+  request_SPC <- poids_SPC %>%
+    filter(Request == request)
   Rbar = mean(request_SPC$range)
   UCL = mean(request_SPC$median) + A2*Rbar
   LCL = mean(request_SPC$median) - A2*Rbar
@@ -37,13 +37,12 @@ request_CL <- function(request, A2 = 0.483, d2 = 5.534) {
   Ppl <- (request_SPC$Cible[1] - LSL)/3*median(request_SPC$sd)
   Cpk <- min(Cpu, Cpl)
   Ppk <- min(Ppu, Ppl)
+  off_spec <- round(100 - ((stats::pnorm(UCL, median(request_SPC$median), median(request_SPC$sd)) - stats::pnorm(LCL, median(request_SPC$median),median(request_SPC$sd)))*100), 2)
   
   graph <- request_SPC %>%
     ggplot2::ggplot() +
     ggplot2::geom_histogram(
-      ggplot2::aes(x = request_SPC$median),
-      fill = "grey80",
-      color = "grey20", bins = 70) + 
+    ggplot2::aes(x = request_SPC$median), bins = 70) + 
     ggplot2::geom_vline(ggplot2::aes(xintercept = mean(request_SPC$median)), color = "blue", linetype = 3) +
     ggplot2::geom_vline(ggplot2::aes(xintercept = UCL), color = "blue", linetype = 3) +
     ggplot2::geom_vline(ggplot2::aes(xintercept = LCL), color = "blue", linetype = 3) +
@@ -83,13 +82,23 @@ if (Ppk < Cpk) {
 }
 if (Ppk < Cpk) {
     caption3 <- "Process is out of control"
-  }
-  print(graph + labs(caption = paste(caption1,"\n", caption2, "\n", caption3)))
 }
 
+  print(graph + labs(caption = paste(
+    paste("USL = ",USL,"\t",
+          "LSL = ", LSL,"\t", "\n",
+          "Cp = ", Cp,"\t",
+          "Pp = ", Pp,"\t", "\n",
+          "Cpk = ", Cpk,"\t",
+          "Ppk = ", Ppk,"\t", "\n",
+          "Out of Specs = ", off_spec,"\t"),"\n",
+    caption1,"\n", caption2, "\n", caption3)) +
+      theme(plot.caption = element_text(hjust = 0, face = "italic"), #Default is hjust=1
+            plot.title.position = "plot", #NEW parameter. Apply for subtitle too.
+            plot.caption.position =  "plot") )
+}
 
 #Add some basic stats, legend, and a text that analyze automatically
 
 request_CL(929)
-
 
