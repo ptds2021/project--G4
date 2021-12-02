@@ -197,7 +197,7 @@ in the R&D branch of the company."),
       br(),
       fluidRow(
         column(5, wellPanel(
-          renderTable("summary_table"),
+          renderTable("table_summary"),
           hr()
         ), offset = 6)
       )
