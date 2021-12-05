@@ -33,6 +33,23 @@ poids_SPC <- poids %>%
 poids_SPC <- poids_SPC[,-4] %>%
   distinct()
 
+
+#This function draws a density graph according to a particular request
+#It shows the median of the process as well as their control limits.
+#It shows also the the process Cible as well as their specication limits (deviation around the Cible).
+
+
+#text to be rephrased (I just copied and pasted)
+
+#(Control limits are used to detect signals in process data that indicate that a process is not in control and,
+#therefore, not operating predictably.)
+#Control limits are calculated from process data.
+#They represent how your process actually performs.
+#Specification limits are defined by your customer and represent the desired performance of your process.
+#Specification limits and control limits are used for different purposes.
+#Control limits let you assess whether your process is stable.
+#Specification limits allow you to assess how capable your process is of meeting customer requirements. 
+
 request_CL <- function(request, A2 = 0.483, d2 = 5.534) {
   request_SPC <- poids_SPC %>%
     filter(Request == request)
@@ -109,6 +126,16 @@ request_CL(929)
 
 
 
+
+
+
+
+
+
+#This function shows the evolution of prélèvements over time according to a particular request. In SixSigma theory, this graph is called an R-chart 
+#It shows the median of the process as well as their control limits.
+#It shows also the the process Cible.
+
 R_bar_chart <- function(request, A2 = 0.483) {
   
   request_SPC <- poids_SPC %>%
@@ -148,9 +175,12 @@ R_bar_chart <- function(request, A2 = 0.483) {
 print(Rchart)
   
 }
-
-
 R_bar_chart(929)
+
+
+
+
+
 
 
 
@@ -184,6 +214,5 @@ summary_stat <- function(request, A2 = 0.483) {
     )
   knitr::kable(summary, "simple")
 }
-
 
 summary_stat(929)
