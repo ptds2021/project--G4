@@ -104,10 +104,8 @@ print(graph + labs(caption = paste(
 
 }
 
-request_CL(1008.1)
+request_CL(929)
 
-# next : 
-# add basic stats
 
 
 
@@ -152,7 +150,7 @@ print(Rchart)
 }
 
 
-
+R_bar_chart(929)
 
 
 
