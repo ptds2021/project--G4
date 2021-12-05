@@ -57,23 +57,24 @@ request_CL <- function(request, A2 = 0.483, d2 = 5.534) {
     ggplot2::ggplot() +
     ggplot2::geom_histogram(aes(x = request_SPC$median, fill = request_SPC$median > UCL | request_SPC$median < LCL), bins = 100) +
     ggplot2::geom_vline(ggplot2::aes(xintercept = mean(request_SPC$median)), color = "black", linetype = 3) +
-    geom_text(aes(x = mean(request_SPC$median), label="Process Median", y=-0.5), colour="black") +
+    ggplot2::geom_text(aes(x = mean(request_SPC$median), label = "Process Median", y = -0.5), colour="black") +
     ggplot2::geom_vline(ggplot2::aes(xintercept = UCL), color = "black", linetype = 3) +
-    geom_text(aes(x = UCL, label = "UCL", y = -0.5), colour = "black") +
+    ggplot2::geom_text(aes(x = UCL, label = "UCL", y = -0.5), colour = "black") +
     ggplot2::geom_vline(ggplot2::aes(xintercept = LCL), color = "black", linetype = 3) +
-    geom_text(aes(x = LCL, label = "LCL", y = -0.5), colour = "black") +
+    ggplot2::geom_text(aes(x = LCL, label = "LCL", y = -0.5), colour = "black") +
     ggplot2::geom_vline(ggplot2::aes(xintercept = request_SPC$Cible), color = "blue") +
-    geom_text(aes(x = request_SPC$Cible, label="Cible", y = 23), colour="blue") +
+    ggplot2::geom_text(aes(x = request_SPC$Cible, label = "Cible", y = 23), colour="blue") +
     ggplot2::geom_vline(ggplot2::aes(xintercept = USL), color = "blue") +
-    geom_text(aes(x = USL, label = "USL", y = 23), colour = "blue") +
+    ggplot2::geom_text(aes(x = USL, label = "USL", y = 23), colour = "blue") +
     ggplot2::geom_vline(ggplot2::aes(xintercept = LSL), color = "blue") +
-    geom_text(aes(x = LSL, label = "LSL", y = 23), colour = "blue") +
+    ggplot2::geom_text(aes(x = LSL, label = "LSL", y = 23), colour = "blue") +
     stat_function(fun = dnorm, n = 101,
                   args = list(mean = mean(request_SPC$median),
                                                     sd = median(request_SPC$sd))) +
     ylab("") +
     xlab("") + theme(legend.position = "none") + 
-    scale_fill_manual(values = c("black", "red")) 
+    scale_fill_manual(values = c("black", "red")) + labs(
+      title = paste("Request",request_SPC$Request, "density chart and Cpk analysis"))
 
 if (Cpk < 1) {
   caption1 <- "Process variation is not equal to the specs"
@@ -103,9 +104,7 @@ print(graph + labs(caption = paste(
 
 }
 
-request_CL(929)
-request_CL(797)
-request_CL(820)
+request_CL(1008.1)
 
 # next : 
 # add basic stats
@@ -121,25 +120,72 @@ R_bar_chart <- function(request, A2 = 0.483) {
   UCL = median(request_SPC$median) + A2*Rbar
   LCL = median(request_SPC$median) - A2*Rbar
   
+  z <- request_SPC$median > UCL | request_SPC$median < LCL
+  out_control_point <- sum(z)
+  
   Rchart <- request_SPC %>%
     ggplot2::ggplot() +
-    ggplot2::geom_point(aes(x = Prelevement, y = median)) +
+    ggplot2::geom_point(aes(x = Prelevement, y = median, colour = request_SPC$median > UCL | request_SPC$median < LCL)) +
     ggplot2::geom_hline(yintercept = mean(request_SPC$median),
                         linetype = "dashed",
-                        color = "blue") +
+                        color = "black") +
+    ggplot2::geom_text(aes(x = -5, label = "Process \n Median", y = mean(request_SPC$median) + 0.007), colour = "black") +
     ggplot2::geom_hline(ggplot2::aes(yintercept = UCL),
-                        color = "blue",
+                        color = "black",
                         linetype = 3) +
+    ggplot2::geom_text(aes(x = -5, label = "UCL", y = UCL + 0.005), colour = "black") +
     ggplot2::geom_hline(ggplot2::aes(yintercept = LCL),
-                        color = "blue",
+                        color = "black",
                         linetype = 3) +
+    ggplot2::geom_text(aes(x = -5, label = "LCL", y = LCL + 0.005), colour = "black") +
     ggplot2::geom_hline(yintercept = (request_SPC$Cible),
-                        linetype = "dashed",
-                        color = "red") + xlab("Prélèvements") + ylab("Gr")
+                        color = "blue") +
+    ggplot2::geom_text(aes(x = -5, label = "Cible", y = (request_SPC$Cible) + 0.005), colour = "blue") +
+    ggplot2::xlab("Prélèvements") +
+    ggplot2::ylab("Median of each sample in grams") + theme(legend.position = "none") + 
+    ggplot2::scale_color_manual(values = c("black", "red")) + labs(
+                    title = paste("Request",request_SPC$Request, "R chart"),
+                    subtitle = paste("The", out_control_point, "red dots are outside the control limits. Process variation cannot explain these extreme values, Process must be analysed" ))
+  
 print(Rchart)
   
 }
 
-R_bar_chart(929)
 
 
+
+
+
+
+summary_stat <- function(request, A2 = 0.483) {
+  
+  request_SPC <- poids_SPC %>%
+    filter(Request == 929)
+  
+  Rbar = mean(request_SPC$range)
+  UCL = median(request_SPC$median) + A2*Rbar
+  LCL = median(request_SPC$median) - A2*Rbar
+  Process_median <- median(request_SPC$median)
+  
+  z <- request_SPC$median > UCL | request_SPC$median < LCL
+  beyond_limit <- sum(z)
+  out_control_perc <- sum(z)/length(request_SPC)
+  
+  
+  summary <- dplyr::as_tibble(c(Process_median, request_SPC$Cible[1], Rbar, UCL, LCL, beyond_limit, out_control_perc))
+  
+  summary$name <-
+    c(
+      "Process Median",
+      "Process Cible",
+      "Process Mean Deviation",
+      "Upper Control Limit",
+      "Lower Control Limit",
+      "Number beyonds Limits", 
+      "Out of control %"
+    )
+  knitr::kable(summary, "simple")
+}
+
+
+summary_stat(929)
