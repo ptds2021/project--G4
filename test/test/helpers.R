@@ -106,10 +106,12 @@ poids$Poids1 <- as.double(poids$Poids1)
 poids$Poids2 <- as.double(poids$Poids2)
 
 #merge the data base
-poids<-poids%>% mutate(Date= as.numeric(Date))
-data_all<- rbind(poids, data)
+poids <- poids %>%
+  mutate(Date = as.numeric(Date))
+data_all <- rbind(poids, data)
 # data_all<-poids
- df <- poids %>%
+
+df <- poids %>%
    pivot_longer(
      cols = starts_with("Poids"),
      names_to = "Poids",
@@ -125,14 +127,14 @@ data_all<- rbind(poids, data)
  
 #function
 
-summary_table <- function(x1,x2, t){
-  x<- c(x1,x2)
-  x<- x-t
-  mean<- (x1+x2)/2
-  sd <- sd(x1,x2)
-  quan1 <- quantile(x, probs = seq(0.25))
-  quan3 <- quantile(x, probs = seq(0.75))
-  t <- tibble(mean,sd, quan1,quan3)
-  t 
-}
+ summary_table <- function(x1, x2, t) {
+   x <- c(x1, x2)
+   x <- x - t
+   mean <- (x1 + x2) / 2
+   sd <- sd(x1, x2)
+   quan1 <- quantile(x, probs = seq(0.25))
+   quan3 <- quantile(x, probs = seq(0.75))
+   t <- tibble(mean, sd, quan1, quan3)
+   t
+ }
  

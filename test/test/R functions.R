@@ -1,3 +1,12 @@
+packages <- c(
+  "here", "readxl", # for the project's organization
+  "tidyverse", "lubridate", # for wrangling
+  "knitr", "kableExtra", "bookdown", "rmarkdown", "DT", # for the report
+  "summarytools","caret","ggplot2",
+  "dplyr")
+
+purrr::walk(packages, library, character.only = TRUE)
+
 poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
 poids <- poids[!is.na(poids$Prelevement),]
 poids <- poids[!is.na(poids$Cible),]
@@ -99,9 +108,38 @@ request_CL(797)
 request_CL(820)
 
 # next : 
-
 # add basic stats
-# understand how implement SL -> if we manage to do it : cpk analyis + text
-# improve presentation
+
+
+
+R_bar_chart <- function(request, A2 = 0.483) {
+  
+  request_SPC <- poids_SPC %>%
+    filter(Request == request)
+
+  Rbar = mean(request_SPC$range)
+  UCL = median(request_SPC$median) + A2*Rbar
+  LCL = median(request_SPC$median) - A2*Rbar
+  
+  Rchart <- request_SPC %>%
+    ggplot2::ggplot() +
+    ggplot2::geom_point(aes(x = Prelevement, y = median)) +
+    ggplot2::geom_hline(yintercept = mean(request_SPC$median),
+                        linetype = "dashed",
+                        color = "blue") +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = UCL),
+                        color = "blue",
+                        linetype = 3) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = LCL),
+                        color = "blue",
+                        linetype = 3) +
+    ggplot2::geom_hline(yintercept = (request_SPC$Cible),
+                        linetype = "dashed",
+                        color = "red") + xlab("Prélèvements") + ylab("Gr")
+print(Rchart)
+  
+}
+
+R_bar_chart(929)
 
 
