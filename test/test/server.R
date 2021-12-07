@@ -47,6 +47,9 @@ shinyServer(function(input, output, session) {
         summary_table(input$Poids1,input$Poids2,input$Tare
             
         )})
+    output$plot_hist <- renderPlot({
+        request_CL(input$Request)
+    })
 })
     
     
