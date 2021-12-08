@@ -1,0 +1,23 @@
+Package: pkgproject
+Type: Package
+Title: Functions for quality analysis
+Version: 0.1.0
+Authors@R: c(
+    person("Sophie","La Gennusa", role = "aut"),
+    person("Louis", "del Perugia", role = "aut"),
+    person("Ozgur", "Aydemir",email= "ozgur.aydemir@unil.ch", role = c("aut", "cre")),
+    person("Daniel", "Szenes", role = "aut"),
+    person("Francesco", "Darino", role = "aut")
+    )
+Maintainer: Ozgur Aydemir <ozgur.aydemir@unil.ch>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.2
+Imports: 
+    shiny (>= 1.7.1),
+    dplyr,
+    tidyverse
+

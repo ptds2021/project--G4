@@ -1,0 +1,52 @@
+---
+title: "pkgproject package and shiny app vignette"
+author: "Daniel Szenes, Özgür Aydemir, Louis Del Perugia, Francesco Darino, Sophie La Gennusa "
+       
+        
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+library(tidyverse)
+poids <- readxl::read_xlsx("C:/Users/sophi//NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
+poids <- poids[!is.na(poids$Prelevement),]
+poids <- poids[!is.na(poids$Cible),]
+poids$Poids1 <- as.double(poids$Poids1)
+poids$Poids2 <- as.double(poids$Poids2)
+poids <- poids[,-16]
+
+poids <- poids %>%
+  pivot_longer(
+    cols = starts_with("Poids"),
+    names_to = "Poids",
+    names_prefix = "Poids",
+    values_to = "weight",
+    values_drop_na = TRUE
+  )
+
+poids_SPC <- poids %>%
+  group_by(Request, Prelevement, Cible) %>%
+  summarise(real_weight = weight - Tare,
+            median = median(real_weight),
+            sd = sd(real_weight),
+            range = max(real_weight) - min(real_weight))
+
+poids_SPC <- poids_SPC[,-4] %>%
+  distinct()
+
+
+
+poids_SPC <- poids_SPC[,-4] %>%
+  distinct()
+
+
+library(pkgproject)
+R_bar_chart(929)
+request_CL(929)
+```
+
