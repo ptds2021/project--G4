@@ -2,7 +2,7 @@ library(shiny)
 library(bslib)
 library("shinyTime")
 source("helpers.R")
-
+source("R functions.R")
 
 navbarPage(
   title = "SPC app",
