@@ -44,7 +44,7 @@ shinyServer(function(input, output, session) {
     })
     
     output$table_summary <- DT::renderDataTable({
-        summary_table(input$Poids1,input$Poids2,input$Tare
+      summary_stat(input$Request
             
         )})
     output$plot_hist <- renderPlot({
@@ -53,29 +53,3 @@ shinyServer(function(input, output, session) {
 })
     
     
-#####Graph output
-#     output$plot <- renderPlot({
-#         ggplot2::ggplot() +
-#             ggplot2::geom_point(ggplot2::aes(y = (data_all$Poids1-data_all$Tare), x = 1)) +
-#             ggplot2::geom_point(ggplot2::aes(y = (data_all$Poids2-data_all$Tare), x = 2)) +
-#             ggplot2::geom_point(ggplot2::aes(y = (data_all$Poids3-data_all$Tare), x = 3)) +
-#             ggplot2::geom_point(ggplot2::aes(y = (data_all$Poids4-data_all$Tare), x = 4)) +
-#             ggplot2::geom_point(ggplot2::aes(y = (data_all$Poids5-data_all$Tare), x = 5)) +
-#             ggplot2::geom_point(ggplot2::aes(y = (data_all$Poids6-data_all$Tare), x = 6)) +
-#             ggplot2::geom_hline(ggplot2::aes(
-#                 yintercept = (
-#                     (data_all$Poids1-data_all$Tare + data_all$Poids2-data_all$Tare + data_all$Poids3-data_all$Tare + data_all$Poids4-data_all$Tare + data_all$Poids5-data_all$Tare + data_all$Poids6-data_all$Tare)
-#                 )/6
-#             ),
-#             color = "blue",
-#             linetype = 3) +
-#             ggplot2::geom_hline(yintercept = (data_all$Cible),
-#                                 linetype = "dashed",
-#                                 color = "red") +
-#             theme_qcc() +
-#             labs(x = "Poids", y = "Weight (Gr)",
-#                  title = paste("Request",data_all$Request),
-#                  subtitle = paste("Prélèvement",data_all$Prelevement))
-#   })
-#     
-# })
