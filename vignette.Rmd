@@ -48,5 +48,6 @@ poids_SPC <- poids_SPC[,-4] %>%
 library(pkgproject)
 R_bar_chart(929)
 request_CL(929)
+summary_stat(929)
 ```
 

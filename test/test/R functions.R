@@ -210,3 +210,4 @@ summary_stat <- function(request, A2 = 0.483) {
 }
 
 summary_stat(929)
+
