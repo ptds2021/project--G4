@@ -14,6 +14,8 @@ poids <- poids[!is.na(poids$Cible),]
 poids$Poids1 <- as.double(poids$Poids1)
 poids$Poids2 <- as.double(poids$Poids2)
 poids <- poids[,-16]
+poids <- poids %>%
+  separate(Batch_pod_bottom, c("Batch Pod size", "Spec"), "-")
 
 poids <- poids %>%
   pivot_longer(
@@ -33,7 +35,6 @@ poids_SPC <- poids %>%
 
 poids_SPC <- poids_SPC[,-4] %>%
   distinct()
-
 
 #This function draws a density graph according to a particular request
 #It shows the median of the process as well as their control limits.
@@ -123,14 +124,6 @@ print(graph + labs(caption = paste(
 }
 
 request_CL(929)
-
-
-
-
-
-
-
-
 
 
 #This function shows the evolution of prélèvements over time according to a particular request. In SixSigma theory, this graph is called an R-chart 
