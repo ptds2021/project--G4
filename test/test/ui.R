@@ -192,15 +192,15 @@ in the R&D branch of the company."),
         column(5, wellPanel(
           plotOutput("plot_sample"),
           hr()
-        ))
-      ),
-      br(),
-      fluidRow(
+        )),
         column(5, wellPanel(
           tableOutput("table_summary"),
           hr()
-        ), offset = 6)
-      )
+        ))
+      ),
+      br(),
+        
+      
  ),
       
       
