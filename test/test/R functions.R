@@ -182,7 +182,7 @@ R_bar_chart(929)
 summary_stat <- function(request, A2 = 0.483) {
   
   request_SPC <- poids_SPC %>%
-    filter(Request == 929)
+    filter(Request == request)
   
   Rbar = mean(request_SPC$range)
   UCL = median(request_SPC$median) + A2*Rbar
