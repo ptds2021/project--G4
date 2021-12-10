@@ -209,13 +209,14 @@ in the R&D branch of the company."),
   tabPanel(title = "Graph",
            fluidPage(
              selectInput("Request", "Request", unique(data_all$Request)),
-             mainPanel(plotOutput("plot_hist", height = "400px"))
+             mainPanel(plotOutput("plot_hist", height = "400px"),
+             mainPanel(DT::dataTableOutput("summ_req")
            ))
 )
 
+)
 
 
-
-
+)
 
 

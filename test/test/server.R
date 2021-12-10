@@ -55,9 +55,19 @@ shinyServer(function(input, output, session) {
         summary$name <- c("mean", "median", "q1", "q3", "sd")
         summary
         })
+    
+    
     output$plot_hist <- renderPlot({
         request_CL(input$Request)
     })
+
+    output$summ_req <- DT::renderDataTable({
+        DT::datatable(summary_stat(input$Request),
+                      options = list(pageLength = 5, scrollX = TRUE),
+                      class = 'cell-border stripe', rownames = FALSE, width =500)
+    })  
+    
+    
 })
     
     

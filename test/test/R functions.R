@@ -7,8 +7,8 @@ packages <- c(
 
 purrr::walk(packages, library, character.only = TRUE)
 
-#poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
-poids <- readxl::read_xlsx("C:/Users/sophi//NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
+poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
+#poids <- readxl::read_xlsx("C:/Users/sophi//NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
 poids <- poids[!is.na(poids$Prelevement),]
 poids <- poids[!is.na(poids$Cible),]
 poids$Poids1 <- as.double(poids$Poids1)
@@ -194,10 +194,10 @@ summary_stat <- function(request, A2 = 0.483) {
   out_control_perc <- sum(z)/length(request_SPC)
   
   
-  summary <- dplyr::as_tibble(c(Process_median, request_SPC$Cible[1], Rbar, UCL, LCL, beyond_limit, out_control_perc))
+  summary <- as.matrix(c(Process_median, request_SPC$Cible[1], Rbar, UCL, LCL, beyond_limit, out_control_perc))
   
-  summary$name <-
-    c(
+  summary <-
+    cbind(c(
       "Process Median",
       "Process Cible",
       "Process Mean Deviation",
@@ -205,8 +205,7 @@ summary_stat <- function(request, A2 = 0.483) {
       "Lower Control Limit",
       "Number beyonds Limits", 
       "Out of control %"
-    )
-  knitr::kable(summary, "simple")
+    ), summary)
 }
 
 summary_stat(929)
