@@ -26,7 +26,9 @@ poids <- poids %>%
     values_drop_na = TRUE
   )
 
-poids_SPC <- poids %>% 
+a <- unique(poids %>% filter(Prelevement >= 40))
+
+poids_SPC <- poids %>% filter(Request %in% a$Request) %>% 
   group_by(Request, Prelevement, Cible) %>%
   summarise(real_weight = weight - Tare,
             median = median(real_weight),

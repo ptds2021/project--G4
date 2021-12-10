@@ -44,12 +44,12 @@ shinyServer(function(input, output, session) {
     })
     
     output$table_summary <- renderTable({
-        inputs<-c(input$Poids1-input$Tare, input$Poids2-input$Tare, input$Poids3-input$Tare, input$Poids4-input$Tare, input$Poids5-input$Tare, input$Poids6-input$Tare)
-        mean <-mean(inputs)
-        median<- median(inputs)
-        q1<- quantile(inputs, probs=0.25)
-        q3<- quantile(inputs, probs=0.75)
-        sd<- sd(inputs)
+        inputs <- c(input$Poids1-input$Tare, input$Poids2-input$Tare, input$Poids3-input$Tare, input$Poids4-input$Tare, input$Poids5-input$Tare, input$Poids6-input$Tare)
+        mean <- mean(inputs)
+        median <- median(inputs)
+        q1 <- quantile(inputs, probs=0.25)
+        q3 <- quantile(inputs, probs=0.75)
+        sd <- sd(inputs)
         
         summary <- dplyr::as_tibble(c(mean, median, q1, q3, sd))
         summary$name <- c("mean", "median", "q1", "q3", "sd")
