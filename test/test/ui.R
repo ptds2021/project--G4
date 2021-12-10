@@ -41,44 +41,11 @@ in the R&D branch of the company."),
   
   # fill content for tab 2
   tabPanel(
-    title = "Import weight data",
+    title = "Input",
     
     fluidPage(
       tags$head(tags$style(
         HTML(".shiny-text-output {background-color:#6e5104;}")
-      )),
-      h1(
-        "Weight Data",
-        span("Import", style = "font-weight: 300"),
-        style =
-          "font-family: 'Montserrat';
-                         color: #6e5104;
-                         text-align: center;
-                         padding: 20px"
-      ),
-      br(),
-      
-      fluidRow(
-        column(
-        6,
-        offset = 3,
-        p(
-          "This page allows you to enter your measurements on the Prélèvements",
-          style = "font-family: 'Montserrat';"
-        )
-      ))
-      ,
-      
-      br(),
-      
-      fluidRow(
-        column(
-        12,
-        wellPanel(
-          h3("Weight Data Table"),
-          DT::dataTableOutput("responses"),
-          hr(),
-        )
       )),
       br(),
       
@@ -186,20 +153,7 @@ in the R&D branch of the company."),
         ))
       ),
       br()
-    ),
-      
-      fluidRow(
-        column(5, wellPanel(
-          plotOutput("plot_sample"),
-          hr()
-        )),
-        column(5, wellPanel(
-          tableOutput("table_summary"),
-          hr()
-        ))
-      ),
-      br(),
-        
+    )
       
  ),
       
@@ -214,7 +168,35 @@ in the R&D branch of the company."),
            ))
 )
 
+),
+tabPanel(title = "Dataset",
+         fluidPage(
+           fluidRow(
+             column(
+               12,
+               wellPanel(
+                 h3("Weight Data Table"),
+                 DT::dataTableOutput("responses"),
+                 hr(),
+               )
+             )),
+           br(),
+           
+           fluidRow(
+             column(5, wellPanel(
+               plotOutput("plot_sample"),
+               hr()
+             )),
+             column(5, wellPanel(
+               tableOutput("table_summary"),
+               hr()
+             ))
+           ),
+           br()
+         )
+         
 )
+
 
 
 )

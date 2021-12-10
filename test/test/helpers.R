@@ -49,9 +49,9 @@ packages <- c(
 purrr::walk(packages, library, character.only = TRUE)
 
 
-#poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx") %>% select(-"...16")
+poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx") %>% select(-"...16")
  
-poids <- readxl::read_xlsx("C:/Users/sophi//NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx") %>% select(-"...16")
+#poids <- readxl::read_xlsx("C:/Users/sophi//NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx") %>% select(-"...16")
 
 #store the data into one tibble
 data <- list.files(path = "test/responses/", pattern="*.csv",  full.names = TRUE) %>%

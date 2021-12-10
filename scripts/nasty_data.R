@@ -89,3 +89,8 @@ batch351 <- cbind(
 
 
 df <- rbind(batch929, batch1003, batch351)
+
+xlsx::write.xlsx2(df, file = "df.xlsx")
+
+
+write
