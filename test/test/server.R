@@ -60,7 +60,7 @@ shinyServer(function(input, output, session) {
     output$plot_hist <- renderPlot({
         request_CL(input$Request)
     })
-
+    
     output$summ_req <- DT::renderDataTable({
         DT::datatable(summary_stat(input$Request),
                       options = list(pageLength = 5, scrollX = TRUE),

@@ -120,12 +120,16 @@ in the R&D branch of the company."),
         )),
         
           column(2, wellPanel(
-            selectInput("Batch_pod_bottom", "Batch_pod_bottom", unique(df$Batch_pod_bottom)),
+            selectInput("Pod Size", "Batch Pod size", c("XS","S", "M", "L", "XL", "NA")),
             hr(),
             
           
           
         )),
+        
+        column(2, wellPanel(
+          selectInput("Specification", "Spec", unique(poids$Spec)),
+          hr(), )),
       
         column(1, wellPanel(
           numericInput("Cible", "Cible", ""),

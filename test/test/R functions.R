@@ -212,3 +212,55 @@ summary_stat <- function(request, A2 = 0.483) {
 
 summary_stat(929)
 
+
+
+
+
+## size and cible filter
+
+cible_CL <- function(size, cible, A2 = 0.483, d2 = 5.534) {
+  cible_p_SPC_ <- poids %>%
+    group_by(`Batch Pod size`, Prelevement, Cible) %>%
+    summarise(
+      real_weight = weight - Tare,
+      median = median(real_weight),
+      sd = sd(real_weight),
+      range = max(real_weight) - min(real_weight)
+    ) %>%
+    filter(`Batch Pod size` == size & Cible == cible)
+  
+  Rbar = mean(cible_p_SPC_$range)
+  UCL = median(cible_p_SPC_$median) + A2 * Rbar
+  LCL = median(cible_p_SPC_$median) - A2 * Rbar
+  
+  
+  USL = cible_p_SPC_$Cible[1] + cible_p_SPC_$Cible[1]*0.015 #Ask to Joao : What value should be set for the gap around the target
+  LSL = cible_p_SPC_$Cible[1] - cible_p_SPC_$Cible[1]*0.015 #Ask to Joao : What value should be set for the gap around the target
+  Cp = (USL - LSL)/(6*Rbar/d2)
+  Cpu <- (USL - mean(cible_p_SPC_$median))/(3*Rbar/d2)
+  Cpl <- (mean(cible_p_SPC_$median) - LSL)/(3*Rbar/d2)
+  Cpk <- min(Cpu, Cpl)
+  
+  
+  graph <- cible_p_SPC_ %>%
+    ggplot2::ggplot() +
+    ggplot2::geom_histogram(aes(x = cible_p_SPC_$median, fill = cible_p_SPC_$median > UCL | cible_p_SPC_$median < LCL), bins = 100) +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = mean(cible_p_SPC_$median)), color = "black", linetype = 3) +
+    ggplot2::geom_text(aes(x = mean(cible_p_SPC_$median), label = "Process Median", y = -0.5), colour="black") +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = UCL), color = "black", linetype = 3) +
+    ggplot2::geom_text(aes(x = UCL, label = "UCL", y = -0.5), colour = "black") +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = LCL), color = "black", linetype = 3) +
+    ggplot2::geom_text(aes(x = LCL, label = "LCL", y = -0.5), colour = "black") +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = cible_p_SPC_$Cible), color = "blue") +
+    ggplot2::geom_text(aes(x = cible_p_SPC_$Cible, label = "Cible", y = 23), colour="blue") +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = USL), color = "blue") +
+    ggplot2::geom_text(aes(x = USL, label = "USL", y = 23), colour = "blue") +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = LSL), color = "blue") +
+    ggplot2::geom_text(aes(x = LSL, label = "LSL", y = 23), colour = "blue") +
+    stat_function(fun = dnorm, n = 101,
+                  args = list(mean = mean(cible_p_SPC_$median),
+                              sd = median(cible_p_SPC_$sd))) +
+    ylab("") +
+    xlab("") + theme(legend.position = "none") + 
+    scale_fill_manual(values = c("black", "red"))
+}
