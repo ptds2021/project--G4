@@ -158,20 +158,38 @@ in the R&D branch of the company."),
       ),
       br()
     )
-      
+    
  ),
       
       
       
 
-  tabPanel(title = "Graph",
-           fluidPage(
-             selectInput("Request", "Request", unique(poids_SPC$Request)),
-             mainPanel(plotOutput("plot_hist", height = "400px"),
-             mainPanel(DT::dataTableOutput("summ_req")
-           ))
-)
-
+ tabPanel(title = "Graph",
+          fluidPage(
+            fluidRow(
+            column(
+            12,
+            selectInput("Request", "Request", unique(poids_SPC$Request)),
+            wellPanel(
+              plotOutput("plot_hist", height = "400px"),
+              wellPanel(DT::dataTableOutput("summ_req"))
+            )
+          )),
+          br(),
+          
+          fluidRow(
+            column(
+              12,
+              selectInput("Pod Size", "Pod Size", unique(cible_p_SPC_$`Batch Pod size`)),
+              selectInput("Cible", "Cible", unique(cible_p_SPC_$Cible)),
+              wellPanel(
+                plotOutput("cible_hist", height = "400px")
+                )
+            )),
+          br()
+          
+          )
+         
 ),
 tabPanel(title = "Dataset",
          fluidPage(

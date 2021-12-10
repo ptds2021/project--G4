@@ -219,19 +219,19 @@ summary_stat(929)
 
 
 
-
+cible_p_SPC_ <- poids %>%
+  group_by(`Batch Pod size`, Prelevement, Cible) %>%
+  summarise(
+    real_weight = weight - Tare,
+    median = median(real_weight),
+    sd = sd(real_weight),
+    range = max(real_weight) - min(real_weight)
+  ) 
 
 ## size and cible filter
 
 cible_CL <- function(size, cible, A2 = 0.483, d2 = 5.534) {
-  cible_p_SPC_ <- poids %>%
-    group_by(`Batch Pod size`, Prelevement, Cible) %>%
-    summarise(
-      real_weight = weight - Tare,
-      median = median(real_weight),
-      sd = sd(real_weight),
-      range = max(real_weight) - min(real_weight)
-    ) %>%
+  cible_p_SPC_ <-  cible_p_SPC_ %>%
     filter(`Batch Pod size` == size & Cible == cible)
   
   Rbar = mean(cible_p_SPC_$range)

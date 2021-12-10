@@ -60,6 +60,10 @@ shinyServer(function(input, output, session) {
         request_CL(input$Request)
     })
     
+    output$cible_hist <- renderPlot({
+        cible_CL(input$`Pod size`, input$Cible)
+    })
+    
     output$summ_req <- DT::renderDataTable({
         DT::datatable(summary_stat(input$Request),
                       options = list(pageLength = 5, scrollX = TRUE),
