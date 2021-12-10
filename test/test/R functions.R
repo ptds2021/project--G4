@@ -14,6 +14,7 @@ poids <- poids[!is.na(poids$Cible),]
 poids$Poids1 <- as.double(poids$Poids1)
 poids$Poids2 <- as.double(poids$Poids2)
 poids <- poids[,-16]
+
 poids <- poids %>%
   separate(Batch_pod_bottom, c("Batch Pod size", "Spec"), "-")
 
@@ -25,6 +26,10 @@ poids <- poids %>%
     values_to = "weight",
     values_drop_na = TRUE
   )
+
+poids$weight[poids$weight == 1656] <- 16.56
+poids$Cible[poids$Request == 796 & poids$Cible != 6.30] <- 6.30
+
 
 a <- unique(poids %>% filter(Prelevement >= 40))
 
