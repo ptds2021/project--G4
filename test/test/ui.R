@@ -140,7 +140,7 @@ in the R&D branch of the company."),
         )),
         
         column(2, wellPanel(
-          selectInput("Operator", "Operator", unique(df$Operator)),
+          selectInput("Operator", "Operator", c("Loïc", "Karen", "Chantal", "Christine", "Sandra", "Tiffany","Sarah", "Anthony", "Chahineze", "Danylo", "Thibaud","Pinar", "Sylvie",  "Dylan", "Sandrine", "Abdallah", "Eymeric", "Erika", "Daniela" )),
           hr(),
           
         )),
