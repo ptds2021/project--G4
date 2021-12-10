@@ -58,7 +58,6 @@ batch1003 <- cbind(
   tare_1003
 )
 
-
 n351_1 <- as.matrix(rnorm(89, mean = 14.877, sd = 4.5 ))
 n351_2 <- as.matrix(rnorm(89, mean = 14.877, sd = 4.5 ))
 n351_3 <- as.matrix(rnorm(89, mean = 14.877, sd = 4.5 ))
