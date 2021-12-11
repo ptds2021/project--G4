@@ -232,15 +232,15 @@ cible_p_SPC_ <- poids %>%
 
 cible_CL <- function(size, cible, A2 = 0.483, d2 = 5.534) {
   cible_p_SPC_ <-  cible_p_SPC_ %>%
-    filter(`Batch Pod size` == size & Cible == cible)
+    filter(`Batch Pod size` == "L" & Cible == 8.7)
   
   Rbar = mean(cible_p_SPC_$range)
   UCL = median(cible_p_SPC_$median) + A2 * Rbar
   LCL = median(cible_p_SPC_$median) - A2 * Rbar
   
   
-  USL = cible_p_SPC_$Cible[1] + cible_p_SPC_$Cible[1]*0.015 #Ask to Joao : What value should be set for the gap around the target
-  LSL = cible_p_SPC_$Cible[1] - cible_p_SPC_$Cible[1]*0.015 #Ask to Joao : What value should be set for the gap around the target
+  USL = cible_p_SPC_$Cible[1] + cible_p_SPC_$Cible[1]*0.01 #Ask to Joao : What value should be set for the gap around the target
+  LSL = cible_p_SPC_$Cible[1] - cible_p_SPC_$Cible[1]*0.01 #Ask to Joao : What value should be set for the gap around the target
   Cp = (USL - LSL)/(6*Rbar/d2)
   Cpu <- (USL - mean(cible_p_SPC_$median))/(3*Rbar/d2)
   Cpl <- (mean(cible_p_SPC_$median) - LSL)/(3*Rbar/d2)
@@ -268,4 +268,8 @@ cible_CL <- function(size, cible, A2 = 0.483, d2 = 5.534) {
     ylab("") +
     xlab("") + theme(legend.position = "none") + 
     scale_fill_manual(values = c("black", "red"))
+  graph
 }
+
+
+cible_CL("L", 8.7)

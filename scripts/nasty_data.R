@@ -88,9 +88,9 @@ batch351 <- cbind(
 
 
 
-df <- rbind(batch929, batch1003, batch351)
+nasty <- rbind(batch929, batch1003, batch351)
+colnames(nasty) <- c("Operator", "Process Sample", "Product Size", "Measure1", "Measure2", "Measure3", "Measure4", "Measure5", "Measure6", "Target Value", "Tare")
+
+
 
 xlsx::write.xlsx2(df, file = "df.xlsx")
-
-
-write
