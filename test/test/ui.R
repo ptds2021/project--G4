@@ -180,8 +180,10 @@ in the R&D branch of the company."),
           fluidRow(
             column(
               12,
-              selectInput("Pod Size", "Pod Size", unique(cible_p_SPC_$`Batch Pod size`)),
-              selectInput("Cible", "Cible", unique(cible_p_SPC_$Cible)),
+              selectInput("psize", "Pod Size", choices = unique(cible_p_SPC_$`Batch Pod size`), 
+                          selected = unique(cible_p_SPC_$`Batch Pod size`)[1]),
+              uiOutput("select_cible"), 
+            
               wellPanel(
                 plotOutput("cible_hist", height = "400px")
                 )
@@ -222,5 +224,3 @@ tabPanel(title = "Dataset",
 
 
 )
-
-

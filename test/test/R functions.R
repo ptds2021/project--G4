@@ -120,7 +120,6 @@ if (Cpk < Cp) {
 
 
 print(graph + labs(caption = paste(
-        round(out_control_perc, 3),"% of observations are considered as outliers and are represented by the red stripes." , "\n",
         "Cp = ", Cp,"\t",
         "Cpk = ", Cpk,"\t", "\n",
         caption1,"\n", caption2, "\n")) +
@@ -232,7 +231,7 @@ cible_p_SPC_ <- poids %>%
 
 cible_CL <- function(size, cible, A2 = 0.483, d2 = 5.534) {
   cible_p_SPC_ <-  cible_p_SPC_ %>%
-    filter(`Batch Pod size` == "L" & Cible == 8.7)
+    filter(`Batch Pod size` == size & Cible == cible)
   
   Rbar = mean(cible_p_SPC_$range)
   UCL = median(cible_p_SPC_$median) + A2 * Rbar

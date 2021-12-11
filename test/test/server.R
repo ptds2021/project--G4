@@ -19,6 +19,17 @@ shinyServer(function(input, output, session) {
                       class = 'cell-border stripe', rownames = FALSE, width =500)
     })
     
+    output$select_cible <- renderUI({
+        
+        selectInput("cible", label = "Cible",
+                    
+                    # the choices below is filtered based on input$country
+                    choices = cible_p_SPC_ %>% 
+                        filter(`Batch Pod size` == input$psize) %>% 
+                        pull(Cible) %>% unique()
+        )
+        
+    })
     output$plot_sample <- renderPlot({
         ggplot2::ggplot() +
             ggplot2::geom_point(ggplot2::aes(y = (input$Poids1-input$Tare), x = 1)) +
@@ -61,7 +72,7 @@ shinyServer(function(input, output, session) {
     })
     
     output$cible_hist <- renderPlot({
-        cible_CL(input$`Pod size`, input$Cible)
+        cible_CL(input$psize, input$cible)
     })
     
     output$summ_req <- DT::renderDataTable({
@@ -69,8 +80,5 @@ shinyServer(function(input, output, session) {
                       options = list(pageLength = 5, scrollX = TRUE),
                       class = 'cell-border stripe', rownames = FALSE, width =500)
     })  
-    
-    
+
 })
-    
-    
