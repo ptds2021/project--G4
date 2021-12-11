@@ -3,7 +3,7 @@ packages <- c(
   "tidyverse", "lubridate", # for wrangling
   "knitr", "kableExtra", "bookdown", "rmarkdown", "DT", # for the report
   "summarytools","caret","ggplot2",
-  "dplyr")
+  "dplyr", "berryFunctions")
 
 purrr::walk(packages, library, character.only = TRUE)
 
@@ -29,6 +29,51 @@ poids <- poids %>%
 
 poids$weight[poids$weight == 1656] <- 16.56
 poids$Cible[poids$Request == 796 & poids$Cible != 6.30] <- 6.30
+poids$`Batch Pod size`[poids$`Batch Pod size` == "S12.2ml" ] <- "S"
+poids$`Batch Pod size`[poids$`Batch Pod size` == "s" ] <- "S"
+poids$`Batch Pod size`[poids$`Batch Pod size` == "L " ] <- "L"
+
+poids$Spec[poids$Spec == "STC 18.3ml" ] <- "18.3"
+poids$Spec[poids$Spec == "18.3mm" ] <- "18.3"
+poids$Spec[poids$Spec == "18.3ml" ] <- "18.3"
+poids$Spec[poids$Spec == "18.3 ml" ] <- "18.3"
+poids$Spec[poids$Spec == "18.3m" ] <- "18.3"
+poids$Spec[poids$Spec == "18.3mL" ] <- "18.3"
+poids$Spec[poids$Spec == "18.3 mL" ] <- "18.3"
+poids$Spec[poids$Spec == "18,3 ml" ] <- "18.3"
+poids$Spec[poids$Spec == "18,3ml" ] <- "18.3"
+
+poids$Spec[poids$Spec == "12.2ml" ] <- "12.2"
+poids$Spec[poids$Spec == "12.2 ml" ] <- "12.2" 
+poids$Spec[poids$Spec == "12.2mL" ] <- "12.2"
+poids$Spec[poids$Spec == "12,2 ml" ] <- "12.2"
+
+poids$Spec[poids$Spec == "18.7ml" ] <- "18.7"
+
+poids$Spec[poids$Spec == "15.4ml" ] <- "15.4"
+poids$Spec[poids$Spec == "15.4 ml" ] <- "15.4"
+poids$Spec[poids$Spec == "15,4ml" ] <- "15.4"
+poids$Spec[poids$Spec == "15,4 ml" ] <- "15.4"
+
+
+
+
+poids$Spec[poids$Spec == "15.3ml" ] <- "15.3"
+
+
+poids$Spec[poids$Spec == "11.5mL" ] <- "11.5"
+poids$Spec[poids$Spec == "11,5 ml" ] <- "11.5"
+poids$Spec[poids$Spec == "11,5ml" ] <- "11.5"
+poids$Spec[poids$Spec == "11.5 ml" ] <- "11.5"
+poids$Spec[poids$Spec == "11.5ml" ] <- "11.5"
+
+poids$Spec[poids$Spec == "11,4ml" ] <- "11.4"
+
+
+poids$Spec[poids$Spec == "18.2 ml" ] <- "18.2"
+
+poids$Spec[poids$Spec == "15.1ml" ] <- "15.1"
+poids$Spec[poids$Spec == "15,1ml" ] <- "15.1"
 
 
 a <- unique(poids %>% filter(Prelevement >= 40))
@@ -114,9 +159,9 @@ if (Cpk >= 1.3) {
   caption1 <- "Process variation is equal to the specs"
   }
   
-if (Cpk < Cp) {
-  caption2 <- "Process is off center"
-}
+  if (berryFunctions::almost.equal(Cp, Cpk)) {
+    caption2 <- "Process is centered"
+  } else{caption2 <- "Process is off-center"}
 
 
 print(graph + labs(caption = paste(
@@ -217,8 +262,11 @@ summary_stat <- function(request, A2 = 0.483) {
 summary_stat(929)
 
 
+b <- unique(poids %>% group_by(Cible) %>% count() %>%
+              filter(n > 40))
 
 cible_p_SPC_ <- poids %>%
+  filter(Cible %in% b$Cible) %>%
   group_by(`Batch Pod size`, Prelevement, Cible) %>%
   summarise(
     real_weight = weight - Tare,
@@ -230,7 +278,7 @@ cible_p_SPC_ <- poids %>%
 ## size and cible filter
 
 cible_CL <- function(size, cible, A2 = 0.483, d2 = 5.534) {
-  cible_p_SPC_ <-  cible_p_SPC_ %>%
+  cible_p_SPC_ <-  cible_p_SPC_ %>% 
     filter(`Batch Pod size` == size & Cible == cible)
   
   Rbar = mean(cible_p_SPC_$range)
@@ -266,9 +314,34 @@ cible_CL <- function(size, cible, A2 = 0.483, d2 = 5.534) {
                               sd = median(cible_p_SPC_$sd))) +
     ylab("") +
     xlab("") + theme(legend.position = "none") + 
-    scale_fill_manual(values = c("black", "red"))
-  graph
+    scale_fill_manual(values = c("black", "red")) + labs(
+      title = paste(cible_p_SPC_$`Batch Pod size`, "Pod size with a target of", cible_p_SPC_$Cible, "Gr" , "density chart and Cpk analysis"))
+  if (Cpk < 1) {
+    caption1 <- "Process variation is not equal to the specs"
+  }
+  
+  if (Cpk >= 1 && Cpk < 1.3) {
+    caption1 <- "Process variation is about equal to the specs"
+  }
+  
+  if (Cpk >= 1.3) {
+    caption1 <- "Process variation is equal to the specs"
+  }
+  
+  if (berryFunctions::almost.equal(Cp, Cpk)) {
+    caption2 <- "Process is centered"
+  } else{caption2 <- "Process is off-center"}
+  
+  print(graph + labs(caption = paste(
+    "Cp = ", Cp,"\t",
+    "Cpk = ", Cpk,"\t", "\n",
+    caption1,"\n", caption2, "\n")) +
+      theme(plot.caption = element_text(hjust = 0, face = "italic"),
+            plot.title.position = "plot", 
+            plot.caption.position =  "plot"))
 }
 
+size = "L"
+cible = 8.7
 
 cible_CL("L", 8.7)

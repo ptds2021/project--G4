@@ -7,10 +7,7 @@ shinyServer(function(input, output, session) {
         data <- sapply(weights, function(x)input[[x]])
         data
     })
-    
-    observeEvent(input$submit, {
-        saveData(formData())
-    })
+
 
     output$responses <- DT::renderDataTable({
         input$submit
@@ -77,7 +74,7 @@ shinyServer(function(input, output, session) {
     
     output$summ_req <- DT::renderDataTable({
         DT::datatable(summary_stat(input$Request),
-                      options = list(pageLength = 5, scrollX = TRUE),
+                      options = list(pageLength = 10, scrollX = TRUE),
                       class = 'cell-border stripe', rownames = FALSE, width =500)
     })  
 
