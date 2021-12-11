@@ -26,22 +26,23 @@ navbarPage(
       )),
       br(),
       
-      fluidRow(column(1,
+      fluidRow(column(2,
                       wellPanel(
                         dateInput("Date", "Date", "", value = Sys.Date()),
                         hr(),
                       )),
                column(2 ,
                       wellPanel(
-                        selectInput("Heure", "Heure:",
+                        selectInput("Heure", "Time:",
                                     c("8:00", "9:00", "10:00", "11:00", "12:00",
                                       "13:00","14:00","15:00","16:00", "17:00","18:00")),
                         hr(),
                       )), 
+               
                column(width = 1, offset = 1, 
                       wellPanel(
                  numericInput("Poids1", "Poids 1", ""),
-                 hr(),
+                        hr(),
                       )),
                column(width = 1, 
                       wellPanel(
@@ -69,35 +70,36 @@ navbarPage(
                         hr(),
                       )),
                
-               
-                 
-               
-               
-               ), 
+               column(1, wellPanel(
+                 textInput("Request", "Request", ""),
+                 hr(),
+               )),
+    br(),
       
-      br(),
-      
-      fluidRow(
-        column(1, wellPanel(
-          numericInput("Prelevement", "Prelevement", ""),
-          hr(),
-        )),
         
         column(2, wellPanel(
           selectInput("Operator", "Operator", c("Loïc", "Karen", "Chantal", "Christine", "Sandra", "Tiffany","Sarah", "Anthony", "Chahineze", "Danylo", "Thibaud","Pinar", "Sylvie",  "Dylan", "Sandrine", "Abdallah", "Eymeric", "Erika", "Daniela" )),
           hr(),
           
         )),
-        
-        
     
-        column(2, offset = 1, wellPanel(
-          selectInput("Batch_pod_scellé", "Batch_pod_scellé", unique(df$Batch_pod_scellé)),
+    
+    
+    column(2, wellPanel(
+      selectInput("Batch_pod_scellé", "Batch pod seal", unique(df$Batch_pod_scellé)),
+      hr(),
+    )),
+        
+        column(1,offset = 1, wellPanel(
+          numericInput("Prelevement", "Prelevement", ""),
           hr(),
         )),
         
-          column(2, wellPanel(
-            selectInput("Pod Size", "Batch Pod size", c("XS","S", "M", "L", "XL", "NA")),
+    
+       
+        
+          column(1, wellPanel(
+            selectInput("Pod Size", "Size", c("XS","S", "M", "L", "XL", "NA")),
             hr(),
             
           
@@ -105,11 +107,11 @@ navbarPage(
         )),
         
         column(2, wellPanel(
-          selectInput("Specification", "Spec", unique(poids$Spec)),
+          selectInput("Specification", "Specification", unique(poids$Spec)),
           hr(), )),
       
         column(1, wellPanel(
-          numericInput("Cible", "Cible", ""),
+          numericInput("Cible", "Target", ""),
           hr(),
         )),
         
@@ -120,23 +122,20 @@ navbarPage(
           hr(),
         )),
         
-        column(1, offset=1, wellPanel(
-          textInput("Request", "Request", ""),
-          hr(),
-        )),
-      ),
+         
       
-      br(),
-      fluidRow(
-        column(2, wellPanel(
+      
+      
+      
+        column(1, wellPanel(
           actionButton("submit", "Submit", align = "center"),
           hr()
         ))
-      ),
-      br()
-    )
+      
+     
+      )
     
- ),
+ )),
       
       
       
