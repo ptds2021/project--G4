@@ -9,8 +9,9 @@ navbarPage(
   theme = bs_theme(
     bg = "white",
     fg = "#6e5104",
-    primary = "#6e5104",
-    base_font = font_google("Montserrat")
+    primary = "#5691cc",
+    base_font = font_google("Montserrat"),
+    bootswatch = "spacelab"
   ),
   
   
