@@ -28,6 +28,21 @@ poids <- poids %>%
   )
 
 poids$weight[poids$weight == 1656] <- 16.56
+poids$weight[poids$weight == 977] <- 9.77
+poids$weight[poids$weight == 854] <- 8.54
+poids$weight[poids$weight == 849] <- 8.49
+poids$weight[poids$weight == 833] <- 8.33
+poids$weight[poids$weight == 708.00] <- 7.08
+poids$weight[poids$weight == 418.30] <- 18.30
+poids$weight[poids$weight == 255.00] <- 25.5
+poids$weight[poids$weight == 91.00] <- 9.1
+poids$weight[poids$weight == 70.50] <- 7.05
+poids$weight[poids$weight == 68.00] <- 6.8
+
+
+
+
+
 poids$Cible[poids$Request == 796 & poids$Cible != 6.30] <- 6.30
 poids$`Batch Pod size`[poids$`Batch Pod size` == "S12.2ml" ] <- "S"
 poids$`Batch Pod size`[poids$`Batch Pod size` == "s" ] <- "S"
@@ -340,8 +355,5 @@ cible_CL <- function(size, cible, A2 = 0.483, d2 = 5.534) {
             plot.title.position = "plot", 
             plot.caption.position =  "plot"))
 }
-
-size = "L"
-cible = 8.7
 
 cible_CL("L", 8.7)
