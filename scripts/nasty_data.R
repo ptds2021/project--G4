@@ -88,9 +88,70 @@ batch351 <- cbind(
 
 
 
-nasty <- rbind(batch929, batch1003, batch351)
-colnames(nasty) <- c("Operator", "Process Sample", "Product Size", "Measure1", "Measure2", "Measure3", "Measure4", "Measure5", "Measure6", "Target Value", "Tare")
+n4_1 <- as.matrix(rnorm(364, mean = 18.84, sd = 0.72 ))
+n4_2 <- as.matrix(rnorm(364, mean = 18.84, sd = 0.72 ))
+n4_3 <- as.matrix(rnorm(364, mean = 18.84, sd = 0.72 ))
+n4_4 <- as.matrix(rnorm(364, mean = 18.84, sd = 0.72 ))
+n4_5 <- as.matrix(rnorm(364, mean = 18.84, sd = 0.72 ))
+n4_6 <- as.matrix(rnorm(364, mean = 18.84, sd = 0.72 ))
+
+cible_4 <- rep(19, 364)
+name_4 <- sample(c("Marc-Olivier", "Valérie", "Iegor", "Samuel", "Sophie", "Ozgür"), 364, replace = TRUE)
+tare_4 <- rep(0.2, 364)
+test_4 <- seq(1, 364)
+size_4 <- rep("XL", 364)
+
+batch4 <- cbind(
+  name_4,
+  test_4,
+  size_4,
+  n4_1,
+  n4_2,
+  n4_3,
+  n4_4,
+  n4_5,
+  n4_6,
+  cible_4,
+  tare_4
+)
 
 
 
-xlsx::write.xlsx2(df, file = "df.xlsx")
+
+n254_1 <- as.matrix(rnorm(289, mean = 9.53, sd = 2.4 ))
+n254_2 <- as.matrix(rnorm(289, mean = 9.53, sd = 2.4 ))
+n254_3 <- as.matrix(rnorm(289, mean = 9.53, sd = 2.4 ))
+n254_4 <- as.matrix(rnorm(289, mean = 9.53, sd = 2.4 ))
+n254_5 <- as.matrix(rnorm(289, mean = 9.53, sd = 2.4 ))
+n254_6 <- as.matrix(rnorm(289, mean = 9.53, sd = 2.4 ))
+
+cible_254 <- rep(15, 289)
+name_254 <- sample(c("Marc-Olivier", "Valérie", "Iegor", "Samuel", "Sophie", "Ozgür"), 289, replace = TRUE)
+tare_254 <- rep(1.5, 289)
+test_254 <- seq(1, 289)
+size_254 <- rep("XL", 289)
+
+batch254 <- cbind(
+  name_254,
+  test_254,
+  size_254,
+  n254_1,
+  n254_2,
+  n254_3,
+  n254_4,
+  n254_5,
+  n254_6,
+  cible_254,
+  tare_254
+)
+
+
+date_df <- sample(c("2021-11-08", "2021-11-01", "2021-10-05", "2021-09-07", "2021-07-19", "2021-07-15"), 970, replace = TRUE)
+nasty <- rbind(batch929, batch1003, batch351, batch4, batch254)
+
+nasty <- cbind(date_df, nasty)
+colnames(nasty) <- c("Date", "Operator", "Process Sample", "Product Size", "Measure1", "Measure2", "Measure3", "Measure4", "Measure5", "Measure6", "Target Value", "Tare")
+
+
+
+xlsx::write.xlsx2(nasty, file = "nasty.xlsx")
