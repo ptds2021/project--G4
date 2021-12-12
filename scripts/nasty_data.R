@@ -10,6 +10,7 @@ cible_929 <- rep(10, 125)
 tare_929 <- rep(0.89, 125)
 test_929 <- seq(1,125)
 size_929 <- rep("M", 125)
+request_929 <- rep(929, 125)
 
 batch929 <- cbind(
   name_929,
@@ -22,7 +23,8 @@ batch929 <- cbind(
   n929_5,
   n929_6,
   cible_929,
-  tare_929
+  tare_929,
+  request_929
 )
 
 
@@ -43,6 +45,7 @@ cible_1003 <- rep(5.5, 103)
 tare_1003 <- rep(0.93, 103)
 test_1003 <- seq(1, 103)
 size_1003 <- rep("S", 103)
+request_1003 <- rep(1003, 125)
 
 batch1003 <- cbind(
   name_1003,
@@ -55,7 +58,8 @@ batch1003 <- cbind(
   n1003_5,
   n1003_6,
   cible_1003,
-  tare_1003
+  tare_1003,
+  request_1003
 )
 
 n351_1 <- as.matrix(rnorm(89, mean = 14.877, sd = 4.5 ))
@@ -70,6 +74,7 @@ cible_351 <- rep(5.5, 89)
 tare_351 <- rep(0.93, 89)
 test_351 <- seq(1, 89)
 size_351 <- rep("L", 89)
+request_351 <- rep(351, 125)
 
 batch351 <- cbind(
   name_351,
@@ -82,7 +87,8 @@ batch351 <- cbind(
   n351_5,
   n351_6,
   cible_351,
-  tare_351
+  tare_351,
+  request_351
 )
 
 
@@ -100,6 +106,9 @@ name_4 <- sample(c("Marc-Olivier", "Valérie", "Iegor", "Samuel", "Sophie", "Ozg
 tare_4 <- rep(0.2, 364)
 test_4 <- seq(1, 364)
 size_4 <- rep("XL", 364)
+request_4 <- rep(4, 125)
+
+
 
 batch4 <- cbind(
   name_4,
@@ -112,7 +121,8 @@ batch4 <- cbind(
   n4_5,
   n4_6,
   cible_4,
-  tare_4
+  tare_4,
+  request_4
 )
 
 
@@ -130,6 +140,8 @@ name_254 <- sample(c("Marc-Olivier", "Valérie", "Iegor", "Samuel", "Sophie", "O
 tare_254 <- rep(1.5, 289)
 test_254 <- seq(1, 289)
 size_254 <- rep("XL", 289)
+request_254 <- rep(254, 125)
+
 
 batch254 <- cbind(
   name_254,
@@ -142,7 +154,8 @@ batch254 <- cbind(
   n254_5,
   n254_6,
   cible_254,
-  tare_254
+  tare_254,
+  request_254
 )
 
 
@@ -150,7 +163,7 @@ date_df <- sample(c("2021-11-08", "2021-11-01", "2021-10-05", "2021-09-07", "202
 nasty <- rbind(batch929, batch1003, batch351, batch4, batch254)
 
 nasty <- cbind(date_df, nasty)
-colnames(nasty) <- c("Date", "Operator", "Process Sample", "Product Size", "Measure1", "Measure2", "Measure3", "Measure4", "Measure5", "Measure6", "Target Value", "Tare")
+colnames(nasty) <- c("Date", "Operator", "Process Sample", "Product Size", "Measure1", "Measure2", "Measure3", "Measure4", "Measure5", "Measure6", "Target Value", "Tare", "Request")
 
 
 
