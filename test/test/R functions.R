@@ -7,8 +7,8 @@ packages <- c(
 
 purrr::walk(packages, library, character.only = TRUE)
 
-#poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
-poids <- readxl::read_xlsx("C:/Users/sophi//NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
+poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
+#poids <- readxl::read_xlsx("C:/Users/sophi//NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
 poids <- poids[!is.na(poids$Prelevement),]
 poids <- poids[!is.na(poids$Cible),]
 poids$Poids1 <- as.double(poids$Poids1)
