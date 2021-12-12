@@ -71,8 +71,8 @@ navbarPage(
                         hr(),
                       )),
                
-               column(1, wellPanel(
-                 textInput("Request", "Request", ""),
+               column(width = 1, wellPanel(
+                 numericInput("Request", "Request", ""),
                  hr(),
                )),
     br(),
@@ -87,7 +87,7 @@ navbarPage(
     
     
     column(2, wellPanel(
-      selectInput("Batch_pod_scellé", "Batch pod seal", unique(df$Batch_pod_scellé)),
+      selectInput("Batch_pod_scellé", "Batch_pod_scellé", unique(df$Batch_pod_scellé)),
       hr(),
     )),
         
@@ -112,7 +112,7 @@ navbarPage(
           hr(), )),
       
         column(1, wellPanel(
-          numericInput("Cible", "Target", ""),
+          numericInput("Cible", "Cible", ""),
           hr(),
         )),
         
@@ -160,7 +160,7 @@ navbarPage(
             fluidRow(
             column(
             12,
-            selectInput("Request", "Request", unique(poids_SPC$Request)),
+            selectInput("req", "Request", unique(poids_SPC$Request)),
             wellPanel(
               plotOutput("plot_hist", height = "400px"),
               wellPanel(DT::dataTableOutput("summ_req"))
