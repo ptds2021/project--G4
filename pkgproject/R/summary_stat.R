@@ -2,22 +2,42 @@
 #' @author Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
 #' @export
 #'
-summary_stat <- function(request, A2 = 0.483) {
 
-  request_SPC <- poids_SPC %>%
-    filter(Request == 929)
 
-  Rbar = mean(request_SPC$range)
-  UCL = median(request_SPC$median) + A2*Rbar
-  LCL = median(request_SPC$median) - A2*Rbar
-  Process_median <- median(request_SPC$median)
 
-  z <- request_SPC$median > UCL | request_SPC$median < LCL
+summary_stat <- function(data,request,A2 = 0.483) {
+
+  request <- data %>%
+    filter(Request == request)
+
+  data_long <- request %>%
+    pivot_longer(
+      cols = starts_with("Measure"),
+      names_to = "Inputs",
+      names_prefix = "Inputs",
+      values_to = "weight",
+      values_drop_na = TRUE
+    )
+
+  df <- data_long %>%
+    group_by(Request, Process.Sample, Target.Value) %>%
+    mutate(real_weight = weight - Tare)%>%
+    summarise(
+      median = median(real_weight),
+      sd = sd(real_weight),
+      range = max(real_weight) - min(real_weight))
+
+  Rbar = mean(df$range)
+  UCL = median(df$median) + A2*Rbar
+  LCL = median(df$median) - A2*Rbar
+  Process_median <- median(df$median)
+
+  z <- request_SPC$median > UCL | df$median < LCL
   beyond_limit <- sum(z)
-  out_control_perc <- sum(z)/length(request_SPC)
+  out_control_perc <- sum(z)/length(df)
 
 
-  summary <- dplyr::as_tibble(c(Process_median, request_SPC$Cible[1], Rbar, UCL, LCL, beyond_limit, out_control_perc))
+  summary <- dplyr::as_tibble(c(Process_median, df$Target.Value[1], Rbar, UCL, LCL, beyond_limit, out_control_perc))
 
   summary$name <-
     c(
