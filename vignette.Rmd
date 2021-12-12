@@ -11,43 +11,36 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+# Data processing
+
 ```{r}
-library(tidyverse)
-poids <- readxl::read_xlsx("C:/Users/sophi//NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx")
-poids <- poids[!is.na(poids$Prelevement),]
-poids <- poids[!is.na(poids$Cible),]
-poids$Poids1 <- as.double(poids$Poids1)
-poids$Poids2 <- as.double(poids$Poids2)
-poids <- poids[,-16]
+data <- read_excel("~/UNIL 2021/Programming_tools/project--G4/nasty.xlsx") %>% rename("Request"= "...1")
 
-poids <- poids %>%
-  pivot_longer(
-    cols = starts_with("Poids"),
-    names_to = "Poids",
-    names_prefix = "Poids",
-    values_to = "weight",
-    values_drop_na = TRUE
-  )
 
-poids_SPC <- poids %>%
-  group_by(Request, Prelevement, Cible) %>%
-  summarise(real_weight = weight - Tare,
-            median = median(real_weight),
-            sd = sd(real_weight),
-            range = max(real_weight) - min(real_weight))
-
-poids_SPC <- poids_SPC[,-4] %>%
-  distinct()
+data$Measure1 <- as.double(data$Measure1)
+data$Measure2 <- as.double(data$Measure2)
+data$Measure3 <- as.double(data$Measure3)
+data$Measure4 <- as.double(data$Measure4)
+data$Measure5 <- as.double(data$Measure5)
+data$Measure6 <- as.double(data$Measure6)
+data$Tare <- as.double(data$Tare)
+data$Target.Value <- as.double(data$Target.Value)
+data_try<- data
+```
 
 
 
-poids_SPC <- poids_SPC[,-4] %>%
-  distinct()
+# summary_stat
+illustrate the funtion
 
+```{r}
 
 library(pkgproject)
-R_bar_chart(929)
-request_CL(929)
-summary_stat(929)
+summary_stat(data_try,1)
+```
+
+
+```{r}
+data <- read_excel("~/UNIL 2021/Programming_tools/project--G4/nasty.xlsx")
 ```
 

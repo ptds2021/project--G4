@@ -15,8 +15,8 @@ request_CL <- function(request, A2 = 0.483, d2 = 5.534) {
   out_control_perc <- sum(z)/length(request_SPC)
 
 
-  USL = request_SPC$Cible[1] + request_SPC$Cible[1]*0.015 #Ask to Joao : What value should be set for the gap around the target
-  LSL = request_SPC$Cible[1] - request_SPC$Cible[1]*0.015 #Ask to Joao : What value should be set for the gap around the target
+  USL = request_SPC$Cible[1] + request_SPC$Cible[1]*0.015
+  LSL = request_SPC$Cible[1] - request_SPC$Cible[1]*0.015
   Cp = (USL - LSL)/(6*Rbar/d2)
   Cpu <- (USL - mean(request_SPC$median))/(3*Rbar/d2)
   Cpl <- (mean(request_SPC$median) - LSL)/(3*Rbar/d2)
