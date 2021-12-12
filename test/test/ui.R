@@ -1,5 +1,5 @@
-library(shiny)
-library(bslib)
+library("shiny")
+library("bslib")
 library("shinyTime")
 source("helpers.R")
 source("R functions.R")
@@ -9,95 +9,41 @@ navbarPage(
   theme = bs_theme(
     bg = "white",
     fg = "#6e5104",
-    primary = "#6e5104",
-    base_font = font_google("Montserrat")
+    primary = "#5691cc",
+    base_font = font_google("Montserrat"),
+    bootswatch = "spacelab"
   ),
   
   
-  tabPanel(
-    title = "Home",
-    br(),
-    hr(),
-    h4(strong("Project Description")),
-    p(
-      style = "text-align: justify; font-size = 25px",
-      "Our project would be an application on industrial production area.
-More precisely the final and ambitious objective of the work is to
-help the Nestle coffee production creating a shiny application to
-support the controlling mechanism of the coffee weight during the
-new capsules recipes formulations.
-Since the coffee is an expensive row material, even a little variation
-in the quantities, taking account of the massive scale of the production,
-has an impact on the cost of goods sold of the company; indeed,a control of
-the weight in that sense could help to optimize such industrial process.
-The application would be used by different users: The operator,
-that would use the app to control his work.
-The project manager, to check the big picture of the project
-in the R&D branch of the company."),
-    
-    tags$blockquote("Our SPC app is still under continuous development. "),
-    hr()
-  ),
+ 
   
   # fill content for tab 2
   tabPanel(
-    title = "Import weight data",
+    title = "Input",
     
     fluidPage(
       tags$head(tags$style(
         HTML(".shiny-text-output {background-color:#6e5104;}")
       )),
-      h1(
-        "Weight Data",
-        span("Import", style = "font-weight: 300"),
-        style =
-          "font-family: 'Montserrat';
-                         color: #6e5104;
-                         text-align: center;
-                         padding: 20px"
-      ),
       br(),
       
-      fluidRow(
-        column(
-        6,
-        offset = 3,
-        p(
-          "This page allows you to enter your measurements on the Prélèvements",
-          style = "font-family: 'Montserrat';"
-        )
-      ))
-      ,
-      
-      br(),
-      
-      fluidRow(
-        column(
-        12,
-        wellPanel(
-          h3("Weight Data Table"),
-          DT::dataTableOutput("responses"),
-          hr(),
-        )
-      )),
-      br(),
-      
-      fluidRow(column(1,
+      fluidRow(column(2,
                       wellPanel(
                         dateInput("Date", "Date", "", value = Sys.Date()),
                         hr(),
                       )),
                column(2 ,
                       wellPanel(
-                        selectInput("Heure", "Heure:",
+                        selectInput("Heure", "Time:",
                                     c("8:00", "9:00", "10:00", "11:00", "12:00",
                                       "13:00","14:00","15:00","16:00", "17:00","18:00")),
                         hr(),
                       )), 
+               
                column(width = 1, offset = 1, 
                       wellPanel(
                  numericInput("Poids1", "Poids 1", ""),
-                 hr(),
+                        hr(),
                       )),
                column(width = 1, 
                       wellPanel(
@@ -125,43 +71,48 @@ in the R&D branch of the company."),
                         hr(),
                       )),
                
-               
-                 
-               
-               
-               ), 
+               column(1, wellPanel(
+                 textInput("Request", "Request", ""),
+                 hr(),
+               )),
+    br(),
       
-      br(),
-      
-      fluidRow(
-        column(1, wellPanel(
-          numericInput("Prelevement", "Prelevement", ""),
-          hr(),
-        )),
         
         column(2, wellPanel(
           selectInput("Operator", "Operator", c("Loïc", "Karen", "Chantal", "Christine", "Sandra", "Tiffany","Sarah", "Anthony", "Chahineze", "Danylo", "Thibaud","Pinar", "Sylvie",  "Dylan", "Sandrine", "Abdallah", "Eymeric", "Erika", "Daniela" )),
           hr(),
           
         )),
-        
-        
     
-        column(2, offset = 1, wellPanel(
-          selectInput("Batch_pod_scellé", "Batch_pod_scellé", unique(df$Batch_pod_scellé)),
+    
+    
+    column(2, wellPanel(
+      selectInput("Batch_pod_scellé", "Batch pod seal", unique(df$Batch_pod_scellé)),
+      hr(),
+    )),
+        
+        column(1,offset = 1, wellPanel(
+          numericInput("Prelevement", "Prelevement", ""),
           hr(),
         )),
         
-          column(2, wellPanel(
-            selectInput("Batch_pod_bottom", "Batch_pod_bottom", unique(df$Batch_pod_bottom)),
+    
+       
+        
+          column(1, wellPanel(
+            selectInput("Pod Size", "Size", c("XS","S", "M", "L", "XL", "NA")),
             hr(),
             
           
           
         )),
+        
+        column(2, wellPanel(
+          selectInput("Specification", "Specification", unique(poids$Spec)),
+          hr(), )),
       
         column(1, wellPanel(
-          numericInput("Cible", "Cible", ""),
+          numericInput("Cible", "Target", ""),
           hr(),
         )),
         
@@ -172,51 +123,112 @@ in the R&D branch of the company."),
           hr(),
         )),
         
-        column(1, offset=1, wellPanel(
-          textInput("Request", "Request", ""),
-          hr(),
-        )),
-      ),
+         
       
-      br(),
-      fluidRow(
-        column(2, wellPanel(
+      
+      
+      
+        column(1, wellPanel(
           actionButton("submit", "Submit", align = "center"),
           hr()
         ))
+      
+     
       ),
-      br()
-    ),
-      
-      fluidRow(
-        column(5, wellPanel(
-          plotOutput("plot_sample"),
-          hr()
-        )),
-        column(5, wellPanel(
-          tableOutput("table_summary"),
-          hr()
-        ))
-      ),
-      br(),
-        
-      
- ),
+    br(),
+    
+    fluidRow(
+      column(
+        12,
+        wellPanel(
+          h3("Weight Data Table"),
+          DT::dataTableOutput("responses"),
+          hr(),
+        )
+      )),
+    br()
+    
+    
+    
+ )),
       
       
       
 
-  tabPanel(title = "Graph",
-           fluidPage(
-             selectInput("Request", "Request", unique(data_all$Request)),
-             mainPanel(plotOutput("plot_hist", height = "400px"),
-             mainPanel(DT::dataTableOutput("summ_req")
-           ))
+ tabPanel(title = "Graph",
+          fluidPage(
+            fluidRow(
+            column(
+            12,
+            selectInput("Request", "Request", unique(poids_SPC$Request)),
+            wellPanel(
+              plotOutput("plot_hist", height = "400px"),
+              wellPanel(DT::dataTableOutput("summ_req"))
+            )
+          )),
+          br(),
+          
+          fluidRow(
+            column(
+              12,
+              selectInput("psize", "Pod Size", choices = unique(cible_p_SPC_$`Batch Pod size`), 
+                          selected = unique(cible_p_SPC_$`Batch Pod size`)[1]),
+              uiOutput("select_cible"), 
+            
+              wellPanel(
+                plotOutput("cible_hist", height = "400px")
+                )
+            )),
+          br()
+          
+          )
+         
+),
+###############################################################################
+tabPanel(title = "Dataset",
+         fluidPage(
+           fluidRow(
+             column(5, wellPanel(
+               plotOutput("plot_sample"),
+               hr()
+             )),
+             column(5, wellPanel(
+               tableOutput("table_summary"),
+               hr()
+             ))
+           ),
+           br()
+         )
+         
+),
+
+
+####### Home tab ###
+
+
+tabPanel(
+  title = "Home",
+  br(),
+  hr(),
+  h4(strong("Project Description")),
+  p(
+    style = "text-align: justify; font-size = 25px",
+    "Our project would be an application on industrial production area.
+More precisely the final and ambitious objective of the work is to
+help the Nestle coffee production creating a shiny application to
+support the controlling mechanism of the coffee weight during the
+new capsules recipes formulations.
+Since the coffee is an expensive row material, even a little variation
+in the quantities, taking account of the massive scale of the production,
+has an impact on the cost of goods sold of the company; indeed,a control of
+the weight in that sense could help to optimize such industrial process.
+The application would be used by different users: The operator,
+that would use the app to control his work.
+The project manager, to check the big picture of the project
+in the R&D branch of the company."),
+  
+  tags$blockquote("Our SPC app is still under continuous development. "),
+  hr()
 )
 
 )
-
-
-)
-
-
