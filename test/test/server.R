@@ -8,11 +8,14 @@ shinyServer(function(input, output, session) {
         data
     })
 
-
+    observeEvent(input$submit, {
+        saveData(formData())
+    })
+    
     output$responses <- DT::renderDataTable({
         input$submit
         DT::datatable(loadData(),
-                      options = list(pageLength = 5, scrollX = TRUE),
+                      options = list(pageLength = 20, scrollX = TRUE),
                       class = 'cell-border stripe', rownames = FALSE, width =500)
     })
     
