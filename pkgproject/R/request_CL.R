@@ -1,50 +1,73 @@
-#' @title Request CL
+#' @title Create Cpk graph for a given request
+#' @description TBD
+#' @param request \code{numeric} used to identify the rquest
+#' @param A2 \code{numeric} defines the boundaries of the control limits, default value 0.483
+#' @param d2 \code{numeric}
 #' @author Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
 #' @export
 #'
 
-request_CL <- function(request, A2 = 0.483, d2 = 5.534) {
-  request_SPC <- poids_SPC %>%
+request_CL <- function(data,request, A2 = 0.483, d2 = 5.534) {
+
+  request <- data %>%
     filter(Request == request)
-  Rbar = mean(request_SPC$range)
-  UCL = median(request_SPC$median) + A2*Rbar
-  LCL = median(request_SPC$median) - A2*Rbar
+
+  data_long <- request %>%
+    pivot_longer(
+      cols = starts_with("Measure"),
+      names_to = "Inputs",
+      names_prefix = "Inputs",
+      values_to = "weight",
+      values_drop_na = TRUE
+    )
+
+  df <- data_long %>%
+    group_by(Request, Process.Sample, Target.Value) %>%
+    mutate(real_weight = weight - Tare)%>%
+    summarise(
+      median = median(real_weight),
+      sd = sd(real_weight),
+      range = max(real_weight) - min(real_weight))
+
+  Rbar = mean(df$range)
+  UCL = median(df$median) + A2*Rbar
+  LCL = median(df$median) - A2*Rbar
 
 
-  z <- request_SPC$median > UCL | request_SPC$median < LCL
-  out_control_perc <- sum(z)/length(request_SPC)
+  z <- df$median > UCL | df$median < LCL
+  out_control_perc <- sum(z)/length(df)
 
 
-  USL = request_SPC$Cible[1] + request_SPC$Cible[1]*0.015
-  LSL = request_SPC$Cible[1] - request_SPC$Cible[1]*0.015
+  USL = df$Target.Value[1] + df$Target.Value[1]*0.015
+  LSL = df$Target.Value[1] - df$Target.Value[1]*0.015
   Cp = (USL - LSL)/(6*Rbar/d2)
-  Cpu <- (USL - mean(request_SPC$median))/(3*Rbar/d2)
-  Cpl <- (mean(request_SPC$median) - LSL)/(3*Rbar/d2)
+  Cpu <- (USL - mean(df$median))/(3*Rbar/d2)
+  Cpl <- (mean(df$median) - LSL)/(3*Rbar/d2)
   Cpk <- min(Cpu, Cpl)
 
 
-  graph <- request_SPC %>%
+  graph <- df %>%
     ggplot2::ggplot() +
-    ggplot2::geom_histogram(aes(x = request_SPC$median, fill = request_SPC$median > UCL | request_SPC$median < LCL), bins = 100) +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = mean(request_SPC$median)), color = "black", linetype = 3) +
-    ggplot2::geom_text(aes(x = mean(request_SPC$median), label = "Process Median", y = -0.5), colour="black") +
+    ggplot2::geom_histogram(aes(x = df$median, fill = df$median > UCL | df$median < LCL), bins = 100) +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = mean(df$median)), color = "black", linetype = 3) +
+    ggplot2::geom_text(aes(x = mean(df$median), label = "Process Median", y = -0.5), colour="black") +
     ggplot2::geom_vline(ggplot2::aes(xintercept = UCL), color = "black", linetype = 3) +
     ggplot2::geom_text(aes(x = UCL, label = "UCL", y = -0.5), colour = "black") +
     ggplot2::geom_vline(ggplot2::aes(xintercept = LCL), color = "black", linetype = 3) +
     ggplot2::geom_text(aes(x = LCL, label = "LCL", y = -0.5), colour = "black") +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = request_SPC$Cible), color = "blue") +
-    ggplot2::geom_text(aes(x = request_SPC$Cible, label = "Cible", y = 23), colour="blue") +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = df$Target.Value), color = "blue") +
+    ggplot2::geom_text(aes(x = df$Target.Value, label = "Target.Value", y = 23), colour="blue") +
     ggplot2::geom_vline(ggplot2::aes(xintercept = USL), color = "blue") +
     ggplot2::geom_text(aes(x = USL, label = "USL", y = 23), colour = "blue") +
     ggplot2::geom_vline(ggplot2::aes(xintercept = LSL), color = "blue") +
     ggplot2::geom_text(aes(x = LSL, label = "LSL", y = 23), colour = "blue") +
     stat_function(fun = dnorm, n = 101,
-                  args = list(mean = mean(request_SPC$median),
-                              sd = median(request_SPC$sd))) +
+                  args = list(mean = mean(df$median),
+                              sd = median(df$sd))) +
     ylab("") +
     xlab("") + theme(legend.position = "none") +
     scale_fill_manual(values = c("black", "red")) + labs(
-      title = paste("Request",request_SPC$Request, "density chart and Cpk analysis"))
+      title = paste("Request",df$Request, "density chart and Cpk analysis"))
 
   if (Cpk < 1) {
     caption1 <- "Process variation is not equal to the specs"

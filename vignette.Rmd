@@ -39,8 +39,13 @@ library(pkgproject)
 summary_stat(data_try,1)
 ```
 
+# request_CL
 
 ```{r}
-data <- read_excel("~/UNIL 2021/Programming_tools/project--G4/nasty.xlsx")
+request_CL(data_try,1)
 ```
+
+
+
+
 
