@@ -1,17 +1,18 @@
 weights <-
   c("Date",
     "Heure",
-    "Prelevement",
-    "Operator",
-    "Request",
-    "Batch_pod_scellé",
-    "Batch_pod_bottom",
     "Poids1",
     "Poids2",
     "Poids3",
     "Poids4",
     "Poids5",
     "Poids6",
+    "Request",
+    "Operator",
+    "Prelevement",
+    "Batch_pod_scellé",
+    "Size",
+    "Specification",
     "Cible",
     "Tare")
 

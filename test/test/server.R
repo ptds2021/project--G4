@@ -68,7 +68,7 @@ shinyServer(function(input, output, session) {
     
     
     output$plot_hist <- renderPlot({
-        request_CL(input$Request)
+        request_CL(input$req)
     })
     
     output$cible_hist <- renderPlot({
