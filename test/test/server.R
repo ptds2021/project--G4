@@ -15,7 +15,7 @@ shinyServer(function(input, output, session) {
     output$responses <- DT::renderDataTable({
         input$submit
         DT::datatable(loadData(),
-                      options = list(pageLength = 20, scrollX = TRUE),
+                      options = list(pageLength = 10, scrollX = TRUE),
                       class = 'cell-border stripe', rownames = FALSE, width =500)
     })
     
