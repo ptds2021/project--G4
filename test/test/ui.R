@@ -134,7 +134,21 @@ navbarPage(
         ))
       
      
-      )
+      ),
+    br(),
+    
+    fluidRow(
+      column(
+        12,
+        wellPanel(
+          h3("Weight Data Table"),
+          DT::dataTableOutput("responses"),
+          hr(),
+        )
+      )),
+    br()
+    
+    
     
  )),
       
@@ -170,19 +184,9 @@ navbarPage(
           )
          
 ),
+###############################################################################
 tabPanel(title = "Dataset",
          fluidPage(
-           fluidRow(
-             column(
-               12,
-               wellPanel(
-                 h3("Weight Data Table"),
-                 DT::dataTableOutput("responses"),
-                 hr(),
-               )
-             )),
-           br(),
-           
            fluidRow(
              column(5, wellPanel(
                plotOutput("plot_sample"),
