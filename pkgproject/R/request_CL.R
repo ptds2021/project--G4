@@ -1,4 +1,8 @@
-#' @title Request CL
+#' @title Create Cpk graph for a given request
+#' @description TBD
+#' @param request \code{numeric} used to identify the rquest
+#' @param A2 \code{numeric} defines the boundaries of the control limits, default value 0.483
+#' @param d2 \code{numeric}
 #' @author Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
 #' @export
 #'
