@@ -10,5 +10,5 @@ R_bar_chart(request, A2 = 0.483)
 R bar chart
 }
 \author{
-Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
+Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesco Darino
 }

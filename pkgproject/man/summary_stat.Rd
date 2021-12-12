@@ -10,5 +10,5 @@ summary_stat(data, request, A2 = 0.483)
 Summary table
 }
 \author{
-Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
+Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesco Darino
 }

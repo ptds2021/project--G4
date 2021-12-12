@@ -17,5 +17,5 @@ request_CL(data, request, A2 = 0.483, d2 = 5.534)
 TBD
 }
 \author{
-Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
+Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesco Darino
 }
