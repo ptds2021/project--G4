@@ -7,7 +7,7 @@
 #' @param \code{numeric} request Request in the data set (a value in the data.frame)
 #' @param A2 \code{numeric} constant determined by a normal law based on the size of the prelevement, default value 0.483
 #' @import tidyverse
-#' @import
+#' @import ggplot2
 #' @import shiny
 #' @export
 

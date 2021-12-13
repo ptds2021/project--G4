@@ -5,6 +5,8 @@
 #' @param A2 constant fixing the normal law
 #' @import tidyverse
 #' @import shiny
+#' @import dplyr
+#' @import knitr
 #' @export
 #'
 
@@ -42,7 +44,7 @@ summary_stat <- function(data,request,A2 = 0.483) {
   out_control_perc <- sum(z)/length(df)
 
 
-  summary <- dplyr::as_tibble(c(Process_median, df$Target.Value[1], Rbar, UCL, LCL, beyond_limit, out_control_perc))
+  summary <- as_tibble(c(Process_median, df$Target.Value[1], Rbar, UCL, LCL, beyond_limit, out_control_perc))
 
   summary$name <-
     c(
@@ -54,5 +56,5 @@ summary_stat <- function(data,request,A2 = 0.483) {
       "Number beyonds Limits",
       "Out of control %"
     )
-  knitr::kable(summary, "simple")
+  kable(summary, "simple")
 }
