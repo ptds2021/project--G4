@@ -20,4 +20,7 @@ Imports:
     shiny (>= 1.7.1),
     dplyr,
     tidyverse
-
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr

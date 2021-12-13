@@ -4,6 +4,7 @@
 #' @return Final choice of classes of user (binary vector)
 #' @param data The data set of the analysis (data.frame)
 #' @param request Request in the data set
+#' @param A2
 #' @import dplyr
 #' @importFrom lpSolve lp
 #' @import tidyverse

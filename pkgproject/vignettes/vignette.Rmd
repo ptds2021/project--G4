@@ -1,0 +1,66 @@
+---
+title: "vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(pkgproject)
+```
+
+
+# Data processing
+
+```{r}
+library(tidyverse)
+data <- readxl::read_excel("~/UNIL 2021/Programming_tools/project--G4/scripts/nasty.xlsx")
+
+
+data$Measure1 <- as.double(data$Measure1)
+data$Measure2 <- as.double(data$Measure2)
+data$Measure3 <- as.double(data$Measure3)
+data$Measure4 <- as.double(data$Measure4)
+data$Measure5 <- as.double(data$Measure5)
+data$Measure6 <- as.double(data$Measure6)
+data$Tare <- as.double(data$Tare)
+data$Target.Value <- as.double(data$Target.Value)
+data_try<- data
+```
+
+
+
+# summary_stat
+
+illustrate the function
+
+```{r}
+
+library(pkgproject)
+summary_stat(data_try,929)
+```
+
+# request_CL
+
+```{r}
+request_CL(data_try,929)
+```
+
+
+# R_bar_chart
+
+```{r}
+R_bar_chart(data,929)
+```
+
+
+
