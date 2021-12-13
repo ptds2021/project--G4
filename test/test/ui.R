@@ -100,7 +100,7 @@ navbarPage(
        
         
           column(1, wellPanel(
-            selectInput("Pod Size", "Size", c("XS","S", "M", "L", "XL", "NA")),
+            selectInput("Size", "Size", c("XS","S", "M", "L", "XL", "NA")),
             hr(),
             
           
