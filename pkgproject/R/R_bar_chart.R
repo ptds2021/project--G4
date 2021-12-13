@@ -7,6 +7,7 @@
 #' @param \code{numeric} request Request in the data set (a value in the data.frame)
 #' @param A2 \code{numeric} constant determined by a normal law based on the size of the prelevement, default value 0.483
 #' @import tidyverse
+#' @import
 #' @import shiny
 #' @export
 
@@ -42,28 +43,32 @@ R_bar_chart <- function(data, request, A2 = 0.483) {
   out_control_point <- sum(z)
 
   Rchart <- df %>%
-    ggplot2::ggplot() +
-    ggplot2::geom_point(aes(x = Process.Sample, y = median, colour = df$median > UCL | df$median < LCL)) +
-    ggplot2::geom_hline(yintercept = mean(df$median),
+       ggplot() +
+       geom_point(aes(x = Process.Sample, y = median, colour = df$median > UCL | df$median < LCL)) +
+       geom_hline(yintercept = mean(df$median),
                         linetype = "dashed",
                         color = "black") +
-    ggplot2::geom_text(aes(x = -5, label = "Process \n Median", y = mean(df$median) + 0.007), colour = "black") +
-    ggplot2::geom_hline(ggplot2::aes(yintercept = UCL),
+       geom_text(aes(x = 2, label = "Process \n Median", y = mean(df$median) + 0.007), colour = "black") +
+       geom_hline(   aes(yintercept = UCL),
                         color = "black",
                         linetype = 3) +
-    ggplot2::geom_text(aes(x = -5, label = "UCL", y = UCL + 0.005), colour = "black") +
-    ggplot2::geom_hline(ggplot2::aes(yintercept = LCL),
+       geom_text(aes(x = 0, label = "UCL", y = UCL + 0.005), colour = "black") +
+       geom_hline(   aes(yintercept = LCL),
                         color = "black",
                         linetype = 3) +
-    ggplot2::geom_text(aes(x = -5, label = "LCL", y = LCL + 0.005), colour = "black") +
-    ggplot2::geom_hline(yintercept = (df$Target.Value),
+       geom_text(aes(x = 0, label = "LCL", y = LCL + 0.005), colour = "black") +
+       geom_hline(yintercept = (df$Target.Value),
                         color = "blue") +
-    ggplot2::geom_text(aes(x = -5, label = "Target.Value", y = (df$Target.Value) + 0.005), colour = "blue") +
-    ggplot2::xlab("Prélèvements") +
-    ggplot2::ylab("Median of each sample in grams") + theme(legend.position = "none") +
-    ggplot2::scale_color_manual(values = c("black", "red")) + labs(
+       geom_text(aes(x = -5, label = "Target.Value", y = (df$Target.Value) + 0.005), colour = "blue") +
+       xlab("Prélèvements") +
+       ylab("Median of each sample in grams") + theme(legend.position = "none") +
+       scale_color_manual(values = c("black", "red")) +
+    labs(
       title = paste("Request",df$Request, "R chart"),
-      subtitle = paste("The", out_control_point, "red dots are outside the control limits. Process variation cannot explain these extreme values, Process must be analysed" ))
+      subtitle = paste("The", out_control_point, "red dots are outside the control limits. Process variation cannot explain these extreme values, Process must be analysed" ))+
+    theme(axis.ticks.x = element_blank(),
+          axis.text.x = element_blank())
+
 
   print(Rchart)
 

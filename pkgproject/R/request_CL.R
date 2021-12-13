@@ -4,6 +4,8 @@
 #' @param A2 \code{numeric} defines the boundaries of the control limits, default value 0.483
 #' @param data \code{data.frame}
 #' @author Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
+#' @import tidyverse
+#' @import ggplot2
 #' @export
 #'
 
@@ -47,20 +49,20 @@ request_CL <- function(data,request, A2 = 0.483, d2 = 5.534) {
 
 
   graph <- df %>%
-    ggplot2::ggplot() +
-    ggplot2::geom_histogram(aes(x = df$median, fill = df$median > UCL | df$median < LCL), bins = 100) +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = mean(df$median)), color = "black", linetype = 3) +
-    ggplot2::geom_text(aes(x = mean(df$median), label = "Process Median", y = -0.5), colour="black") +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = UCL), color = "black", linetype = 3) +
-    ggplot2::geom_text(aes(x = UCL, label = "UCL", y = -0.5), colour = "black") +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = LCL), color = "black", linetype = 3) +
-    ggplot2::geom_text(aes(x = LCL, label = "LCL", y = -0.5), colour = "black") +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = df$Target.Value), color = "blue") +
-    ggplot2::geom_text(aes(x = df$Target.Value, label = "Target.Value", y = 23), colour="blue") +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = USL), color = "blue") +
-    ggplot2::geom_text(aes(x = USL, label = "USL", y = 23), colour = "blue") +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = LSL), color = "blue") +
-    ggplot2::geom_text(aes(x = LSL, label = "LSL", y = 23), colour = "blue") +
+     ggplot() +
+     geom_histogram(aes(x = df$median, fill = df$median > UCL | df$median < LCL), bins = 100) +
+     geom_vline( aes(xintercept = mean(df$median)), color = "black", linetype = 3) +
+     geom_text(aes(x = mean(df$median), label = "Process Median", y = -0.5), colour="black") +
+     geom_vline( aes(xintercept = UCL), color = "black", linetype = 3) +
+     geom_text(aes(x = UCL, label = "UCL", y = -0.5), colour = "black") +
+     geom_vline( aes(xintercept = LCL), color = "black", linetype = 3) +
+     geom_text(aes(x = LCL, label = "LCL", y = -0.5), colour = "black") +
+     geom_vline( aes(xintercept = df$Target.Value), color = "blue") +
+     geom_text(aes(x = df$Target.Value, label = "Target.Value", y = 23), colour="blue") +
+     geom_vline( aes(xintercept = USL), color = "blue") +
+     geom_text(aes(x = USL, label = "USL", y = 23), colour = "blue") +
+     geom_vline( aes(xintercept = LSL), color = "blue") +
+     geom_text(aes(x = LSL, label = "LSL", y = 23), colour = "blue") +
     stat_function(fun = dnorm, n = 101,
                   args = list(mean = mean(df$median),
                               sd = median(df$sd))) +
