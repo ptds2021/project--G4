@@ -87,3 +87,30 @@ df <- poids %>%
  
 
  
+ request_TS <- function(request, prelev) {
+   TS <-  poids %>% 
+     filter(Request == request & Prelevement == prelev)
+   
+   graph <- ggplot2::ggplot() +
+     ggplot2::geom_point(ggplot2::aes(y = (TS$weight[1]-TS$Tare), x = 1)) +
+     ggplot2::geom_point(ggplot2::aes(y = (TS$weight[2]-TS$Tare), x = 2)) +
+     ggplot2::geom_point(ggplot2::aes(y = (TS$weight[3]-TS$Tare), x = 3)) +
+     ggplot2::geom_point(ggplot2::aes(y = (TS$weight[4]-TS$Tare), x = 4)) +
+     ggplot2::geom_point(ggplot2::aes(y = (TS$weight[5]-TS$Tare), x = 5)) +
+     ggplot2::geom_point(ggplot2::aes(y = (TS$weight[6]-TS$Tare), x = 6)) +
+     ggplot2::geom_hline(ggplot2::aes(
+       yintercept = (
+         (TS$weight[1]-TS$Tare + TS$weight[2]-TS$Tare + TS$weight[3]-TS$Tare + TS$weight[4]-TS$Tare + TS$weight[5]-TS$Tare + TS$weight[6]-TS$Tare)
+       )/6
+     ),
+     color = "blue",
+     linetype = 3) +
+     ggplot2::geom_hline(yintercept = (TS$Cible),
+                         linetype = "dashed",
+                         color = "red") +
+     labs(x = "Poids", y = "Weight (Gr)",
+          title = paste("Request",TS$Request),
+          subtitle = paste("Prélèvement",TS$Prelevement))
+   print(graph)
+ }
+ 

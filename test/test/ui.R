@@ -199,19 +199,21 @@ navbarPage(
          
 ),
 ###############################################################################
-tabPanel(title = "Time Series",
+tabPanel(title = "Time Series for operators",
          fluidPage(
            fluidRow(
-             column(10, wellPanel(
-               plotOutput("plot_sample"),
-               hr()
+             column(
+               12,
+               selectInput("prequest", "Request", choices = unique(poids$Request), 
+                           selected = unique(poids$Request)[1]),
+               uiOutput("select_prelev"), 
+               
+               wellPanel(
+                 plotOutput("TS_g", height = "400px")
+               )
              )),
-             column(2, wellPanel(
-               tableOutput("table_summary"),
-               hr()
-             ))
-           ),
            br()
+           
          )
          
 ),
@@ -221,7 +223,7 @@ tabPanel(title = "Time Series",
 
 
 tabPanel(
-  title = "Home",
+  title = "App Info",
   br(),
   hr(),
   h4(strong("Project Description")),
@@ -240,8 +242,6 @@ The application would be used by different users: The operator,
 that would use the app to control his work.
 The project manager, to check the big picture of the project
 in the R&D branch of the company."),
-  
-  tags$blockquote("Our SPC app is still under continuous development. "),
   hr()
 )
 
