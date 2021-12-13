@@ -16,7 +16,7 @@ weights <-
     "Cible",
     "Tare")
 
-fieldsMandatory <- c("Cible")
+fieldsMandatory <- c("Poids1", "Poids2", "Poids3", "Poids4", "Poids5", "Poids6", "Request", "Cible", "Prelevement","Tare")
 
 outputDirWeight <- "responses"
 

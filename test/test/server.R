@@ -49,11 +49,23 @@ shinyServer(function(input, output, session) {
     })
     
     
+
+    
     observeEvent(input$submit_another, {
         shinyjs::show("form")
         shinyjs::hide("thankyou_msg")
+        shinyjs::reset("Poids1")
+        shinyjs::reset("Poids2")
+        shinyjs::reset("Poids3")
+        shinyjs::reset("Poids4")
+        shinyjs::reset("Poids5")
+        shinyjs::reset("Poids6")
+        shinyjs::reset("Prelevement")
+        shinyjs::reset("Request")
+        shinyjs::reset("Cible")
+        shinyjs::reset("Tare")
     })
-    
+
     output$responses <- DT::renderDataTable({
         input$submit
         DT::datatable(loadData(),
