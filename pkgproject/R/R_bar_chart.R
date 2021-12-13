@@ -1,12 +1,11 @@
 #' @title R bar chart
 #' @author Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
-#' @description This function is will produce a R bar chart.
-#' @return Final choice of classes of user (binary vector)
-#' @param data The data set of the analysis (data.frame)
-#' @param request Request in the data set
-#' @param A2
-#' @import dplyr
-#' @importFrom lpSolve lp
+#' @description This function will produce a R bar chart. It will display the mean of the request specify and all the all other prelevement found in the data base.
+#' We use the A2 constants to calculate control limits for an Average.
+#' @return A plot displaying the R bar chart
+#' @param \code{data.frame} data The data set of the analysis
+#' @param \code{numeric} request Request in the data set (a value in the data.frame)
+#' @param A2 \code{numeric} constant determined by a normal law based on the size of the prelevement, default value 0.483
 #' @import tidyverse
 #' @import shiny
 #' @export

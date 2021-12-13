@@ -1,5 +1,10 @@
 #' @title Summary table
 #' @author Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
+#' @param data The data set of the analysis (data.frame)
+#' @param request Request in the data set (a value in the data.frame)
+#' @param A2 constant fixing the normal law
+#' @import tidyverse
+#' @import shiny
 #' @export
 #'
 

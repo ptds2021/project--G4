@@ -10,7 +10,8 @@ Authors@R: c(
     person("Francesco", "Darino", role = "aut")
     )
 Maintainer: Ozgur Aydemir <ozgur.aydemir@unil.ch>
-Description: More about what it does (maybe more than one line)
+Description: This package is create to produce statistical tables and graphs in order to analyse company data.
+This package will provide you a quality control analysis. 
     Use four spaces when indenting paragraphs within the Description.
 License: GPL (>= 2)
 Encoding: UTF-8
