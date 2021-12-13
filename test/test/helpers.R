@@ -114,3 +114,12 @@ df <- poids %>%
    print(graph)
  }
  
+ 
+ 
+ summary_TS <- function(request, prelev) {
+   TS <-  poids %>% 
+     filter(Request == request & Prelevement == prelev)
+   
+   t(as.matrix(summary(TS$weight-TS$Tare)))
+ }
+ 
