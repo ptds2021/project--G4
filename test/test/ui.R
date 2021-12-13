@@ -170,7 +170,7 @@ navbarPage(
       
       
 
- tabPanel(title = "Graph",
+ tabPanel(title = "Density Plot",
           fluidPage(
             fluidRow(
             column(
@@ -200,7 +200,7 @@ navbarPage(
          
 ),
 ###############################################################################
-tabPanel(title = "Dataset",
+tabPanel(title = "Time Series",
          fluidPage(
            fluidRow(
              column(10, wellPanel(
