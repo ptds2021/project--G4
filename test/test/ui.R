@@ -21,7 +21,7 @@ navbarPage(
   tabPanel(
     title = "Input",
     
-    fluidPage(
+    fluidPage(shinyjs::useShinyjs(),
       tags$head(tags$style(
         HTML(".shiny-text-output {background-color:#6e5104;}")
       )),
@@ -136,6 +136,19 @@ navbarPage(
      
       ),
     br(),
+    
+    shinyjs::hidden(
+      span(id = "submit_msg", "Submitting..."),
+      div(id = "error",
+          div(br(), tags$b("Error: "), span(id = "error_msg"))
+      )),
+    shinyjs::hidden(
+      div(
+        id = "thankyou_msg",
+        h3("Thanks, your response was submitted successfully!"),
+        actionLink("submit_another", "Submit another response")
+      )
+    ),
     
     fluidRow(
       column(

@@ -1,5 +1,5 @@
 library(shiny)
-
+library(shinyjs)
 shinyServer(function(input, output, session) {
 
 #####Import Data output
@@ -8,9 +8,50 @@ shinyServer(function(input, output, session) {
         data$Date <- as.character(input$Date)
         data
     })
-
+    
+    
+    observe({
+        
+        mandatoryFilled <-
+            vapply(fieldsMandatory,
+                   function(x) {
+                       !is.na(input[[x]]) || input[[x]] != ""
+                   },
+                   logical(1))
+        mandatoryFilled <- all(mandatoryFilled)
+        
+       
+        shinyjs::toggleState(id = "submit", condition = mandatoryFilled)
+    })
+    
     observeEvent(input$submit, {
-        saveData(formData())
+        
+        #UX design
+        shinyjs::disable("submit")
+        shinyjs::show("submit_msg")
+        shinyjs::hide("error")
+        
+        
+        tryCatch({
+            saveData(formData())
+            shinyjs::reset("form")
+            shinyjs::hide("form")
+            shinyjs::show("thankyou_msg")
+        },
+        error = function(err) {
+            shinyjs::html("error_msg", err$message)
+            shinyjs::show(id = "error", anim = TRUE, animType = "fade")
+        },
+        finally = {
+            shinyjs::enable("submit")
+            shinyjs::hide("submit_msg")
+        })
+    })
+    
+    
+    observeEvent(input$submit_another, {
+        shinyjs::show("form")
+        shinyjs::hide("thankyou_msg")
     })
     
     output$responses <- DT::renderDataTable({
@@ -24,7 +65,7 @@ shinyServer(function(input, output, session) {
         
         selectInput("cible", label = "Cible",
                     
-                    # the choices below is filtered based on input$country
+                    
                     choices = cible_p_SPC_ %>% 
                         filter(`Batch Pod size` == input$psize) %>% 
                         pull(Cible) %>% unique()

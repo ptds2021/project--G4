@@ -16,6 +16,8 @@ weights <-
     "Cible",
     "Tare")
 
+fieldsMandatory <- c("Cible")
+
 outputDirWeight <- "responses"
 
 saveData <- function(data) {
