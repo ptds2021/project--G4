@@ -298,21 +298,21 @@ cible_CL <- function(size, cible, A2 = 0.483, d2 = 5.534) {
     filter(`Batch Pod size` == size & Cible == cible)
   
   Rbar_cible = mean(cible_p_SPC_$range)
-  UCL_cible = median(cible_p_SPC_$median) + A2 * Rbar
-  LCL_cible = median(cible_p_SPC_$median) - A2 * Rbar
+  UCL_cible = median(cible_p_SPC_$median) + A2 * Rbar_cible
+  LCL_cible = median(cible_p_SPC_$median) - A2 * Rbar_cible
   
   
   USL = cible_p_SPC_$Cible[1] + cible_p_SPC_$Cible[1]*0.01 #Ask to Joao : What value should be set for the gap around the target
   LSL = cible_p_SPC_$Cible[1] - cible_p_SPC_$Cible[1]*0.01 #Ask to Joao : What value should be set for the gap around the target
-  Cp = (USL - LSL)/(6*Rbar/d2)
-  Cpu <- (USL - mean(cible_p_SPC_$median))/(3*Rbar/d2)
-  Cpl <- (mean(cible_p_SPC_$median) - LSL)/(3*Rbar/d2)
+  Cp = (USL - LSL)/(6*Rbar_cible/d2)
+  Cpu <- (USL - mean(cible_p_SPC_$median))/(3*Rbar_cible/d2)
+  Cpl <- (mean(cible_p_SPC_$median) - LSL)/(3*Rbar_cible/d2)
   Cpk <- min(Cpu, Cpl)
   
   
   graph <- cible_p_SPC_ %>%
     ggplot2::ggplot() +
-    ggplot2::geom_histogram(aes(x = cible_p_SPC_$median, fill = cible_p_SPC_$median > UCL | cible_p_SPC_$median < LCL), bins = 100) +
+    ggplot2::geom_histogram(aes(x = cible_p_SPC_$median, fill = cible_p_SPC_$median > UCL_cible | cible_p_SPC_$median < LCL_cible), bins = 100) +
     ggplot2::geom_vline(ggplot2::aes(xintercept = mean(cible_p_SPC_$median)), color = "black", linetype = 3) +
     ggplot2::geom_text(aes(x = mean(cible_p_SPC_$median), label = "Process Median", y = -0.5), colour="black") +
     ggplot2::geom_vline(ggplot2::aes(xintercept = UCL_cible), color = "black", linetype = 3) +

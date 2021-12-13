@@ -3,7 +3,6 @@ library("bslib")
 library("shinyTime")
 source("helpers.R")
 source("R functions.R")
-install.packages("shinyjs")
 library("shinyjs")
 
 navbarPage(
