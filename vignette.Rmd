@@ -14,7 +14,8 @@ vignette: >
 # Data processing
 
 ```{r}
-data <- read_excel("~/UNIL 2021/Programming_tools/project--G4/nasty.xlsx") %>% rename("Request"= "...1")
+library(tidyverse)
+data <- readxl::read_excel("~/UNIL 2021/Programming_tools/project--G4/scripts/nasty.xlsx")
 
 
 data$Measure1 <- as.double(data$Measure1)
@@ -36,15 +37,18 @@ illustrate the funtion
 ```{r}
 
 library(pkgproject)
-summary_stat(data_try,1)
+summary_stat(data_try,929)
 ```
 
 # request_CL
 
 ```{r}
-request_CL(data_try,1)
+request_CL(data_try,929)
 ```
 
+```{r}
+R_bar_chart(data,929)
+```
 
 
 

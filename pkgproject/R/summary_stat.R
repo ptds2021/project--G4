@@ -32,7 +32,7 @@ summary_stat <- function(data,request,A2 = 0.483) {
   LCL = median(df$median) - A2*Rbar
   Process_median <- median(df$median)
 
-  z <- request_SPC$median > UCL | df$median < LCL
+  z <- df$median > UCL | df$median < LCL
   beyond_limit <- sum(z)
   out_control_perc <- sum(z)/length(df)
 
