@@ -5,6 +5,7 @@ shinyServer(function(input, output, session) {
 #####Import Data output
     formData <- reactive({
         data <- sapply(weights, function(x)input[[x]])
+        data$Date <- as.character(input$Date)
         data
     })
 
