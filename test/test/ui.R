@@ -3,6 +3,8 @@ library("bslib")
 library("shinyTime")
 source("helpers.R")
 source("R functions.R")
+install.packages("shinyjs")
+library("shinyjs")
 
 navbarPage(
   title = "SPC app",
@@ -201,11 +203,11 @@ navbarPage(
 tabPanel(title = "Dataset",
          fluidPage(
            fluidRow(
-             column(5, wellPanel(
+             column(10, wellPanel(
                plotOutput("plot_sample"),
                hr()
              )),
-             column(5, wellPanel(
+             column(2, wellPanel(
                tableOutput("table_summary"),
                hr()
              ))
