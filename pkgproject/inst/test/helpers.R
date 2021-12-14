@@ -75,7 +75,7 @@ data_all <- rbind(Measure, data)
                          color = "red") +
      labs(x = "Measure", y = "Weight (Gr)",
           title = paste("Request",TS$Request),
-          subtitle = paste("Prélèvement",TS$Prelevement))
+          subtitle = paste("Process Sample",TS$Process.Sample))
    print(graph)
  }
 
