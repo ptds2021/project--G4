@@ -1,7 +1,7 @@
 #' @title Summary table
+#' @author Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
 #' @description Displays a table with summary statistics for the measurements of a process.
 #' The process should generally be measuring the weight of a substance in aontainer.
-#' @author Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
 #' @param data \code{data.frame} The dataset for the analysis (data.frame).
 #' #' For this function to work, your dataset must have :
 #' a `Request` column that has a number that identifies the request,
@@ -11,6 +11,7 @@
 #' a `Tare` column for the weight of the container.
 #' @param request \code{numeric} Number used to identify the request.
 #' @param A2 \code{numeric} constant defining the specification limits, default value 0.483.
+#' @example summary_stat(nasty, 929)
 #' @import tidyverse
 #' @import shiny
 #' @import dplyr
