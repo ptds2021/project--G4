@@ -6,9 +6,16 @@
 \usage{
 summary_stat(data, request, A2 = 0.483)
 }
+\arguments{
+\item{data}{The data set of the analysis (data.frame)}
+
+\item{request}{Request in the data set (a value in the data.frame)}
+
+\item{A2}{constant fixing the normal law}
+}
 \description{
 Summary table
 }
 \author{
-Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesco Darino
+Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
 }

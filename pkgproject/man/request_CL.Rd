@@ -7,15 +7,23 @@
 request_CL(data, request, A2 = 0.483, d2 = 5.534)
 }
 \arguments{
-\item{request}{\code{numeric} used to identify the rquest}
+\item{data}{\code{data.frame} The dataset on which chart will be based.
+For this function to work, your dataset must have :
+a `Request` column that has a number that identifies the request,
+columns starting with `Measure` that has the values for you measurements,
+a `Process Sample` column that records the number of the sample per request,
+a `Target value` column that gives us the the value on which we base the specifications.}
 
-\item{A2}{\code{numeric} defines the boundaries of the control limits, default value 0.483}
+\item{request}{\code{numeric} Number used to identify the request}
 
-\item{d2}{\code{numeric}}
+\item{A2}{\code{numeric} constant defining the specification limits, default value 0.483}
+
+\item{d2}{\code{numeric} constant defining the variability of the Process, default value of 5.534}
 }
 \description{
-TBD
+Displays a graph with a histogram with limits and text that show how much the outputs
+of a process meet a given set specifications.
 }
 \author{
-Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesco Darino
+Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
 }

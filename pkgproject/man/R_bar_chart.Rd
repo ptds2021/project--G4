@@ -4,11 +4,22 @@
 \alias{R_bar_chart}
 \title{R bar chart}
 \usage{
-R_bar_chart(request, A2 = 0.483)
+R_bar_chart(data, request, A2 = 0.483)
+}
+\arguments{
+\item{A2}{\code{numeric} constant determined by a normal law based on the size of the prelevement, default value 0.483}
+
+\item{\code{data.frame}}{data The data set of the analysis}
+
+\item{\code{numeric}}{request Request in the data set (a value in the data.frame)}
+}
+\value{
+A plot displaying the R bar chart
 }
 \description{
-R bar chart
+This function will produce a R bar chart. It will display the mean of the request specify and all the all other prelevement found in the data base.
+We use the A2 constants to calculate control limits for an Average.
 }
 \author{
-Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesco Darino
+Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
 }
