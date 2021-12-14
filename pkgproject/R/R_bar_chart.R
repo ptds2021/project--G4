@@ -43,6 +43,15 @@ R_bar_chart <- function(data, request, A2 = 0.483) {
   z <- df$median > UCL | df$median < LCL
   out_control_point <- sum(z)
 
+  d<- df %>% select(median, Process.Sample)
+  a <- tibble()
+  for (i in 1:nrow(d)){
+
+    if (d$median[i] > UCL | d$median[i] < LCL){
+      a <- rbind(a, d[i,])
+    }
+  }
+
   Rchart <- df %>%
        ggplot() +
        geom_point(aes(x = Process.Sample, y = median, colour = df$median > UCL | df$median < LCL)) +
@@ -68,7 +77,11 @@ R_bar_chart <- function(data, request, A2 = 0.483) {
       title = paste("Request",df$Request, "R chart"),
       subtitle = paste("The", out_control_point, "red dots are outside the control limits. Process variation cannot explain these extreme values, Process must be analysed" ))+
     theme(axis.ticks.x = element_blank(),
-          axis.text.x = element_blank())
+          axis.text.x = element_blank()) +
+    geom_label_repel(data= a, aes(x = a$Process.Sample,
+                                    y = a$median,label = a$Process.Sample,
+                                    fill = "red"),
+                       colour = "white", size = 3.5)
 
 
 
