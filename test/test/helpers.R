@@ -28,7 +28,7 @@ saveData <- function(data) {
   write.csv(
     x = data,
     file = file.path(outputDirWeight, fileName), 
-    row.names = FALSE, quote = TRUE
+    row.names = TRUE, quote = TRUE
   )
 }
 
