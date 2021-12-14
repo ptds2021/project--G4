@@ -1,41 +1,28 @@
 weights <-
   c("Date",
-    "Heure",
-    "Poids1",
-    "Poids2",
-    "Poids3",
-    "Poids4",
-    "Poids5",
-    "Poids6",
+    "Measure1",
+    "Measure2",
+    "Measure3",
+    "Measure4",
+    "Measure5",
+    "Measure6",
     "Request",
     "Operator",
-    "Prelevement",
-    "Batch_pod_scellé",
-    "Size",
-    "Specification",
-    "Cible",
+    "Process.Sample",
+    "Product.Size",
+    "Taget.Value",
     "Tare")
 
-fieldsMandatory <- c("Poids1", "Poids2", "Poids3", "Poids4", "Poids5", "Poids6", "Request", "Cible", "Prelevement","Tare")
+fieldsMandatory <- c("Measure1", "Measure2", "Measure3", "Measure4", "Measure5", "Measure6", "Request", "Taget.Value", "Process.Sample","Tare")
 
 outputDirWeight <- "responses"
 
-saveData <- function(data) {
-  data <- t(data)
-  # Create a unique file name
-  fileName <- sprintf("%s_%s.csv", as.integer(Sys.time()), digest::digest(data))
-  # Write the file to the local system
-  write.csv(
-    x = data,
-    file = file.path(outputDirWeight, fileName), 
-    row.names = TRUE, quote = TRUE
-  )
-}
+
 
 loadData <- function() {
   # Read all the files into a list
   files <- list.files(outputDirWeight, full.names = TRUE)
-  data <- lapply(files, read.csv, stringsAsFactors = FALSE) 
+  data <- lapply(files, read.csv, stringsAsFactors = FALSE)
   # Concatenate all data together into one data.frame
   data <- do.call(rbind, data)
   data <- as.matrix(data)
@@ -51,11 +38,6 @@ packages <- c(
 
 purrr::walk(packages, library, character.only = TRUE)
 
-
-poids <- readxl::read_xlsx("~/NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx") %>% select(-"...16")
- 
-#poids <- readxl::read_xlsx("C:/Users/sophi//NESTLE/PodSPC - Documents/Data/VenusLab - QMS poids.xlsx") %>% select(-"...16")
-
 #store the data into one tibble
 data <- list.files(path = "test/responses/", pattern="*.csv",  full.names = TRUE) %>%
   lapply(read_csv) %>%                                            # Store all files in list
@@ -63,34 +45,17 @@ data <- list.files(path = "test/responses/", pattern="*.csv",  full.names = TRUE
 data
 
 
-poids$Poids1 <- as.double(poids$Poids1)
-poids$Poids2 <- as.double(poids$Poids2)
-
 #merge the data base
-poids <- poids %>%
+Measure <- Measure %>%
   mutate(Date = as.numeric(Date))
-data_all <- rbind(poids, data)
-# data_all<-poids
+data_all <- rbind(Measure, data)
 
-df <- poids %>%
-   pivot_longer(
-     cols = starts_with("Poids"),
-     names_to = "Poids",
-     names_prefix = "Poids",
-    values_to = "weight",
-    values_drop_na = TRUE
-   ) #tidy data set
 
- df <- df[!is.na(df$Prelevement),]
- df <- df[!is.na(df$Cible),]
- 
- 
 
- 
  request_TS <- function(request, prelev) {
-   TS <-  poids %>% 
+   TS <-  Measure %>%
      filter(Request == request & Prelevement == prelev)
-   
+
    graph <- ggplot2::ggplot() +
      ggplot2::geom_point(ggplot2::aes(y = (TS$weight[1]-TS$Tare), x = 1)) +
      ggplot2::geom_point(ggplot2::aes(y = (TS$weight[2]-TS$Tare), x = 2)) +
@@ -105,21 +70,20 @@ df <- poids %>%
      ),
      color = "blue",
      linetype = 3) +
-     ggplot2::geom_hline(yintercept = (TS$Cible),
+     ggplot2::geom_hline(yintercept = (TS$Taget.Value),
                          linetype = "dashed",
                          color = "red") +
-     labs(x = "Poids", y = "Weight (Gr)",
+     labs(x = "Measure", y = "Weight (Gr)",
           title = paste("Request",TS$Request),
           subtitle = paste("Prélèvement",TS$Prelevement))
    print(graph)
  }
- 
- 
- 
+
+
+
  summary_TS <- function(request, prelev) {
-   TS <-  poids %>% 
+   TS <-  Measure %>%
      filter(Request == request & Prelevement == prelev)
-   
+
    t(as.matrix(summary(TS$weight-TS$Tare)))
  }
- 
