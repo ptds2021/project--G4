@@ -70,7 +70,7 @@ R_bar_chart <- function(data, request, A2 = 0.483) {
        geom_hline(yintercept = (df$Target.Value),
                         color = "blue") +
        geom_text(aes(x = -5, label = "Target.Value", y = (df$Target.Value) + 0.005), colour = "blue") +
-       xlab("Prélèvements") +
+       xlab("Process Sample") +
        ylab("Median of each sample in grams") + theme(legend.position = "none") +
        scale_color_manual(values = c("black", "red")) +
     labs(
