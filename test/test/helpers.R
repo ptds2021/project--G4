@@ -28,7 +28,7 @@ saveData <- function(data) {
   write.csv(
     x = data,
     file = file.path(outputDirWeight, fileName), 
-    row.names = FALSE, quote = TRUE
+    row.names = TRUE, quote = TRUE
   )
 }
 
@@ -112,5 +112,14 @@ df <- poids %>%
           title = paste("Request",TS$Request),
           subtitle = paste("Prélèvement",TS$Prelevement))
    print(graph)
+ }
+ 
+ 
+ 
+ summary_TS <- function(request, prelev) {
+   TS <-  poids %>% 
+     filter(Request == request & Prelevement == prelev)
+   
+   t(as.matrix(summary(TS$weight-TS$Tare)))
  }
  

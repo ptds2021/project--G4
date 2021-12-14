@@ -209,7 +209,8 @@ tabPanel(title = "Time Series for operators",
                uiOutput("select_prelev"), 
                
                wellPanel(
-                 plotOutput("TS_g", height = "400px")
+                 plotOutput("TS_g", height = "400px"),
+                 wellPanel(DT::dataTableOutput("summ_ts"))
                )
              )),
            br()

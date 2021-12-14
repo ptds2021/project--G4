@@ -1,8 +1,15 @@
 #' @title Create Cpk graph for a given request
-#' @description TBD
-#' @param request \code{numeric} used to identify the request
-#' @param A2 \code{numeric} defines the boundaries of the control limits, default value 0.483
-#' @param data \code{data.frame}
+#' @description Displays a graph with a histogram with limits and text that show how much the outputs
+#' of a process meet a given set specifications.
+#' @param data \code{data.frame} The dataset on which chart will be based.
+#' For this function to work, your dataset must have :
+#' a `Request` column that has a number that identifies the request,
+#' columns starting with `Measure` that has the values for you measurements,
+#' a `Process Sample` column that records the number of the sample per request,
+#' a `Target value` column that gives us the the value on which we base the specifications.
+#' @param request \code{numeric} Number used to identify the request
+#' @param A2 \code{numeric} constant defining the specification limits, default value 0.483
+#' @param d2 \code{numeric} constant defining the variability of the Process, default value of 5.534
 #' @author Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
 #' @import tidyverse
 #' @import ggplot2

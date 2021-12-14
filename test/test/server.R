@@ -114,5 +114,10 @@ shinyServer(function(input, output, session) {
                       options = list(pageLength = 10, scrollX = TRUE),
                       class = 'cell-border stripe', rownames = FALSE, width =500)
     })  
-
+    
+    output$summ_ts <- DT::renderDataTable({
+        DT::datatable(summary_TS(input$prequest, input$prelevement),
+                      options = list(pageLength = 10, scrollX = TRUE),
+                      class = 'cell-border stripe', rownames = FALSE, width =500)
+    })  
 })
