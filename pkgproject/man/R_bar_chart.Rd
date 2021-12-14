@@ -7,7 +7,7 @@
 R_bar_chart(data, request, A2 = 0.483)
 }
 \arguments{
-\item{A2}{\code{numeric} constant determined by a normal law based on the size of the prelevement, default value 0.483}
+\item{A2}{\code{numeric} constant determined by a normal law based on the size of the prelevement, default value 0.483.}
 
 \item{\code{data.frame}}{data The data set of the analysis}
 
