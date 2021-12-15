@@ -75,7 +75,7 @@ navbarPage(
 
 
         column(2, wellPanel(
-          selectInput("Operator", "Operator", c("Loïc", "Karen", "Chantal", "Christine", "Sandra", "Tiffany","Sarah", "Anthony", "Chahineze", "Danylo", "Thibaud","Pinar", "Sylvie",  "Dylan", "Sandrine", "Abdallah", "Eymeric", "Erika", "Daniela" )),
+          selectInput("Operator", "Operator", c("Samuel", "Iegor", "Sophie", "Ozgür", "Valérie", "Marc-Olivier")),
           hr(),
 
         )),
@@ -92,16 +92,12 @@ navbarPage(
 
 
           column(1, wellPanel(
-            selectInput("Product.Size", "Size", c("XS","S", "M", "L", "XL", "NA")),
+            selectInput("Product.Size", "Size", c("S", "M", "L", "XL")),
             hr(),
 
 
 
         )),
-
-        #column(2, wellPanel(
-          #selectInput("Specification", "Specification", unique(Measure$Spec)),
-          #hr(), )),
 
         column(1, wellPanel(
           numericInput("Target.Value", "Target.Value", ""),
@@ -151,14 +147,27 @@ navbarPage(
           hr(),
         )
       )),
-    br()
+    br(),
 
-
+    fluidRow(
+      column(
+        12,
+        wellPanel(
+          plotOutput("plot_sample"),
+          hr(),
+        )
+      )),
+    br(),
+    fluidRow(
+      column(5, wellPanel(tableOutput("table"),
+        hr()
+      ), offset = 6)
+    )
 
  )),
 
 
-
+##################
 
  tabPanel(title = "Density Plot",
           fluidPage(

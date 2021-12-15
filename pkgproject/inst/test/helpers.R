@@ -1,4 +1,4 @@
-measures <-
+weights <-
   c("Date",
     "Measure1",
     "Measure2",
@@ -27,7 +27,7 @@ fieldsMandatory <-
     "Tare"
   )
 
-outputDirmeasure <- "responses"
+outputDirWeight <- "responses"
 
 saveData <- function(data) {
   data <- t(data)
@@ -107,4 +107,16 @@ data_all <- rbind(Measure, data)
      filter(Request == request & Process.Sample == prelev)
 
    t(as.matrix(summary(TS$measure-TS$Tare)))
+ }
+
+ summary_table <- function(x1,x2, x3,x4,x5,x6,t){
+   x<- c(x1,x2, x3,x4,x5,x6)
+   x<- x-t
+   mean<- mean(x)
+   sd <- sd(x)
+   median<-median(x)
+   quantile1 <- quantile(x, probs = seq(0.25))
+   quantile3 <- quantile(x, probs = seq(0.75))
+   t <- tibble(mean,sd, median,quantile1,quantile3)
+   t
  }

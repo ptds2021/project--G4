@@ -55,12 +55,12 @@ shinyServer(function(input, output, session) {
     observeEvent(input$submit_another, {
         shinyjs::show("form")
         shinyjs::hide("thankyou_msg")
-        shinyjs::reset("Measure")
-        shinyjs::reset("Measure")
-        shinyjs::reset("Measure")
-        shinyjs::reset("Measure")
-        shinyjs::reset("Measure")
-        shinyjs::reset("Measure")
+        shinyjs::reset("Measure1")
+        shinyjs::reset("Measure2")
+        shinyjs::reset("Measure3")
+        shinyjs::reset("Measure4")
+        shinyjs::reset("Measure5")
+        shinyjs::reset("Measure6")
         shinyjs::reset("Process.Sample")
         shinyjs::reset("Request")
         shinyjs::reset("Target.Value")
@@ -119,4 +119,33 @@ shinyServer(function(input, output, session) {
                       options = list(pageLength = 10, scrollX = TRUE),
                       class = 'cell-border stripe', rownames = FALSE, width =500)
     })
+    output$plot_sample <- renderPlot({
+        ggplot2::ggplot() +ggplot2::geom_point(ggplot2::aes(y = (input$Measure1-input$Tare), x = 1)) +
+            ggplot2::geom_point(ggplot2::aes(y = (input$Measure2-input$Tare), x = 2)) +
+            ggplot2::geom_point(ggplot2::aes(y = (input$Measure3-input$Tare), x = 3)) +
+            ggplot2::geom_point(ggplot2::aes(y = (input$Measure4-input$Tare), x = 4)) +
+            ggplot2::geom_point(ggplot2::aes(y = (input$Measure5-input$Tare), x = 5)) +
+            ggplot2::geom_point(ggplot2::aes(y = (input$Measure6-input$Tare), x = 6)) +
+            ggplot2::geom_hline(ggplot2::aes(yintercept = (input$Measure1-input$Tare +
+                                                                input$Measure2-input$Tare +
+                                                                input$Measure3-input$Tare +
+                                                                input$Measure4-input$Tare +
+                                                                input$Measure5-input$Tare +
+                                                                input$Measure6-input$Tare)/6),
+        color = "blue",
+        linetype = 3) +
+        ggplot2::geom_hline(yintercept = (input$cible),
+                            linetype = "dashed",
+                            color = "red")
+    })
+    output$table <- renderTable({
+        summary_table(input$Measure1,input$Measure2,
+                      input$Measure3,
+                      input$Measure4,
+                      input$Measure5,
+                      input$Measure6,
+                      input$Tare
+
+        )})
+
 })
