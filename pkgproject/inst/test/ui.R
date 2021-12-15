@@ -195,26 +195,6 @@ navbarPage(
 
 ),
 ###############################################################################
-tabPanel(title = "Time Series for operators",
-         fluidPage(
-           fluidRow(
-             column(
-               12,
-               selectInput("prequest", "Request", choices = unique(nasty$Request),
-                           selected = unique(nasty$Request)[1]),
-               uiOutput("select_prelev"),
-
-               wellPanel(
-                 plotOutput("TS_g", height = "400px"),
-                 wellPanel(DT::dataTableOutput("summ_ts"))
-               )
-             )),
-           br()
-
-         )
-
-),
-
 
 ####### Home tab ###
 
