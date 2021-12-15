@@ -55,15 +55,15 @@ shinyServer(function(input, output, session) {
     observeEvent(input$submit_another, {
         shinyjs::show("form")
         shinyjs::hide("thankyou_msg")
-        shinyjs::reset("Poids1")
-        shinyjs::reset("Poids2")
-        shinyjs::reset("Poids3")
-        shinyjs::reset("Poids4")
-        shinyjs::reset("Poids5")
-        shinyjs::reset("Poids6")
-        shinyjs::reset("Prelevement")
+        shinyjs::reset("Measure")
+        shinyjs::reset("Measure")
+        shinyjs::reset("Measure")
+        shinyjs::reset("Measure")
+        shinyjs::reset("Measure")
+        shinyjs::reset("Measure")
+        shinyjs::reset("Process.Sample")
         shinyjs::reset("Request")
-        shinyjs::reset("Cible")
+        shinyjs::reset("Target.Value")
         shinyjs::reset("Tare")
     })
 
@@ -77,11 +77,9 @@ shinyServer(function(input, output, session) {
     output$select_cible <- renderUI({
 
         selectInput("cible", label = "Cible",
-
-
-                    choices = cible_p_SPC_ %>%
-                        filter(`Batch Pod size` == input$psize) %>%
-                        pull(Cible) %>% unique()
+                    choices = Target.Value_p_SPC_ %>%
+                        filter(Product.Size == input$psize) %>%
+                        pull(Target.Value) %>% unique()
         )
 
     })
@@ -93,7 +91,7 @@ shinyServer(function(input, output, session) {
 
                     choices = nasty %>%
                         filter(Request == input$prequest) %>%
-                        pull(Prelevement) %>% unique()
+                        pull(Process.Sample) %>% unique()
         )
 
     })

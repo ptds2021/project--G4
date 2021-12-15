@@ -2,9 +2,9 @@ library("shiny")
 library("bslib")
 library("shinyTime")
 source("helpers.R")
-#source("R functions.R")
+source("R functions.R")
 library("shinyjs")
-library(pkgproject)
+#library(pkgproject)
 
 navbarPage(
   title = "SPC app",
@@ -38,32 +38,32 @@ navbarPage(
 
                column(width = 1, offset = 1,
                       wellPanel(
-                 numericInput("Poids1", "Poids 1", ""),
+                 numericInput("Measure1", "Measure 1", ""),
                         hr(),
                       )),
                column(width = 1,
                       wellPanel(
-                        numericInput("Poids2", "Poids 2", ""),
+                        numericInput("Measure2", "Measure 2", ""),
                         hr(),
                       )),
                column(width = 1,
                       wellPanel(
-                        numericInput("Poids3", "Poids 3", ""),
+                        numericInput("Measure3", "Measure 3", ""),
                         hr(),
                       )),
                column(width = 1,
                       wellPanel(
-                        numericInput("Poids4", "Poids 4", ""),
+                        numericInput("Measure4", "Measure 4", ""),
                         hr(),
                       )),
                column(width = 1,
                       wellPanel(
-                        numericInput("Poids5", "Poids 5", ""),
+                        numericInput("Measure5", "Measure 5", ""),
                         hr(),
                       )),
                column(width = 1,
                       wellPanel(
-                        numericInput("Poids6", "Poids 6", ""),
+                        numericInput("Measure6", "Measure 6", ""),
                         hr(),
                       )),
 
@@ -84,7 +84,7 @@ navbarPage(
 
 
         column(1,offset = 1, wellPanel(
-          numericInput("Prelevement", "Prelevement", ""),
+          numericInput("Process.Sample", "Process.Sample", ""),
           hr(),
         )),
 
@@ -92,7 +92,7 @@ navbarPage(
 
 
           column(1, wellPanel(
-            selectInput("Size", "Size", c("XS","S", "M", "L", "XL", "NA")),
+            selectInput("Product.Size", "Size", c("XS","S", "M", "L", "XL", "NA")),
             hr(),
 
 
@@ -100,11 +100,11 @@ navbarPage(
         )),
 
         #column(2, wellPanel(
-          #selectInput("Specification", "Specification", unique(poids$Spec)),
+          #selectInput("Specification", "Specification", unique(Measure$Spec)),
           #hr(), )),
 
         column(1, wellPanel(
-          numericInput("Cible", "Cible", ""),
+          numericInput("Target.Value", "Target.Value", ""),
           hr(),
         )),
 
@@ -176,8 +176,8 @@ navbarPage(
           fluidRow(
             column(
               12,
-              selectInput("psize", "Pod Size", choices = unique(nasty$Request),
-                          selected = unique(nasty$Request)[1]),
+              selectInput("psize", "Size", choices = unique(nasty$Product.Size),
+                          selected = unique(nasty$Product.Size)[1]),
               uiOutput("select_cible"),
 
               wellPanel(

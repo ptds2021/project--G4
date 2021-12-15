@@ -1,4 +1,4 @@
-weights <-
+measures <-
   c("Date",
     "Measure1",
     "Measure2",
@@ -10,18 +10,40 @@ weights <-
     "Operator",
     "Process.Sample",
     "Product.Size",
-    "Taget.Value",
+    "Target.Value",
     "Tare")
 
-fieldsMandatory <- c("Measure1", "Measure2", "Measure3", "Measure4", "Measure5", "Measure6", "Request", "Taget.Value", "Process.Sample","Tare")
+fieldsMandatory <-
+  c(
+    "Measure1",
+    "Measure2",
+    "Measure3",
+    "Measure4",
+    "Measure5",
+    "Measure6",
+    "Request",
+    "Target.Value",
+    "Process.Sample",
+    "Tare"
+  )
 
-outputDirWeight <- "responses"
+outputDirmeasure <- "responses"
 
-
+saveData <- function(data) {
+  data <- t(data)
+  # Create a unique file name
+  fileName <- sprintf("%s_%s.csv", as.integer(Sys.time()), digest::digest(data))
+  # Write the file to the local system
+  write.csv(
+    x = data,
+    file = file.path(outputDirWeight, fileName),
+    row.names = TRUE, quote = TRUE
+  )
+}
 
 loadData <- function() {
   # Read all the files into a list
-  files <- list.files(outputDirWeight, full.names = TRUE)
+  files <- list.files(outputDirmeasure, full.names = TRUE)
   data <- lapply(files, read.csv, stringsAsFactors = FALSE)
   # Concatenate all data together into one data.frame
   data <- do.call(rbind, data)
@@ -46,35 +68,33 @@ data
 
 
 #merge the data base
-Measure<- nasty
-Measure <- Measure %>%
-  mutate(Date = as.numeric(Date))
+Measure <- nasty
 data_all <- rbind(Measure, data)
 
 
 
  request_TS <- function(request, prelev) {
-   TS <-  Measure %>%
-     filter(Request == request & Prelevement == prelev)
+   TS <-  nasty %>%
+     filter(Request == request & Process.Sample == prelev)
 
    graph <- ggplot2::ggplot() +
-     ggplot2::geom_point(ggplot2::aes(y = (TS$weight[1]-TS$Tare), x = 1)) +
-     ggplot2::geom_point(ggplot2::aes(y = (TS$weight[2]-TS$Tare), x = 2)) +
-     ggplot2::geom_point(ggplot2::aes(y = (TS$weight[3]-TS$Tare), x = 3)) +
-     ggplot2::geom_point(ggplot2::aes(y = (TS$weight[4]-TS$Tare), x = 4)) +
-     ggplot2::geom_point(ggplot2::aes(y = (TS$weight[5]-TS$Tare), x = 5)) +
-     ggplot2::geom_point(ggplot2::aes(y = (TS$weight[6]-TS$Tare), x = 6)) +
+     ggplot2::geom_point(ggplot2::aes(y = (TS$measure[1]-TS$Tare), x = 1)) +
+     ggplot2::geom_point(ggplot2::aes(y = (TS$measure[2]-TS$Tare), x = 2)) +
+     ggplot2::geom_point(ggplot2::aes(y = (TS$measure[3]-TS$Tare), x = 3)) +
+     ggplot2::geom_point(ggplot2::aes(y = (TS$measure[4]-TS$Tare), x = 4)) +
+     ggplot2::geom_point(ggplot2::aes(y = (TS$measure[5]-TS$Tare), x = 5)) +
+     ggplot2::geom_point(ggplot2::aes(y = (TS$measure[6]-TS$Tare), x = 6)) +
      ggplot2::geom_hline(ggplot2::aes(
        yintercept = (
-         (TS$weight[1]-TS$Tare + TS$weight[2]-TS$Tare + TS$weight[3]-TS$Tare + TS$weight[4]-TS$Tare + TS$weight[5]-TS$Tare + TS$weight[6]-TS$Tare)
+         (TS$measure[1]-TS$Tare + TS$measure[2]-TS$Tare + TS$measure[3]-TS$Tare + TS$measure[4]-TS$Tare + TS$measure[5]-TS$Tare + TS$measure[6]-TS$Tare)
        )/6
      ),
      color = "blue",
      linetype = 3) +
-     ggplot2::geom_hline(yintercept = (TS$Taget.Value),
+     ggplot2::geom_hline(yintercept = (TS$Target.Value),
                          linetype = "dashed",
                          color = "red") +
-     labs(x = "Measure", y = "Weight (Gr)",
+     labs(x = "Measure", y = "measure (Gr)",
           title = paste("Request",TS$Request),
           subtitle = paste("Process Sample",TS$Process.Sample))
    print(graph)
@@ -84,7 +104,7 @@ data_all <- rbind(Measure, data)
 
  summary_TS <- function(request, prelev) {
    TS <-  Measure %>%
-     filter(Request == request & Prelevement == prelev)
+     filter(Request == request & Process.Sample == prelev)
 
-   t(as.matrix(summary(TS$weight-TS$Tare)))
+   t(as.matrix(summary(TS$measure-TS$Tare)))
  }
