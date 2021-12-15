@@ -18,19 +18,13 @@ LazyData: true
 RoxygenNote: 7.1.2
 Imports: 
     shiny (>= 1.7.1),
-    dplyr,
     tidyverse,
-    ggrepel,
-    grid, 
-    Rcpp, 
-    rlang (>= 0.3.0), 
-    scales (>= 0.5.0),
-    ggplot2,
-    base
+    tidyr
 Suggests: 
     rmarkdown,
-    knitr
+    knitr,
+    ggrepel,
+    dplyr
 VignetteBuilder: knitr
 Depends:
-    R (>= 3.0.0), 
-    ggplot2 (>= 2.2.0)
+    R (>= 2.10)

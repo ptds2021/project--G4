@@ -13,9 +13,9 @@
 #' @param A2 \code{numeric} constant defining the specification limits, default value 0.483.
 #' @param d2 \code{numeric} constant defining the variability of the Process, default value of 5.534.
 #' @example request_CL(nasty, 929)
-#' @import tidyverse
-#' @import ggplot2
 #' @import dplyr
+#' @import tidyr
+#' @import ggplot2
 #' @export
 #'
 

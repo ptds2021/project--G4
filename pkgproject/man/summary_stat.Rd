@@ -8,7 +8,7 @@ summary_stat(data, request, A2 = 0.483)
 }
 \arguments{
 \item{data}{\code{data.frame} The dataset for the analysis (data.frame).
-#' For this function to work, your dataset must have :
+For this function to work, your dataset must have :
 a `Request` column that has a number that identifies the request,
 columns starting with `Measure` that has the values for you measurements,
 a `Process Sample` column that records the number of the sample per request,

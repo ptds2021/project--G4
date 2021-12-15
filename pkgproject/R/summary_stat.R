@@ -14,7 +14,6 @@
 #' @example summary_stat(nasty, 929)
 #' @import tidyverse
 #' @import shiny
-#' @import dplyr
 #' @import knitr
 #' @export
 #'
