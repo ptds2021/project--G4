@@ -100,8 +100,8 @@ shinyServer(function(input, output, session) {
         request_CL(nasty,input$req)
     })
 
-    output$cible_hist <- renderPlot({
-        cible_CL(input$psize, input$cible)
+    output$R_bar <- renderPlot({
+        R_bar_chart(nasty,input$req)
     })
 
     output$TS_g <- renderPlot({

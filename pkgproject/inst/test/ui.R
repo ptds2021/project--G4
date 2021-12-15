@@ -176,12 +176,8 @@ navbarPage(
           fluidRow(
             column(
               12,
-              selectInput("psize", "Size", choices = unique(nasty$Product.Size),
-                          selected = unique(nasty$Product.Size)[1]),
-              uiOutput("select_cible"),
-
               wellPanel(
-                plotOutput("cible_hist", height = "400px")
+                plotOutput("R_bar", height = "400px")
                 )
             )),
           br()
