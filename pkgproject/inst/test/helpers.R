@@ -34,7 +34,7 @@ packages <- c(
   "tidyverse", "lubridate", # for wrangling
   "knitr", "kableExtra", "bookdown", "rmarkdown", "DT", # for the report
   "summarytools","caret","ggplot2",
-  "dplyr")
+  "dplyr", "pkgproject")
 
 purrr::walk(packages, library, character.only = TRUE)
 
@@ -46,6 +46,7 @@ data
 
 
 #merge the data base
+Measure<- nasty
 Measure <- Measure %>%
   mutate(Date = as.numeric(Date))
 data_all <- rbind(Measure, data)

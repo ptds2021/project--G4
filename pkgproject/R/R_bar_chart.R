@@ -79,7 +79,7 @@ R_bar_chart <- function(data, request, A2 = 0.483) {
       subtitle = paste("The", out_control_point, "red dots are outside the control limits. Process variation cannot explain these extreme values, Process must be analysed" ))+
     theme(axis.ticks.x = element_blank(),
           axis.text.x = element_blank()) +
-    geom_label_repel(data= a, aes(x = a$Process.Sample,
+    ggrepel::geom_label_repel(data= a, aes(x = a$Process.Sample,
                                     y = a$median,label = a$Process.Sample,
                                     fill = "red"),
                        colour = "white", size = 3.5)

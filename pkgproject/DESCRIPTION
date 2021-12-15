@@ -19,11 +19,18 @@ RoxygenNote: 7.1.2
 Imports: 
     shiny (>= 1.7.1),
     dplyr,
-    tidyverse
+    tidyverse,
+    ggrepel,
+    grid, 
+    Rcpp, 
+    rlang (>= 0.3.0), 
+    scales (>= 0.5.0),
+    ggplot2,
+    base
 Suggests: 
     rmarkdown,
-    knitr,
-    ggrepel
+    knitr
 VignetteBuilder: knitr
-Depends: 
-    R (>= 2.10)
+Depends:
+    R (>= 3.0.0), 
+    ggplot2 (>= 2.2.0)

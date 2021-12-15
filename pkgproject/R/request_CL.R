@@ -15,6 +15,7 @@
 #' @example request_CL(nasty, 929)
 #' @import tidyverse
 #' @import ggplot2
+#' @import dplyr
 #' @export
 #'
 
