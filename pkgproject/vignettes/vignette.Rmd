@@ -7,6 +7,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r, results='hide'}
+library(knitr)
+```
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -23,8 +27,9 @@ library(pkgproject)
 
 ```{r}
 library(tidyverse)
-data <- readxl::read_excel("~/UNIL 2021/Programming_tools/project--G4/scripts/nasty.xlsx")
+data <- readxl::read_excel("~/GitHub/project--G4/scripts/nasty.xlsx")
 
+#"~/UNIL 2021/Programming_tools/project--G4/scripts/nasty.xlsx"
 
 data$Measure1 <- as.double(data$Measure1)
 data$Measure2 <- as.double(data$Measure2)
