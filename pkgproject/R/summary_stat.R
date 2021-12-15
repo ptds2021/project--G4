@@ -52,9 +52,9 @@ summary_stat <- function(data,request,A2 = 0.483) {
   out_control_perc <- sum(z)/length(df)
 
 
-  summary <- as_tibble(c(Process_median, df$Target.Value[1], Rbar, UCL, LCL, beyond_limit, out_control_perc))
+  summary <- as.data.frame(cbind(Process_median, df$Target.Value[1], Rbar, UCL, LCL, beyond_limit, out_control_perc))
 
-  summary$name <-
+  colnames(summary) <-
     c(
       "Process Median",
       "Process Cible",
@@ -64,5 +64,5 @@ summary_stat <- function(data,request,A2 = 0.483) {
       "Number beyonds Limits",
       "Out of control %"
     )
-  kable(summary, "simple")
+  summary
 }

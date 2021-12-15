@@ -97,7 +97,7 @@ shinyServer(function(input, output, session) {
     })
 
     output$plot_hist <- renderPlot({
-        request_CL(input$req)
+        request_CL(nasty,input$req)
     })
 
     output$cible_hist <- renderPlot({
@@ -109,7 +109,7 @@ shinyServer(function(input, output, session) {
     })
 
     output$summ_req <- DT::renderDataTable({
-        DT::datatable(summary_stat(input$Request),
+        DT::datatable(summary_stat(nasty,input$req),
                       options = list(pageLength = 10, scrollX = TRUE),
                       class = 'cell-border stripe', rownames = FALSE, width =500)
     })
