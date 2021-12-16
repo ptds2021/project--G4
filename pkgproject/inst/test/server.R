@@ -16,7 +16,7 @@ shinyServer(function(input, output, session) {
         mandatoryFilled <-
             vapply(fieldsMandatory,
                    function(x) {
-                       !is.na(input[[x]]) || input[[x]] != ""
+                       !is.na(input[[x]]) && input[[x]] != ""
                    },
                    logical(1))
         mandatoryFilled <- all(mandatoryFilled)
