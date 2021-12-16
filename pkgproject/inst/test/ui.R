@@ -83,7 +83,7 @@ navbarPage(
 
 
 
-        column(1,offset = 1, wellPanel(
+        column(2, wellPanel(
           numericInput("Process.Sample", "Process.Sample", ""),
           hr(),
         )),
@@ -91,7 +91,7 @@ navbarPage(
 
 
 
-          column(1, wellPanel(
+          column(2, wellPanel(
             selectInput("Product.Size", "Size", c("S", "M", "L", "XL")),
             hr(),
 
@@ -99,14 +99,14 @@ navbarPage(
 
         )),
 
-        column(1, wellPanel(
+        column(2, wellPanel(
           numericInput("Target.Value", "Target.Value", ""),
           hr(),
         )),
 
 
 
-        column(1, wellPanel(
+        column(2, wellPanel(
           numericInput("Tare", "Tare", ""),
           hr(),
         )),
@@ -116,10 +116,10 @@ navbarPage(
 
 
 
-        column(1, wellPanel(
+        column(width = 2, offset = 2, wellPanel(
           actionButton("submit", "Submit", align = "center"),
           hr()
-        ))
+        )),
 
 
       ),
