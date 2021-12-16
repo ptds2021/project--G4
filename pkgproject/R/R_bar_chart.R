@@ -1,11 +1,15 @@
-#' @title R bar chart
+#' @title Xbar-R bar chart
 #' @author Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
-#' @description This function will produce a R bar chart. It will display the mean of the request specify and all the all other prelevement found in the data base.
-#' We use the A2 constants to calculate control limits for an Average.
-#' @return A plot displaying the R bar chart
+#' @description This function will produce a Shewhart X-bar/R control chart. The Xbar-R control chart is the most commonly used.
+#' Xbar/R chart:
+#' This function allows you to plots each sample mean to see between-sample variation
+#' Useful for identifying special cause changes to the process mean (X), for detecting shifts/trends.
+#' Control limits, related to +/- 3 standard deviations, are calculated using Rbar.
+#' Points within the control limits are in accordance with the process variation. Those outside the limits are special causes to be analysed
+#' @return A plot displaying the X_bar/R control chart
 #' @param \code{data.frame} data The data set of the analysis
-#' @param \code{numeric} request Request in the data set (a value in the data.frame)
-#' @param A2 \code{numeric} constant determined by a normal law based on the size of the prelevement, default value 0.483.
+#' @param \code{numeric} request A particular product, with specific production parameters (a value in the data.frame)
+#' @param A2 \code{numeric} Constant determined by a normal distribution as a function of the sample size useful for defining the control limits. We consider by default that the number of points in the sample is equal to 6, which gives a constant equal to 0.483.
 #' @example R_bar_chart(nasty, 929)
 #' @import tidyverse
 #' @import ggplot2
@@ -30,7 +34,7 @@ R_bar_chart <- function(data, request, A2 = 0.483) {
 
   df <- data_long %>%
     group_by(Request, Process.Sample, Target.Value) %>%
-    mutate(real_weight = weight - Tare)%>%
+    mutate(real_weight = weight - Tare) %>%
     summarise(
       median = median(real_weight),
       sd = sd(real_weight),
@@ -88,5 +92,4 @@ R_bar_chart <- function(data, request, A2 = 0.483) {
 
 
   print(Rchart)
-
 }
