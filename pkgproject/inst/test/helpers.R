@@ -51,14 +51,7 @@ loadData <- function() {
   data
 }
 
-packages <- c(
-  "here", "readxl", # for the project's organization
-  "tidyverse", "lubridate", # for wrangling
-  "knitr", "kableExtra", "bookdown", "rmarkdown", "DT", # for the report
-  "summarytools","caret","ggplot2",
-  "dplyr", "pkgproject")
 
-purrr::walk(packages, library, character.only = TRUE)
 
 #store the data into one tibble
 data <- list.files(path = "test/responses/", pattern="*.csv",  full.names = TRUE) %>%
