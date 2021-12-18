@@ -149,6 +149,14 @@ shinyServer(function(input, output, session) {
     )})
 
     output$plot_sample <- renderPlot({
+        validate(
+            need(vapply(fieldsMandatory,
+                        function(x) {
+                            !is.na(input[[x]]) && input[[x]] != ""
+                        },
+                        logical(1)), "Please fill the inputs"
+            )
+        )
         ggplot2::ggplot() + ggplot2::geom_point(ggplot2::aes(y = (input$Measure1 - input$Tare), x = 1)) +
             ggplot2::geom_point(ggplot2::aes(y = (input$Measure2 - input$Tare), x = 2)) +
             ggplot2::geom_point(ggplot2::aes(y = (input$Measure3 - input$Tare), x = 3)) +
@@ -180,6 +188,14 @@ shinyServer(function(input, output, session) {
     })
 
     output$table <- renderTable({
+        validate(
+            need(vapply(fieldsMandatory,
+                        function(x) {
+                            !is.na(input[[x]]) && input[[x]] != ""
+                        },
+                        logical(1)), "Please fill the inputs"
+            )
+        )
         summary_table(
             input$Measure1,
             input$Measure2,

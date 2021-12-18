@@ -134,14 +134,10 @@ navbarPage(
       fluidRow(column(12,
                       wellPanel(
                         plotOutput("plot_sample"),
+                        tableOutput("table"),
                         hr(),
                       ))),
       br(),
-      fluidRow(column(5, wellPanel(
-        tableOutput("table"),
-        hr()
-      ), offset = 6))
-
     )
   ),
 
