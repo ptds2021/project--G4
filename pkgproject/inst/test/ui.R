@@ -1,8 +1,8 @@
 library("shiny")
 library("bslib")
 library("shinyTime")
-source("setup.R")
 source("helpers.R")
+#source("R functions.R")
 library("shinyjs")
 library(pkgproject)
 
@@ -16,130 +16,116 @@ navbarPage(
     bootswatch = "spacelab"
   ),
 
-
-
-
   # fill content for tab 2
   tabPanel(
     title = "Input",
 
-    fluidPage(shinyjs::useShinyjs(),
+    fluidPage(
+      shinyjs::useShinyjs(),
       tags$head(tags$style(
         HTML(".shiny-text-output {background-color:#6e5104;}")
       )),
       br(),
 
-      fluidRow(column(2,
-                      wellPanel(
-                        dateInput("Date", "Date", "", value = Sys.Date()),
-                        hr(),
-                      )),
-
-
-               column(width = 1, offset = 1,
-                      wellPanel(
-                 numericInput("Measure1", "Measure 1", ""),
-                        hr(),
-                      )),
-               column(width = 1,
-                      wellPanel(
-                        numericInput("Measure2", "Measure 2", ""),
-                        hr(),
-                      )),
-               column(width = 1,
-                      wellPanel(
-                        numericInput("Measure3", "Measure 3", ""),
-                        hr(),
-                      )),
-               column(width = 1,
-                      wellPanel(
-                        numericInput("Measure4", "Measure 4", ""),
-                        hr(),
-                      )),
-               column(width = 1,
-                      wellPanel(
-                        numericInput("Measure5", "Measure 5", ""),
-                        hr(),
-                      )),
-               column(width = 1,
-                      wellPanel(
-                        numericInput("Measure6", "Measure 6", ""),
-                        hr(),
-                      )),
-
-               column(width = 1, wellPanel(
-                 numericInput("Request", "Request", ""),
+      fluidRow(
+        column(width = 2,
+               wellPanel(
+                 dateInput("Date", "Date", "", value = Sys.Date()),
                  hr(),
                )),
-    br(),
+        column(width = 1,
+               wellPanel(
+                 numericInput("Measure1", "Measure 1", ""),
+                 hr(),
+               )),
+        column(width = 1,
+               wellPanel(
+                 numericInput("Measure2", "Measure 2", ""),
+                 hr(),
+               )),
+        column(width = 1,
+               wellPanel(
+                 numericInput("Measure3", "Measure 3", ""),
+                 hr(),
+               )),
+        column(width = 1,
+               wellPanel(
+                 numericInput("Measure4", "Measure 4", ""),
+                 hr(),
+               )),
+        column(width = 1,
+               wellPanel(
+                 numericInput("Measure5", "Measure 5", ""),
+                 hr(),
+               )),
+        column(width = 1,
+               wellPanel(
+                 numericInput("Measure6", "Measure 6", ""),
+                 hr(),
+               )),
 
-
-        column(2, wellPanel(
-          selectInput("Operator", "Operator", c("Samuel", "Iegor", "Sophie", "Ozgür", "Valérie", "Marc-Olivier")),
+        column(width = 1, wellPanel(
+          numericInput("Request", "Request", ""),
+          hr(),
+        )),
+        br(),
+        column(width = 2, wellPanel(
+          selectInput(
+            "Operator",
+            "Operator",
+            c(
+              "Samuel",
+              "Iegor",
+              "Sophie",
+              "Ozgür",
+              "Valérie",
+              "Marc-Olivier"
+            )
+          ),
           hr(),
 
         )),
 
-
-
-
-        column(2, wellPanel(
+        column(width = 2, wellPanel(
           numericInput("Process.Sample", "Process.Sample", ""),
           hr(),
         )),
 
-
-
-
-          column(2, wellPanel(
-            selectInput("Product.Size", "Size", c("S", "M", "L", "XL")),
-            hr(),
-
-
-
+        column(width = 2, wellPanel(
+          selectInput("Product.Size", "Size", c("S", "M", "L", "XL")),
+          hr(),
         )),
 
-        column(2, wellPanel(
+        column(width = 2, wellPanel(
           numericInput("Target.Value", "Target.Value", ""),
           hr(),
         )),
 
+        column(width = 2, wellPanel(numericInput("Tare", "Tare", ""),
+                                    hr(),)),
 
-
-        column(2, wellPanel(
-          numericInput("Tare", "Tare", ""),
-          hr(),
-        )),
-
-
-
-
-
-
-        column(width = 2, offset = 2, wellPanel(
-          actionButton("submit", "Submit", align = "center"),
-          hr()
-        )),
-
+        column(width = 2,
+               offset = 1,
+               wellPanel(
+                 actionButton("submit", "Submit", align = "center"),
+                 hr()
+               )),
 
       ),
-    br(),
+      br(),
 
-    shinyjs::hidden(
-      span(id = "submit_msg", "Submitting..."),
-      div(id = "error",
-          div(br(), tags$b("Error: "), span(id = "error_msg"))
-      )),
-    shinyjs::hidden(
-      div(
+      shinyjs::hidden(span(id = "submit_msg", "Submitting..."),
+                      div(id = "error",
+                          div(
+                            br(), tags$b("Error: "), span(id = "error_msg")
+                          ))),
+      shinyjs::hidden(div(
         id = "thankyou_msg",
         h3("Thanks, your response was submitted successfully!"),
         actionLink("submit_another", "Submit another response")
-      )
-    ),
+      )),
 
-    fluidRow(
-      column(
+      fluidRow(column(
         12,
         wellPanel(
           h3("Weight Data Table"),
@@ -147,66 +133,66 @@ navbarPage(
           hr(),
         )
       )),
-    br(),
+      br(),
 
-    fluidRow(
-      column(
-        12,
-        wellPanel(
-          plotOutput("plot_sample"),
-          hr(),
-        )
-      )),
-    br(),
-    fluidRow(
-      column(5, wellPanel(tableOutput("table"),
+      fluidRow(column(12,
+                      wellPanel(
+                        plotOutput("plot_sample"),
+                        hr(),
+                      ))),
+      br(),
+      fluidRow(column(5, wellPanel(
+        tableOutput("table"),
         hr()
-      ), offset = 6)
+      ), offset = 6))
+
     )
-
- )),
-
-
-##################
-
- tabPanel(title = "Density Plot",
-          fluidPage(
-            fluidRow(
-            column(
-            12,
-            selectInput("req", "Request", unique(nasty$Request)),
-            wellPanel(
-              plotOutput("plot_hist", height = "400px"),
-              wellPanel(DT::dataTableOutput("summ_req"))
-            )
-          )),
-          br(),
-
-          fluidRow(
-            column(
-              12,
-              wellPanel(
-                plotOutput("R_bar", height = "400px")
-                )
-            )),
-          br()
-
-          )
-
-),
-###############################################################################
-
-####### Home tab ###
+  ),
 
 
-tabPanel(
-  title = "App Info",
-  br(),
-  hr(),
-  h4(strong("Project Description")),
-  p(
-    style = "text-align: justify; font-size = 25px",
-    "Our project would be an application on industrial production area.
+  ##################
+
+  tabPanel(title = "Density Plot",
+           fluidPage(
+             fluidRow(column(
+               12,
+               selectInput("req", "Request", unique(nasty$Request)),
+               wellPanel(
+                 plotOutput("plot_hist", height = "400px"),
+                 wellPanel(DT::dataTableOutput("summ_req"))
+               )
+             )),
+             br(),
+
+             fluidRow(column(12,
+                             wellPanel(
+                               plotOutput("R_bar", height = "400px")
+                             ))),
+             br()
+
+           )),
+  ###############################################################################
+
+  tabPanel(title = "Time Series for operators",
+           fluidPage(fluidRow(
+             column(
+               12,
+               uiOutput("choices"),
+               uiOutput("select_prelev"),
+               plotOutput("TS_g", height = "400px")
+             ),
+             br()
+           ))),
+
+  ####### Home tab ###
+  tabPanel(
+    title = "App Info",
+    br(),
+    hr(),
+    h4(strong("Project Description")),
+    p(
+      style = "text-align: justify; font-size = 25px",
+      "Our project would be an application on industrial production area.
 More precisely the final and ambitious objective of the work is to
 help the Nestle coffee production creating a shiny application to
 support the controlling mechanism of the coffee weight during the
@@ -218,8 +204,9 @@ the weight in that sense could help to optimize such industrial process.
 The application would be used by different users: The operator,
 that would use the app to control his work.
 The project manager, to check the big picture of the project
-in the R&D branch of the company."),
-  hr()
-)
+in the R&D branch of the company."
+    ),
+    hr()
+  )
 
 )
