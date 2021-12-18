@@ -1,10 +1,8 @@
-library("shiny")
-library("bslib")
-library("shinyTime")
-source("helpers.R")
-#source("R functions.R")
-library("shinyjs")
+library(shiny)
+library(bslib)
+library(shinyjs)
 library(pkgproject)
+source("helpers.R")
 
 navbarPage(
   title = "SPC app",
@@ -73,14 +71,12 @@ navbarPage(
           selectInput(
             "Operator",
             "Operator",
-            c(
-              "Samuel",
+            c("Samuel",
               "Iegor",
               "Sophie",
               "Ozgür",
               "Valérie",
-              "Marc-Olivier"
-            )
+              "Marc-Olivier")
           ),
           hr(),
 
@@ -102,14 +98,14 @@ navbarPage(
         )),
 
         column(width = 2, wellPanel(numericInput("Tare", "Tare", ""),
-                                    hr(),)),
+                                    hr(), )),
 
-        column(width = 2,
-               offset = 1,
-               wellPanel(
-                 actionButton("submit", "Submit", align = "center"),
-                 hr()
-               )),
+        column(
+          width = 3,
+          offset = 0,
+          wellPanel(actionButton("submit", "Submit", align = "center"),
+                    hr())
+        ),
 
       ),
       br(),
