@@ -38,58 +38,93 @@ R_bar_chart <- function(data, request, A2 = 0.483) {
     summarise(
       median = median(real_weight),
       sd = sd(real_weight),
-      range = max(real_weight) - min(real_weight))
+      range = max(real_weight) - min(real_weight)
+    )
 
 
   Rbar = mean(df$range)
-  UCL = median(df$median) + A2*Rbar
-  LCL = median(df$median) - A2*Rbar
+  UCL = median(df$median) + A2 * Rbar
+  LCL = median(df$median) - A2 * Rbar
 
   z <- df$median > UCL | df$median < LCL
   out_control_point <- sum(z)
 
-  d<- df %>% select(median, Process.Sample)
+  d <- df %>% select(median, Process.Sample)
   a <- tibble()
-  for (i in 1:nrow(d)){
-
-    if (d$median[i] > UCL | d$median[i] < LCL){
-      a <- rbind(a, d[i,])
+  for (i in 1:nrow(d)) {
+    if (d$median[i] > UCL | d$median[i] < LCL) {
+      a <- rbind(a, d[i, ])
     }
   }
 
   Rchart <- df %>%
-       ggplot() +
-       geom_point(aes(x = Process.Sample, y = median, colour = df$median > UCL | df$median < LCL)) +
-       geom_hline(yintercept = mean(df$median),
-                        linetype = "dashed",
-                        color = "black") +
-       geom_text(aes(x = 2, label = "Process \n Median", y = mean(df$median) + 0.007), colour = "black") +
-       geom_hline(   aes(yintercept = UCL),
-                        color = "black",
-                        linetype = 3) +
-       geom_text(aes(x = 0, label = "UCL", y = UCL + 0.005), colour = "black") +
-       geom_hline(   aes(yintercept = LCL),
-                        color = "black",
-                        linetype = 3) +
-       geom_text(aes(x = 0, label = "LCL", y = LCL + 0.005), colour = "black") +
-       geom_hline(yintercept = (df$Target.Value),
-                        color = "blue") +
-       geom_text(aes(x = -5, label = "Target.Value", y = (df$Target.Value) + 0.005), colour = "blue") +
-       xlab("Process Sample") +
-       ylab("Median of each sample in grams") + theme(legend.position = "none") +
-       scale_color_manual(values = c("black", "red")) +
+    ggplot() +
+    geom_point(aes(
+      x = Process.Sample,
+      y = median,
+      colour = df$median > UCL | df$median < LCL
+    )) +
+    geom_hline(
+      yintercept = mean(df$median),
+      linetype = "dashed",
+      color = "black"
+    ) +
+    geom_text(aes(
+      x = 2,
+      label = "Process \n Median",
+      y = mean(df$median) + 0.007
+    ), colour = "black") +
+    geom_hline(aes(yintercept = UCL),
+               color = "black",
+               linetype = 3) +
+    geom_text(aes(
+      x = 0,
+      label = "UCL",
+      y = UCL + 0.005
+    ), colour = "black") +
+    geom_hline(aes(yintercept = LCL),
+               color = "black",
+               linetype = 3) +
+    geom_text(aes(
+      x = 0,
+      label = "LCL",
+      y = LCL + 0.005
+    ), colour = "black") +
+    geom_hline(yintercept = (df$Target.Value),
+               color = "blue") +
+    geom_text(aes(
+      x = -5,
+      label = "Target.Value",
+      y = (df$Target.Value) + 0.005
+    ), colour = "blue") +
+    xlab("Process Sample") +
+    ylab("Median of each sample in grams") + theme(legend.position = "none") +
+    scale_color_manual(values = c("black", "red")) +
     labs(
-      title = paste("Request",df$Request, "R chart"),
-      subtitle = paste("The", out_control_point, "red dots are outside the control limits. Process variation cannot explain these extreme values, Process must be analysed" ))+
+      title = paste("Request", df$Request, "R chart"),
+      subtitle = paste(
+        "The",
+        out_control_point,
+        "red dots are outside the control limits. Process variation cannot explain these extreme values, Process must be analysed"
+      )
+    ) +
     theme(axis.ticks.x = element_blank(),
-          axis.text.x = element_blank()) +
-    ggrepel::geom_label_repel(data= a, aes(x = a$Process.Sample,
-                                    y = a$median,label = a$Process.Sample,
-                                    fill = "red"),
-                       colour = "white", size = 3.5)
+          axis.text.x = element_blank())
 
 
-
-
-  print(Rchart)
+  if (nrow(a) > 0) {
+    print(Rchart + ggrepel::geom_label_repel(
+      data = a,
+      aes(
+        x = a$Process.Sample,
+        y = a$median,
+        label = a$Process.Sample,
+        fill = "red"
+      ),
+      colour = "white",
+      size = 3.5
+    ))
+  } else {
+    print(Rchart)
+  }
 }
