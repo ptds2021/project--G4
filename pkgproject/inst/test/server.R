@@ -114,11 +114,6 @@ shinyServer(function(input, output, session) {
                       class = 'cell-border stripe', rownames = FALSE, width =500)
     })
 
-    output$summ_ts <- DT::renderDataTable({
-        DT::datatable(summary_TS(input$prequest, input$prelevement),
-                      options = list(pageLength = 10, scrollX = TRUE),
-                      class = 'cell-border stripe', rownames = FALSE, width =500)
-    })
     output$plot_sample <- renderPlot({
         ggplot2::ggplot() +ggplot2::geom_point(ggplot2::aes(y = (input$Measure1-input$Tare), x = 1)) +
             ggplot2::geom_point(ggplot2::aes(y = (input$Measure2-input$Tare), x = 2)) +

@@ -59,13 +59,8 @@ data <- list.files(path = "test/responses/", pattern="*.csv",  full.names = TRUE
   bind_rows                                                       # Combine data sets into one data set
 data
 
-
-#merge the data base
-Measure <- nasty
-data_all <- rbind(Measure, data)
-
-
-
+####################
+#functions
  request_TS <- function(request, prelev) {
    TS <-  nasty %>%
      filter(Request == request & Process.Sample == prelev)
@@ -94,14 +89,7 @@ data_all <- rbind(Measure, data)
  }
 
 
-
- summary_TS <- function(request, prelev) {
-   TS <-  Measure %>%
-     filter(Request == request & Process.Sample == prelev)
-
-   t(as.matrix(summary(TS$measure-TS$Tare)))
- }
-
+#summary table
  summary_table <- function(x1,x2, x3,x4,x5,x6,t){
    x<- c(x1,x2, x3,x4,x5,x6)
    x<- x-t

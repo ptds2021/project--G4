@@ -1,8 +1,8 @@
 library("shiny")
 library("bslib")
 library("shinyTime")
-source("helpers.R")
 source("setup.R")
+source("helpers.R")
 library("shinyjs")
 library(pkgproject)
 
