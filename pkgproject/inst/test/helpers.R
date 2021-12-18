@@ -30,9 +30,33 @@ fieldsMandatory <-
   )
 
 
+packages <- c(
+  "here",
+  "readxl",
+  # for the project's organization
+  "tidyverse",
+  "lubridate",
+  # for wrangling
+  "knitr",
+  "kableExtra",
+  "bookdown",
+  "rmarkdown",
+  "DT",
+  # for the report
+  "summarytools",
+  "caret",
+  "ggplot2",
+  "dplyr",
+  "pkgproject",
+  "tibble"
+)
+
+purrr::walk(packages, library, character.only = TRUE)
+
+
 outputDirWeight <- "responses"
 
-dataLoaded <- loadData()
+
 
 saveData <- function(data) {
   data <- t(data)
@@ -57,28 +81,9 @@ loadData <- function() {
   data1 <- as.tibble(data1)
   return(data1)
 }
+dataLoaded <- loadData()
 
-packages <- c(
-  "here",
-  "readxl",
-  # for the project's organization
-  "tidyverse",
-  "lubridate",
-  # for wrangling
-  "knitr",
-  "kableExtra",
-  "bookdown",
-  "rmarkdown",
-  "DT",
-  # for the report
-  "summarytools",
-  "caret",
-  "ggplot2",
-  "dplyr",
-  "pkgproject"
-)
 
-purrr::walk(packages, library, character.only = TRUE)
 
 #store the data into one tibble
 data <-
