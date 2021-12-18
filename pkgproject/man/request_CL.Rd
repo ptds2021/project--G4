@@ -22,8 +22,10 @@ a `Tare` column for the weight of the container.}
 \item{d2}{\code{numeric} constant defining the variability of the Process, default value of 5.534.}
 }
 \description{
-Displays a graph with a histogram with limits and text that show how much the outputs
-of a process meet a given set specifications.The process should generally be measuring the weight of a substance in aontainer.
+Displays a graph with a histogram with process capability limits and text that show how much the outputs
+of a process meet a given set specifications.
+This graph helps to monitor the capability of a particular parameter in the production process of a product.
+A capable process is a process where the process median is close to the parameter target and which falls within the range of variation on the target.
 }
 \author{
 Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino

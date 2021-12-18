@@ -1,10 +1,8 @@
-library("shiny")
-library("bslib")
-library("shinyTime")
-source("helpers.R")
-#source("R functions.R")
-library("shinyjs")
+library(shiny)
+library(bslib)
+library(shinyjs)
 library(pkgproject)
+source("helpers.R")
 
 navbarPage(
   title = "SPC app",

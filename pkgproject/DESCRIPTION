@@ -1,6 +1,6 @@
 Package: pkgproject
 Type: Package
-Title: Functions for quality analysis
+Title: Statistical Process Control functions
 Version: 0.1.0
 Authors@R: c(
     person("Sophie","La Gennusa", role = "aut"),
@@ -12,20 +12,20 @@ Authors@R: c(
 Maintainer: Ozgur Aydemir <ozgur.aydemir@unil.ch>
 Description: This package is create to produce statistical tables and graphs in order to analyse company data. This package will provide you a quality control analysis. 
     Use four spaces when indenting paragraphs within the Description.
-License: GPL (>= 2)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
+Depends: R (>= 4.0.0)
 Imports: 
     shiny (>= 1.7.1),
-    tidyverse,
-    tidyr,
-    dplyr,
-    ggrepel,
-    ggplot2,
-    knitr
+    tidyverse (>= 1.3.0),
+    tidyr (>= 1.1.4),
+    dplyr (>= 1.0.7),
+    ggrepel (>= 0.9.1),
+    ggplot2 (>= 3.3.5),
+    knitr (>= 1.36),
+    stats (>= 1.0.7)
 Suggests: 
-    rmarkdown
+    rmarkdown (>= 2.11)
 VignetteBuilder: knitr
-Depends:
-    R (>= 2.10)
