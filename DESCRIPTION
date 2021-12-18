@@ -27,5 +27,7 @@ Imports:
     knitr (>= 1.36),
     stats (>= 1.0.7)
 Suggests: 
+    testthat (>= 3.0.0),
     rmarkdown (>= 2.11)
 VignetteBuilder: knitr
+Config/testthat/edition: 3
