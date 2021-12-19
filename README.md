@@ -10,10 +10,10 @@ This package is created with the ambitious purpose of providing support to emplo
 
 Sophie La Gennusa, HEC Lausanne, MSc Management and Business Analytics (sophie.lagennusa@unil.ch)
 
-Francesco Darino, HEC Lausanne, MSc Accounting, Control and Finance (francesco.darino@unil.ch)
+Francesco Darino, HEC Lausanne, MSc Management and Business Analytics (francesco.darino@unil.ch)
 
 Louis del Perugia, HEC Lausanne, MSc Management and Business Analytics (louis.delperugia@unil.ch)
 
 Özgür Aydemir, HEC Lausanne, MSc Management and Business Analytics (ozgur.aydemir@unil.ch)
 
-Daniel Szenes, HEC Lausanne, MSc Management (daniel.szenes@unil.ch)
+Daniel Szenes, HEC Lausanne, MSc Management and Business Analytics (daniel.szenes@unil.ch)
