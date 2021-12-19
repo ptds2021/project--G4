@@ -4,7 +4,7 @@ https://nspcrpackage.netlify.app/
 
 ## Main purpose
 
-The Shiny Application is created with the ambitious purpose of providing support to employees during the industrial process. The application was made with the aim of optimizing data record by adding manually imput data about the industrial process directly from the shiny and to visualize in real time statistical charts, also helping to understand whether the process is under control or not.
+This package is created with the ambitious purpose of providing support to employees during the industrial process. The application was made with the aim of optimizing data record by adding manually imput data about the industrial process directly from the shiny and to visualize in real time statistical charts, also helping to understand whether the process is under control or not.
 
 ## Authors
 
