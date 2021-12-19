@@ -2,20 +2,22 @@
 % Please edit documentation in R/Run_demo.R
 \name{Run_demo}
 \alias{Run_demo}
-\title{Run Shiny app for estimate_area function}
+\title{Run Shiny app for pkgproject}
 \usage{
 Run_demo()
 }
 \value{
 A \code{Shiny app} containing the following elements:
  \describe{
-     \item{sidebarPanel}{Sidebar where one can input the number of points to simulate and the seed}
-     \item{mainPanel}{A plot of the area, as well as textual output for the value of the area and the time of execution}
+     \item{Input tab}{Tab where one can input new values and see historical data}
+     \item{Density plot}{Tab that displays analytical plots and summary statistics per request}
+     \item{Time seires tab}{Tab where one can see the values for measurements per request per sample}
+     \item{App info tab}{Tab with general information about the app}
 }
 }
 \description{
 Runs an interactive Shiny app that allows the user
- adjust the inputs of the estimate_area() function.
+ to organise inputs and analysis for his process data
 }
 \author{
 Özgür Aydemir, Sophie La Gennusa, Louis del Perugia, Daniel Szenes, Francesca Darino
