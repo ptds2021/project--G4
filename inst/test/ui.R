@@ -186,13 +186,8 @@ navbarPage(
       style = "text-align: justify; font-size = 25px",
       "Our project would be an application on industrial production area.
 More precisely the final and ambitious objective of the work is to
-help the Nestle coffee production creating a shiny application to
-support the controlling mechanism of the coffee weight during the
-new capsules recipes formulations.
-Since the coffee is an expensive row material, even a little variation
-in the quantities, taking account of the massive scale of the production,
-has an impact on the cost of goods sold of the company; indeed,a control of
-the weight in that sense could help to optimize such industrial process.
+help companies with process control by creating a shiny application to
+support the controlling mechanism of a specific carateristic.
 The application would be used by different users: The operator,
 that would use the app to control his work.
 The project manager, to check the big picture of the project
